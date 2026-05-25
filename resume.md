@@ -41,7 +41,18 @@ Advisor: Adrian Atanasiu
 **University of Bucharest, Faculty of Mathematics and Informatics, 2013–Present**
 
 [LONG]
-Design and teach programming-languages and software-engineering courses — Fundamentals of Programming Languages, Functional Programming in Haskell, Software Systems Modelling (UML), and a graduate Introduction to Machine Learning — with all materials openly published. Supervise graduate students and serve on departmental committees.
+
+Courses developed and taught, with all materials openly published:
+
+- [Software Systems Modelling](https://traiansf.github.io/class/amss2025) — requirements analysis and modelling (UML, design patterns)
+- [Declarative Programming](https://github.com/unibuc-cs/progdecl) — functional and declarative programming in Haskell
+- [Concurrency in Programming Languages](https://github.com/unibuc-cs/iclp) — concurrency hands-on across Java, C++, Erlang/Elixir, JavaScript, and Python
+- [Programming Languages Semantics](https://github.com/unibuc-cs/slp/tree/v2017) — operational semantics, interpreters, and type systems
+- [Foundations of Programming Languages](https://github.com/unibuc-cs/flp) — lambda calculus, type systems, and logic programming (Haskell and Prolog)
+- [Introduction to Machine Learning](https://github.com/unibuc-cs/dh-ml) — hands-on machine learning for non-computer-scientists (Master in Digital Humanities)
+
+Supervise graduate students and serve on departmental committees.
+
 [/LONG]
 
 ## Consultant and Researcher
@@ -52,7 +63,7 @@ Core Rust engineer on FastSet and its Verifiable Settlement Layer — Pi Squared
 [/LONG]
 
 ## Consultant and Researcher
-**Runtime Verification, Inc., 2013–2023**
+**Runtime Verification, Inc., 2012–2023**
 
 [LONG]
 Principal contributor to the K Framework and its Haskell symbolic-execution prover, and core developer of RV-Predict, a data-race and deadlock detector for Java and C/C++. Applied K to the formal semantics of the EVM (smart-contract verification), WebAssembly, and the IELE VM, and formalized CBC-Casper consensus in Coq.
@@ -63,8 +74,8 @@ Principal contributor to the K Framework and its Haskell symbolic-execution prov
 
 Formal methods research in software engineering. Coordonated the team developing the K framework.
 
-## Postdoctoral Research Collaborator
-**University of Illinois, Urbana-Champaign (FSL Laboratory), 2011–2012**
+## Postdoctoral Research Associate
+**University of Illinois, Urbana-Champaign (Information Trust Institute), 2011–2012**
 
 Formal systems and verification research.
 
