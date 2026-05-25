@@ -13,13 +13,16 @@ web: "http://cs.unibuc.ro/~tserbanuta"
 
 Dissertation: *A Rewriting Approach to Concurrent Programming Language Design and Semantics*
 
+[LONG]
 Advisor: Grigore Roșu
 
 Committee: Thomas Ball, Darko Marinov, José Meseguer, Madhusudan Parthasarathy
+[/LONG]
 
 ## Master in Computer Science
 **University of Bucharest, 2004**
 
+[LONG]
 Dissertation: *Concepte instituționale în logica de ordinul I, teoria specificațiilor parametrizate și programarea logică*
 
 Advisors: Răzvan Diaconescu, Virgil Emil Căzănescu
@@ -30,27 +33,35 @@ Advisors: Răzvan Diaconescu, Virgil Emil Căzănescu
 Dissertation: *Ascunderea informației în text folosind gramatici de tip LR(k)*
 
 Advisor: Adrian Atanasiu
+[/LONG]
 
 # Experience
 
-## Lecturer in Computer Science
+## Associate Professor of Computer Science
 **University of Bucharest, Faculty of Mathematics and Informatics, 2013–Present**
 
 [LONG]
-Teaching and research in formal methods, programming languages, and semantics. Supervise graduate students and participate in departmental committees.
+Design and teach programming-languages and software-engineering courses — Fundamentals of Programming Languages, Functional Programming in Haskell, Software Systems Modelling (UML), and a graduate Introduction to Machine Learning — with all materials openly published. Supervise graduate students and serve on departmental committees.
 [/LONG]
 
 ## Consultant and Researcher
-**Runtime Verification, Inc., 2013–Present**
+**Pi Squared, Inc., 2024–2026**
 
 [LONG]
-Research and development in formal verification tools and techniques for software and hardware systems.
+Core Rust engineer on FastSet and its Verifiable Settlement Layer — Pi Squared's infrastructure for verifiable computing and universal settlement ("Proof of Proof"). Built much of the validator–proxy layer (REST/OpenAPI RPC, signed settlement claims, USDC fees, multisig CLI, monitoring) and extended the platform into agentic AI-commerce.
+[/LONG]
+
+## Consultant and Researcher
+**Runtime Verification, Inc., 2013–2023**
+
+[LONG]
+Principal contributor to the K Framework and its Haskell symbolic-execution prover, and core developer of RV-Predict, a data-race and deadlock detector for Java and C/C++. Applied K to the formal semantics of the EVM (smart-contract verification), WebAssembly, and the IELE VM, and formalized CBC-Casper consensus in Coq.
 [/LONG]
 
 ## Postdoctoral Research Fellow
 **Alexandru Ioan Cuza University, Iași (FMSE Laboratory), 2011–2013**
 
-Formal methods research in software engineering.
+Formal methods research in software engineering. Coordonated the team developing the K framework.
 
 ## Postdoctoral Research Collaborator
 **University of Illinois, Urbana-Champaign (FSL Laboratory), 2011–2012**
@@ -65,7 +76,7 @@ Assisted in research on formal semantics, rewriting logic, and programming langu
 [/LONG]
 
 ## Teaching Assistant
-**University of Bucharest, Department of Computer Science Fundamentals, 2003–2009**
+**University of Bucharest, Department of Computer Science Fundamentals, 2003–2004**
 
 [LONG]
 Supported undergraduate courses in programming, discrete mathematics, and computer science theory.
@@ -81,21 +92,24 @@ Co-authored a patent application on web traffic analysis methods (with Bogdan C�
 ## Summer Intern
 **Microsoft Research, Redmond (Testing, Verification, and Measurement Group), 2005**
 
-(Additional details in long version if needed)
+[LONG]
+Contributed an equality theory propagation core for the Zapp (currently Z3) prover
+[/LONG]
 
 ## Programmer
 **Popnet-Agentscape Romania, Natural Language Processing Team, 2000–2001**
 
-(Additional details in long version if needed)
-
 [LONG]
+Implemented classification algorithms for one of the first AI Agents
+[/LONG]
+
 # Publications
 
-## Summary
+- 40 articles indexed in Web of Science (43 in Scopus; 55 in Google Scholar)
+- Hirsch index 13 in Web of Science (17 in Scopus; 22 in Google Scholar)
+- 653 citations in Web of Science (1042 in Scopus; 1931 in Google Scholar)
 
-- 10 articles in ISI-indexed journals
-- 13 articles in ISI-indexed conference proceedings
-
+[LONG]
 ## Journal Articles
 
 1. Arusoaie, Andrei, Ștefan Ciobâcă, Dorel Lucanu, Grigore Roșu, Vlad Rusu, and Traian-Florin Șerbănuță. "Program Logics and Their Applications." *REVUE ROUMAINE DE MATHEMATIQUES PURES ET APPLIQUEES*, Vol. 62, No. 1, pp. 137-154, 2017.
@@ -152,9 +166,9 @@ Co-authored a patent application on web traffic analysis methods (with Bogdan C�
 
 - Formal methods and verification
 - Programming language semantics
-- Rewriting logic
 
 [LONG]
+- Rewriting logic
 - K framework
 - Temporal logics
 - Model checking
@@ -165,3 +179,4 @@ Co-authored a patent application on web traffic analysis methods (with Bogdan C�
 
 - Romanian (native)
 - English (fluent)
+- French (basic)
