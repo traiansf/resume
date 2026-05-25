@@ -150,8 +150,18 @@ Co-authored a patent application on web traffic analysis methods (with Bogdan CÄ
 
 # Skills
 
-(To be filled)
+- Formal methods and verification
+- Programming language semantics
+- Rewriting logic
+
+[LONG]
+- K framework
+- Temporal logics
+- Model checking
+- Specification and verification techniques
+[/LONG]
 
 # Languages
 
-(To be filled)
+- Romanian (native)
+- English (fluent)
