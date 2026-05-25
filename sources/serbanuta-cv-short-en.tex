@@ -1,0 +1,255 @@
+\documentclass[10pt]{article}
+\usepackage{natbib}
+\usepackage{charter}
+\usepackage{fullpage}
+\usepackage[colorlinks=false]{hyperref}
+\usepackage{ifthen}
+\usepackage[resetlabels]{multibib}
+%\usepackage[openbib,ManyBibs]{currvita}
+\usepackage[ManyBibs]{currvita}
+%\usepackage{currvita}
+\usepackage{amssymb}
+
+\newboolean{doResearchInterests}
+\setboolean{doResearchInterests}{true}
+%\setboolean{doResearchInterests}{false}
+
+\newcites{thesis}{foo}
+\newcites{conference}{foo}
+\newcites{workshop}{foo}
+\newcites{journal}{foo}
+\newcites{techreport}{foo}
+
+\usepackage{ucs} % for unicode characters (just for \Rosu and \Serbanuta)
+\newcommand{\sh}{\unichar{0537}}
+\newcommand{\Sh}{\unichar{0536}}
+\newcommand{\tz}{\unichar{0539}}
+\newcommand{\Tz}{\unichar{0538}}
+\PrerenderUnicode{\sh}
+\PrerenderUnicode{\Sh}
+\PrerenderUnicode{\tz}
+\PrerenderUnicode{\Tz}
+\newcommand{\Serbanuta}{{\Sh}er\-b{\u a}\-nu\-{\tz}{\u a}}
+\newcommand{\Rosu}{Ro\-{\sh}u}
+\newcommand{\Stefanescu}{{\Sh}te\-f{\u a}\-nes\-cu}
+
+
+% Better for lists with 1-2 items and short descriptions
+\newenvironment{sublist}{%
+    \begin{list}{}{%
+        \setlength{\itemsep}{0em}\setlength{\parsep}{0em}%
+        \setlength{\topsep}{0em}\setlength{\parskip}{0em}%
+    }%
+}%
+{ \end{list} }
+
+% Better for lists with more than 2 items and/or long descriptions
+\newenvironment{subbulletlist}{%
+    \begin{list}{\labelitemii}{%
+        \setlength{\topsep}{\itemsep}\setlength{\parskip}{\parsep}%
+    }%
+}%
+{ \end{list} }
+
+\begin{document}
+
+\bibliographystyle{unsrt}
+\bibliographystylethesis{unsrt}
+\bibliographystyleconference{unsrt}
+\bibliographystyleworkshop{unsrt}
+\bibliographystylejournal{unsrt}
+\bibliographystyletechreport{unsrt}
+
+\newlength{\oldcvlabelwidth}
+\setlength{\oldcvlabelwidth}{\cvlabelwidth}
+
+\renewcommand*{\cvbibname}{}
+
+\begin{cv}{Traian Florin \Serbanuta{}\\{\large \itshape Curriculum Vitae}}
+
+\begin{cvlist}{Contact}
+    \item
+	Facultatea de Matematica si Informatica\\
+    Str Academiei nr. 14,\\
+	Sector 1, Bucuresti, 010014
+    \item Phone: +4 (073) 527-9178
+    \\ Fax: +4 (021) 315 6990
+    \item \href{mailto:traian.serbanuta@unibuc.ro}{traian.serbanuta@unibuc.ro}
+    \item \href{http://unibuc.ro/~tserbanuta}
+    {\url{http://unibuc.ro/~tserbanuta}}
+\end{cvlist}
+
+\ifthenelse{\boolean{doResearchInterests}} {
+\setlength{\cvlabelwidth}{1em}
+\begin{cvlist}{Research Interests}
+\item Logics and their applications to computing
+\item Algebraic specifications and formal methods for software engineering
+\item Algorithms, Programming using logics, Rewriting
+\end{cvlist}
+\setlength{\cvlabelwidth}{\oldcvlabelwidth}
+} { 
+}
+
+\begin{cvlist}{Education}
+    \item \emph{Ph.D., Computer Science}, 2010\\
+    University of Illinois at Urbana-Champaign
+    \begin{sublist}
+        \item Thesis: \textit{A Rewriting Approach to Concurrent Programming Language Design and Semantics}
+        \item Adviser: Grigore \Rosu{}
+        \item Committee: Thomas Ball, Darko Marinov, Jos\'e Meseguer, Madhusudan Parthasarathy
+    \end{sublist}
+    \item \emph{M.S., Computer Science}, 2004\\ 
+    University of Bucharest
+    \begin{sublist}
+        \item Thesis: \textit{Institutions and Logic Programming Compiling}
+        \item Advisers: R{\u a}zvan Diaconescu and Virgil Emil C{\u a}z{\u a}nescu
+    \end{sublist}
+    \item \emph{B.A., Computer Science}, 2002\\
+    University of Bucharest
+    \begin{sublist}
+        \item Thesis: \textit{Hiding information in text using LR(k) grammars}
+        \item Advisor: Adrian Atanasiu
+        \item Minor: \emph{Mathematics}
+    \end{sublist}
+\end{cvlist}
+
+
+\begin{cvlist}{Employment}
+    \item[2013--present] Associate Professor\\
+	 {\em University of Bucharest}\\
+	 Faculty of Mathematics and Computer Science, Department of Computer Science
+    \item[2012--present] Research Consultant\\
+	 {\em Runtime Verification, Inc.}\\
+	 Designing state-of-art analysis tools based on cutting-edge research
+    \item[2011--2013] Postdoctoral researcher\\
+     {\em ``Alexandru Ioan Cuza'' University of Ia{\sh}i}\\
+    Formal Methods in Software Engineering (FMSE) laboratory
+    \item[2011--2012] Postdoctoral researcher\\
+    Information Trust Institute, University of Illinois at 
+    Urbana-Champaign
+    \item[2004--2010] Research Assistant\\
+    Formal Systems Laboratory, University of Illinois at 
+    Urbana-Champaign\\
+    Advisor: Grigore \Rosu{}
+    \item[2003--2004] Research Assistant\\
+	 {\em University of Bucharest}\\
+	 Faculty of Mathematics and Computer Science, Department of Computer Science
+     Chair of Foundations of Computer Science, University of Bucharest
+     \item[2007] Summer intern\\
+     Google New York\\
+     Mentor: Bogdan C{\u a}pri{\tz}{\u a}\\
+     Coauthored (with Bogdan C{\u a}pri{\tz}{\u a}) a patent related to traffic analysis technology
+     \item[2005] Summer intern\\
+     Testing, Verification and Measurement, Microsoft Research Redmond\\
+     Mentor: Madan Musuvathi
+     \item[2000--2001] IT developer at {\em Popnet-Agentscape Romania}\\
+     Natural language processing team
+\end{cvlist}
+
+%\ifthenelse{\boolean{doResearchInterests}} {
+%\pagebreak
+%}{}
+
+%\setlength{\bibindent}{2.5em}
+% Do bibaddtoleftmargin instead of biblabelsep if you're
+% not using manybib or openbib
+%\renewcommand*{\bibaddtoleftmargin}{1.5em}
+%\setlength{\bibhang}{3.5em}
+% To update, before doing latexmk, run:
+% bibtex journal
+% bibtex refpaper
+% bibtex unrefpaper
+% bibtex techreport
+\begin{cvlist}{Publications}
+    \item \textbf{PhD Thesis}
+     \nocitethesis{serbanuta-2010-thesis}
+    \bibliographythesis{vitae}
+    \item \textbf{In Journals}
+    \input journals.tex
+    \bibliographyjournal{vitae}
+    \item \textbf{In Conference Proceedings} 
+    \input conferences.tex
+    \bibliographyconference{vitae}
+    \item \textbf{In Workshop Proceedings} 
+    \input workshops.tex
+    \bibliographyworkshop{vitae}
+    
+%    \item \textbf{Technical Reports} 
+%    \nocitetechreport{serbanuta-chen-rosu-2010-tr} 
+%    \nocitetechreport{serbanuta-rosu-2010-tr}
+%    \nocitetechreport{chen-serbanuta-rosu-2007-tr-a}
+%    \bibliographytechreport{vitae}
+\end{cvlist}
+
+
+\setlength{\cvlabelwidth}{\oldcvlabelwidth}
+
+\begin{cvlist}{Presentations}
+\item[WRLA'16] Maximally Parallel Contextual String Rewriting
+\item[TERMGRAPH'13] Programming Language Semantics using --- true concurrency through term graph rewriting --- (invited talk)
+\item[SYNASC'12] Invited tutorial on K (together with Dorel Lucanu)
+\item[RV'12]  \textit{Maximal Causal Models for Sequentially Consistent Systems}
+\item[ICGT'12] \textit{A Truly Concurrent Semantics for the K Framework Based on
+               Graph Transformations}
+               \\
+               Also, an invited presentation on K during the surprise PechaKucha session.
+\item[K'11] \textit{A Concurrent Semantics for the K Framework}
+\\ \textit{From Language Definitions to (Runtime) Analysis Tools}
+\\ \textit{The K-framework Tool Chain---towards version 3.0: lessons learned and new perspectives}
+\item[WRLA'10] \textit{K-Maude: A Rewriting Based Tool for Semantics of Programming Languages} (presentation and tool demo)
+\item[ICSE'08] \textit{JPredictor: A Predictive Runtime Analysis Tool for Java}
+\item[WMC'08] \textit{Deﬁning and Executing P-systems with Structured Data in K}
+\item[SOS'07] \textit{A Rewriting Logic Approach to Operational Semantics---Extended Abstract}
+\item[WRLA'06] Co-organizer and co-presenter of the \textit{Rewrite Engines Competition}
+\item[FOSSACS'06] \textit{A Semantic Approach to Interpolation}
+\item[MSR Redmond'05] \textit{Interleaving Boolean and theory reasoning in a SAT-based theorem prover} --- end of internship talk
+\end{cvlist}
+
+\setlength{\cvlabelwidth}{1em}
+
+%\begin{cvlist}{Awards}
+%\item[2000]%[8/2004--present] 
+%    \emph{15th place at the The 24th ACM International Collegiate Programming Contest World Finals}
+%\item[1999]%[8/2001--8/2004] 
+%    \emph{1st place at the The SouthEastern European Regional Contest of the ACM ICPC}
+%\item[1998]
+%    \emph{3rd prize at the Romanian National Olympiad of Mathematics}
+%\end{cvlist}
+%
+
+\begin{cvlist}{External Reviewer}
+        \item {\it Journal of Logic and Computation}, \textit{Journal of Theoretical Computer Science}, {\it Software and Systems Modeling}, {\it Journal of Logical and Algebraic Methods in Programming}, {\it Science of Computer Programming}, and \textit{International Journal of Foundations of Computer Science}. 
+        \item  \input reviewer.tex
+\end{cvlist}
+
+\setlength{\cvlabelwidth}{\oldcvlabelwidth}
+\begin{cvlist}{Extracurricular}
+    \item[2008--2011] Community Aide,
+    University of Illinois Family and Graduate Housing
+    \begin{subbulletlist} 
+    \item Responsible for proposing, organizing and assisting with community events
+    \end{subbulletlist}
+    \item[2010--2012] Parish Council Member,
+    Three Hierarchs Greek Orthodox Church, Champaign, IL
+    \begin{subbulletlist} 
+    \item Expenses treasurer
+    \end{subbulletlist}
+\end{cvlist}
+
+\setlength{\oldcvlabelwidth}{\cvlabelwidth}
+\setlength{\cvlabelwidth}{1em}
+\begin{cvlist}{Personal Data}
+\item \textit{Citizenship:} Romanian
+\item Married, three children
+\end{cvlist}
+\setlength{\cvlabelwidth}{\oldcvlabelwidth}
+
+%\begin{cvlist}{References}
+%\item Available upon request
+%\item See attached sheets
+%\end{cvlist}
+
+\end{cv}
+\end{document}
+
+

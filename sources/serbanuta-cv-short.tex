@@ -1,0 +1,171 @@
+\documentclass[10pt]{article}
+\usepackage{natbib}
+\usepackage{charter}
+\usepackage{fullpage}
+\usepackage[colorlinks=false]{hyperref}
+\usepackage{ifthen}
+\usepackage[resetlabels]{multibib}
+%\usepackage[openbib,ManyBibs]{currvita}
+\usepackage[ManyBibs]{currvita}
+%\usepackage{currvita}
+\usepackage{datenumber}
+
+\newcounter{dateone}
+\newcounter{datetwo}
+
+\newcommand{\difftoday}[3]{%
+      \setmydatenumber{dateone}{\the\year}{\the\month}{\the\day}%
+      \setmydatenumber{datetwo}{#1}{#2}{#3}%
+      \addtocounter{datetwo}{-\thedateone}%
+      \the\numexpr-\thedatetwo/365\relax\space year(s),
+      \the\numexpr(-\thedatetwo - (-\thedatetwo/365)*365)/30\relax\space month(s)
+} 
+
+\newcommand{\yearsSince}[3]{%
+      \setmydatenumber{dateone}{\the\year}{\the\month}{\the\day}%
+      \setmydatenumber{datetwo}{#1}{#2}{#3}%
+      \addtocounter{datetwo}{-\thedateone}%
+      \the\numexpr-\thedatetwo/365\relax%
+} 
+
+\newboolean{doResearchInterests}
+\setboolean{doResearchInterests}{true}
+%\setboolean{doResearchInterests}{false}
+
+\newcites{short}{foo}
+
+\usepackage{ucs} % for unicode characters (just for \Rosu and \Serbanuta)
+\newcommand{\sh}{\unichar{0537}}
+\newcommand{\Sh}{\unichar{0536}}
+\newcommand{\tz}{\unichar{0539}}
+\newcommand{\Tz}{\unichar{0538}}
+\PrerenderUnicode{\sh}
+\PrerenderUnicode{\Sh}
+\PrerenderUnicode{\tz}
+\PrerenderUnicode{\Tz}
+\newcommand{\Serbanuta}{{\Sh}er\-b{\u a}\-nu\-{\tz}{\u a}}
+\newcommand{\Rosu}{Ro\-{\sh}u}
+\newcommand{\Stefanescu}{{\Sh}te\-f{\u a}\-nes\-cu}
+
+
+% Better for lists with 1-2 items and short descriptions
+\newenvironment{sublist}{%
+    \begin{list}{}{%
+        \setlength{\itemsep}{0em}\setlength{\parsep}{0em}%
+        \setlength{\topsep}{0em}\setlength{\parskip}{0em}%
+    }%
+}%
+{ \end{list} }
+
+% Better for lists with more than 2 items and/or long descriptions
+\newenvironment{subbulletlist}{%
+    \begin{list}{\labelitemii}{%
+        \setlength{\topsep}{\itemsep}\setlength{\parskip}{\parsep}%
+    }%
+}%
+{ \end{list} }
+\pagestyle{empty}
+\begin{document}
+
+\bibliographystyle{unsrt}
+\bibliographystyleshort{unsrt}
+
+\newlength{\oldcvlabelwidth}
+\setlength{\oldcvlabelwidth}{\cvlabelwidth}
+
+\renewcommand*{\cvbibname}{}
+
+\begin{cv}{Traian Florin \Serbanuta{}---{\large \itshape Short Bio}}
+
+
+\begin{cvlist}{Personal Data}
+\item[Last Name] \Serbanuta{} 
+\item[Fist Name] Traian
+\item[Age] \yearsSince{1979}{11}{3}
+\end{cvlist}
+
+\ifthenelse{\boolean{doResearchInterests}} {
+\setlength{\cvlabelwidth}{1em}
+\begin{cvlist}{Research Interests}
+\item Logics and their applications to computing
+\item Algebraic specifications and formal methods for software engineering
+\item Algorithms, Programming using logics, Rewriting
+\end{cvlist}
+\setlength{\cvlabelwidth}{\oldcvlabelwidth}
+} { 
+}
+
+\begin{cvlist}{Education}
+\item[2010] \emph{Ph.D., Computer Science}, University of Illinois at Urbana-Champaign
+    \begin{sublist}
+        \item Thesis: \textit{A Rewriting Approach to Concurrent Programming Language Design and Semantics}
+        \item Adviser: Grigore \Rosu{}
+        \item Committee: Thomas Ball, Darko Marinov, Jos\'e Meseguer, Madhusudan Parthasarathy
+    \end{sublist}
+\item[2004] \emph{M.S., Computer Science}, University of Bucharest
+\item[2002] \emph{B.A., Computer Science}, University of Bucharest
+\end{cvlist}
+
+
+\begin{cvlist}{Employment}
+	\item[2013--present] Associate Professor, University of Bucharest
+	\item[2013--present] Research Consultant for Runtime Verification, Inc.
+    \item[2011--2013] Postdoctoral researcher,
+     ``Alexandru Ioan Cuza'' University of Ia{\sh}i
+    \item[2011--2012] Postdoctoral researcher,
+    University of Illinois at 
+    Urbana-Champaign
+    \item[2004--2010] Research Assistant,
+    University of Illinois at 
+    Urbana-Champaign
+    \item[2003--2009] Research Assistant, University of Bucharest
+     \item[2007] Summer intern,
+     Google New York
+     \item[2005] Summer intern, Microsoft Research Redmond
+     \item[2000--2001] IT developer at Popnet-Agentscape Romania
+\end{cvlist}
+
+\begin{cvlist}{Professional activities}
+        \item[Program Committee member for] WRLA'16, SYNASC'16, FROM'17
+        \item[Reviewer for] \textit{Journal of Theoretical Computer Science}, \textit{International Journal of Foundations of Computer Science}, \textit{Science of Computer Programming}, \textit{Journal of Computer and System Sciences}, \textit{Fundamenta Informatic\ae}.
+        \item[Reviewer for]  \input reviewer.tex
+\end{cvlist}
+
+%\setlength{\cvlabelwidth}{\oldcvlabelwidth}
+%\begin{cvlist}{Extracurricular}
+%    \item[2008--2011] Ajutor comunitar la 
+%    University of Illinois Family and Graduate Housing
+%   \setlength{\itemsep}{-1ex}
+%%    \begin{subbulletlist} 
+%    \item Atribuții: Propunerea, organizarea și asistarea programelor pentru  membrii comunității. 
+% %   \end{subbulletlist}
+%   \setlength{\itemsep}{0ex}
+%    \item[2010--2012] Membru al consiliului parohial pentru
+%    biserica ortodoxă Trei Ierarhi din Champaign, IL
+%\end{cvlist}
+%
+\newpage
+  \begin{cvlist}{Bibliometric data}
+  \item[Publications in ISI Journals] 9
+  \item[Publications in ISI Proceedings] 12
+  \item[Hirsch index] 9 --- ISI Web of Science, 10 --- Scopus, 17 --- Google Scholar
+  \item[Citations] 242 -- ISI Web of Science, 440 --- Scopus, 960 --- Google Scholar
+  \end{cvlist}
+
+
+  \setlength{\cvlabelwidth}{0pt}
+\begin{cvlist}{Selected Publications}
+\item %\nociteshort{serbanuta-2010-thesis}
+
+\input{short.tex} 
+%\nociteshort{serbanuta-2004-jtcs}
+%\nociteshort{serbanuta-rosu-2006-rta}
+%\nociteshort{serbanuta-rosu-meseguer-2007-ic}
+%\nociteshort{rosu-serbanuta-2010-jlap}
+  \bibliographyshort{vitae}
+  \end{cvlist}    
+
+\end{cv}
+\end{document}
+
+

@@ -1,0 +1,267 @@
+\documentclass[10pt, romanian]{article}
+\usepackage[romanian]{babel}
+\usepackage{natbib}
+\usepackage{charter}
+\usepackage{fullpage}
+\usepackage[colorlinks=false]{hyperref}
+\usepackage{ifthen}
+\usepackage[resetlabels]{multibib}
+%\usepackage[openbib,ManyBibs]{currvita}
+\usepackage[ManyBibs]{currvita}
+%\usepackage{currvita}
+\usepackage[utf8x]{inputenc}
+\usepackage{amssymb}
+
+\newboolean{doResearchInterests}
+\setboolean{doResearchInterests}{true}
+%\setboolean{doResearchInterests}{false}
+\newcites{thesis}{A. Teza de doctorat}
+\newcites{book}{B. Cărți și capitole în cărți}
+\newcites{isij}{C. Lucrări indexate ISI}
+\newcites{isic}{C. Lucrări indexate ISI}
+\newcites{neindexate}{D. Lucrări publicate în reviste și volume de conferințe cu referenți (neindexate)}
+
+\usepackage{ucs} % for unicode characters (just for \Rosu and \Serbanuta)
+\newcommand{\sh}{\unichar{0537}}
+\newcommand{\Sh}{\unichar{0536}}
+\newcommand{\tz}{\unichar{0539}}
+\newcommand{\Tz}{\unichar{0538}}
+\PrerenderUnicode{\sh}
+\PrerenderUnicode{\Sh}
+\PrerenderUnicode{\tz}
+\PrerenderUnicode{\Tz}
+\newcommand{\Serbanuta}{{\Sh}er\-b{\u a}\-nu\-{\tz}{\u a}}
+\newcommand{\Rosu}{Ro\-{\sh}u}
+\newcommand{\Stefanescu}{{\Sh}te\-f{\u a}\-nes\-cu}
+
+
+% Better for lists with 1-2 items and short descriptions
+\newenvironment{sublist}{%
+    \begin{list}{}{%
+        \setlength{\itemsep}{0em}\setlength{\parsep}{0em}%
+        \setlength{\topsep}{0em}\setlength{\parskip}{0em}%
+    }%
+}%
+{ \end{list} }
+
+% Better for lists with more than 2 items and/or long descriptions
+\newenvironment{subbulletlist}{%
+    \begin{list}{\labelitemii}{%
+        \setlength{\topsep}{\itemsep}\setlength{\parskip}{\parsep}%
+    }%
+}%
+{ \end{list} }
+
+\begin{document}
+
+%\bibliographystyle{unsrt}
+%\bibliographystylebook{unsrt}
+%\bibliographystyleconference{unsrt}
+%\bibliographystyleworkshop{unsrt}
+%\bibliographystylejournal{unsrt}
+%\bibliographystyletechreport{unsrt}
+
+\newlength{\oldcvlabelwidth}
+\setlength{\oldcvlabelwidth}{\cvlabelwidth}
+
+\renewcommand*{\cvbibname}{}
+
+\begin{cv}{Traian Florin Șerbănuță\\{\large \itshape Curriculum Vit\ae}}
+
+\begin{cvlist}{Date Personale}
+   \setlength{\itemsep}{-1ex}
+    \item[Date de contact] Adresa: Facultatea de Matematică și Informatică, Universitatea din București
+    \\Str. Academiei nr.14, sector 1, C.P. 010014, Bucuresti, Romania
+    \item Tel: (4-021) 314 3508, Fax: (4-021) 315 6990
+    \item \href{mailto:traian.serbanuta@unibuc.ro}{traian.serbanuta@unibuc.ro}
+    \item \href{http://unibuc.ro/~tserbanuta}
+    {http://unibuc.ro/~tserbanuta}
+       \setlength{\itemsep}{0ex}
+\item[Cetățenie] română
+\item[Stare Civilă] Căsătorit, trei copii
+\end{cvlist}
+
+\begin{cvlist}{Educație}
+   \setlength{\itemsep}{-1ex}
+    \item[2010] \emph{Doctor în Informatică},
+    Universitatea din Illinois, Urbana-Champaign
+    %\begin{sublist}
+        \item Teza: \textit{A Rewriting Approach to Concurrent Programming Language Design and Semantics}
+        \item Coordonator: Grigore Roșu
+        \item Comisia de doctorat: Thomas Ball, Darko Marinov, Jos\'e Meseguer,  Madhusudan Parthasarathy
+  %  \end{sublist}
+   \setlength{\itemsep}{0ex}
+    \item[2004] \emph{Master în Informatică},
+    Universitatea din București
+   \setlength{\itemsep}{-1ex}
+%    \begin{sublist}
+        \item Teza: \textit{Concepte instituționale în logica de ordinul I, teoria specificațiilor parametrizate și programarea logică}
+        \item Coordonatori: Răzvan Diaconescu și Virgil Emil Căzănescu
+%    \end{sublist}
+   \setlength{\itemsep}{0ex}
+    \item[2002] \emph{Licențiat în Informatică},
+    Universitatea din București
+   \setlength{\itemsep}{-1ex}
+%    \begin{sublist}
+        \item Teza: \textit{Ascunderea informației în text folosind gramatici de tip LR(k)}
+        \item Coordonator: Adrian Atanasiu
+ %   \end{sublist}
+\end{cvlist}
+
+
+\ifthenelse{\boolean{doResearchInterests}} {
+\setlength{\cvlabelwidth}{1em}
+\begin{cvlist}{Interese de cercetare}
+\item Logici formale și aplicațiile lor în informatică
+\item Specificații algebrice și metode formale pentru ingineria sofware
+\item Algoritmi, programare funcțională, programare logică, rescriere
+\end{cvlist}
+\setlength{\cvlabelwidth}{\oldcvlabelwidth}
+} {
+}
+
+\begin{cvlist}{Experiență profesională}
+    \item[2013--prezent] Conferențiar universitar la {\em Universitatea din București}, Facultatea de Matematică și Informatică, Departamentul de Informatică
+    \item[2013--prezent] Consultant/Cercetător pentru Runtime Verification, Inc.
+    \item[2011--2013] Cercetător știintific post-doctoral la {\em Universitatea Alexandru Ioan Cuza Iași}\\
+    Laboratorul de Metode Formale in Ingineria Software (FMSE)
+    \item[2011--2012] Colaborator de cercetare post-doctoral la {\em Universitatea din Illinois, Urbana-Champaign}\\
+    Information Trust Institute (ITI), Laboratorul de sisteme formale (FSL)
+    \item[2004--2010] Asistent de cercetare la {\em Universitatea din Illinois,
+    Urbana-Champaign}\\
+    Laboratorul de sisteme formale (FSL)
+    \item[2003--2009] Preparator la {\em Universitatea din București}\\
+     Catedra de Fundamentele informaticii
+     \item[2007] Practică de vară la {\em Google New York}\\
+     Co-autor (împreună cu Bogdan Căpriță) al unei aplicații de patent referitor la o metodă de analizare a traficului web
+     \item[2005] Practică de vară la {\em Microsoft Research Redmond}\\
+     Grupul de Testare, Verificare și Măsurare (TVM)
+     \item[2000--2001] Programator la {\em Popnet-Agentscape Romania}\\
+     Echipa de procesare a limbajului natural
+\end{cvlist}
+
+%\ifthenelse{\boolean{doResearchInterests}} {
+%\pagebreak
+%}{}
+
+%\setlength{\bibindent}{2.5em}
+% Do bibaddtoleftmargin instead of biblabelsep if you're
+% not using manybib or openbib
+%\renewcommand*{\bibaddtoleftmargin}{1.5em}
+%\setlength{\bibhang}{3.5em}
+% To update, before doing latexmk, run:
+% bibtex journal
+% bibtex refpaper
+% bibtex unrefpaper
+% bibtex techreport
+%\newpage
+  \begin{cvlist}{Bibliometric data}
+  \item[Publications in ISI Journals] 11
+  \item[Publications in ISI Proceedings] 19
+  \item[Hirsch index] 12 --- ISI Web of Science, 14 --- Scopus, 19 --- Google Scholar
+  \item[Citations] 298 -- ISI Web of Science, 719 --- Scopus, 1436 --- Google Scholar
+  \end{cvlist}
+
+
+
+\setlength{\cvlabelwidth}{\oldcvlabelwidth}
+
+\begin{cvlist}{Prezentări}
+\item[CRM9'19] \textit{Operational Semantics and Program Verification Using Many-Sorted Hybrid 
+               Modal Logic}
+\item[TABLEAUX'19] \textit{Operational Semantics and Program Verification Using Many-Sorted Hybrid
+               Modal Logic}
+\item[Diaspora și prietenii săi'16] \textit{Maximally Parallel Contextual String Rewriting} la invitația organizatorilor
+\item[WRLA'16] \textit{Maximally Parallel Contextual String Rewriting}
+\item[SYNASC'12] Susținerea unui tutorial despre K (împreună cu Dorel Lucanu) la invitația organizatorilor
+\item[RV'12]  \textit{Maximal Causal Models for Sequentially Consistent Systems}
+\item[ICGT'12] \textit{A Truly Concurrent Semantics for the K Framework Based on
+               Graph Transformations}
+               \\
+               De asemeni, susținerea unei prezentari depre K în cadrul sesiunii supriză PechaKucha, la invitația organizatorilor.
+\item[K'11] \textit{A Concurrent Semantics for the K Framework}
+\\ \textit{From Language Definitions to (Runtime) Analysis Tools}
+\\ \textit{The K-framework Tool Chain---towards version 3.0: lessons learned and new perspectives}
+\item[WRLA'10] \textit{K-Maude: A Rewriting Based Tool for Semantics of Programming Languages}---\\prezentare și demonstrație
+\item[ICSE'08] \textit{JPredictor: A Predictive Runtime Analysis Tool for Java}
+\item[WMC'08] \textit{Defining and Executing P-systems with Structured Data in K}
+\item[SOS'07] \textit{A Rewriting Logic Approach to Operational Semantics---Extended Abstract}
+\item[WRLA'06] Co-organizator și co-prezentator al \textit{Competiției de motoare de rescriere}
+\item[FOSSACS'06] \textit{A Semantic Approach to Interpolation}
+\item[MSR Redmond'05] \textit{Interleaving Boolean and theory reasoning in a SAT-based theorem prover}---\\prezentare de încheiere a practicii de vară
+\end{cvlist}
+
+%\newpage
+%\setlength{\cvlabelwidth}{1em}
+%
+%\begin{cvlist}{Premii}
+%\item[2000]%[8/2004--prezent]
+%    \emph{Locul 15 (ca membru al echipei Universității București) la faza finală a concursului internațional de programare ACM}
+%\item[1999]%[8/2001--8/2004]
+%    \emph{Locul întâi (ca membru al echipei Universității București) la faza pe Europa de sud-est al concursului internațional de programare ACM}
+%%\item[1998]
+%%    \emph{Premiul III la Olimpiada națională de matematică}
+%\end{cvlist}
+%
+
+\begin{cvlist}{Recenzent}
+        \item \textit{Journal of Theoretical Computer Science}, \textit{International Journal of Foundations of Computer Science}, \textit{Science of Computer Programming}, \textit{Journal of Computer and System Sciences}, \textit{Fundamenta Informatic\ae}.
+        \item  \input reviewer.tex
+\end{cvlist}
+
+%\setlength{\cvlabelwidth}{\oldcvlabelwidth}
+%\begin{cvlist}{Extracurricular}
+%    \item[2008--2011] Ajutor comunitar la
+%    University of Illinois Family and Graduate Housing
+%   \setlength{\itemsep}{-1ex}
+%%    \begin{subbulletlist}
+%    \item Atribuții: Propunerea, organizarea și asistarea programelor pentru  membrii comunității.
+% %   \end{subbulletlist}
+%   \setlength{\itemsep}{0ex}
+%    \item[2010--2012] Membru al consiliului parohial pentru
+%    biserica ortodoxă Trei Ierarhi din Champaign, IL
+%\end{cvlist}
+
+\setlength{\oldcvlabelwidth}{\cvlabelwidth}
+\setlength{\cvlabelwidth}{1em}
+\setlength{\cvlabelwidth}{\oldcvlabelwidth}
+
+%\begin{cvlist}{References}
+%\item Available upon request
+%\item See attached sheets
+%\end{cvlist}
+
+
+
+
+\bibliographystyle{plain}
+\bibliographystylethesis{unsrt}
+\bibliographystylebook{unsrt}
+\bibliographystyleisij{unsrt}
+\bibliographystyleisic{unsrt}
+\bibliographystyleneindexate{unsrt}
+
+
+\renewcommand*{\cvbibname}{}
+
+  \begin{cvlist}{Lista lucrărilor științifice}
+  \item[A. Teza de doctorat]
+  \nocitethesis{serbanuta-2010-thesis}
+  \bibliographythesis{vitae}
+  \item[B. Cărți]
+  \input books.tex
+  \bibliographybook{vitae}
+  \item[C. Lucrări indexate ISI]
+
+  \item[\hfill În reviste]
+    \input isi-journal.tex
+    \bibliographyisij{vitae}
+  \item[\hfill În conferințe]
+    \input isi-conference.tex
+    \bibliographyisic{vitae}
+  \end{cvlist}
+
+\end{cv}
+\end{document}
+
+

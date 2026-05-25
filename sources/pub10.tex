@@ -1,0 +1,78 @@
+\documentclass[12pt]{article}
+\usepackage[romanian]{babel}
+\usepackage{natbib}
+\usepackage{charter}
+\usepackage{fullpage}
+\usepackage[colorlinks=false]{hyperref}
+\usepackage{ifthen}
+\usepackage[resetlabels]{multibib}
+%\usepackage[openbib,ManyBibs]{currvita}
+\usepackage[ManyBibs]{currvita}
+%\usepackage{currvita}
+\usepackage[utf8x]{inputenc}
+\usepackage{amssymb}
+
+\usepackage{ucs} % for unicode characters (just for \Rosu and \Serbanuta)
+\newcommand{\sh}{\unichar{0537}}
+\newcommand{\Sh}{\unichar{0536}}
+\newcommand{\tz}{\unichar{0539}}
+\newcommand{\Tz}{\unichar{0538}}
+\PrerenderUnicode{\sh}
+\PrerenderUnicode{\Sh}
+\PrerenderUnicode{\tz}
+\PrerenderUnicode{\Tz}
+\PrerenderUnicode{ă}
+\PrerenderUnicode{î}
+\newcommand{\Serbanuta}{{\Sh}er\-b{\u a}\-nu\-{\tz}{\u a}}
+\newcommand{\Rosu}{Ro\-{\sh}u}
+\newcommand{\Stefanescu}{{\Sh}te\-f{\u a}\-nes\-cu}
+
+\newcites{thesis}{A. Teza de doctorat}
+\newcites{book}{B. Cărți și capitole în cărți}
+\newcites{isi}{C. Lucrări indexate ISI}
+\newcites{neindexate}{D. Lucrări publicate în reviste și volume de conferințe cu referenți (neindexate)}
+
+
+\begin{document}
+
+\medskip
+\noindent Universitatea din București\\
+Facultatea de Matematică\\
+Departamentul de Informatică
+
+\medskip
+Traian Flo Șerbănuță Traian Florin
+
+\medskip\begin{center}\Large L I S T A\\
+\large lucrărilor științifice
+\end{center}
+
+\bibliographystyle{unsrt}
+\bibliographystylethesis{unsrt}
+\bibliographystylebook{unsrt}
+\bibliographystyleisi{unsrt}
+\bibliographystyleneindexate{unsrt}
+
+
+\renewcommand*{\cvbibname}{}
+
+%\title{Traian Florin Șerbănuță --- Publicații}
+%\maketitle
+  \nocitethesis{serbanuta-2010-thesis}
+  \bibliographythesis{vitae}
+
+  \input books10.tex
+  \bibliographybook{vitae}
+
+    \input isi10.tex
+    \bibliographyisi{vitae}
+
+    \input neindexate10.tex
+    \bibliographyneindexate{vitae}
+
+\bigskip
+\noindent
+Data: 8 martie 2017\hfill \begin{minipage}{20em}\begin{center}Semnătura:\\Traian Florin Șerbănuță\end{center}\end{minipage}
+\end{document}
+
+
