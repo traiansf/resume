@@ -38,3 +38,6 @@ check-deps:
 	@fc-list | grep -qi "Playfair Display" || { echo "ERROR: Playfair Display font missing. See README."; exit 1; }
 	@fc-list | grep -qi "Source Sans 3" || { echo "ERROR: Source Sans 3 font missing. See README."; exit 1; }
 	@echo "All dependencies OK."
+
+test:
+	@./tests/filter/run-tests.sh
