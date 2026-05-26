@@ -9,6 +9,7 @@ help:
 pdf: resume.md filter.lua template.tex
 	pandoc -L filter.lua \
 		--template=template.tex \
+		--metadata full_version=true \
 		--metadata short_version=false \
 		-f markdown \
 		-t pdf \
