@@ -37,13 +37,21 @@
 
 \begin{document}
 
-% --- Header (Task 6 will replace this with the styled version) ---
-\noindent\textbf{\Huge $name$}\par
-$if(tagline)$
-\noindent\textit{$tagline$}\par
-$endif$
-\noindent $email$ \quad $phone$ \quad \url{$web$}\par
-\vspace{8pt}\hrule\vspace{8pt}
+% --- Header ---
+\begingroup
+  \setlength{\parindent}{0pt}
+  {\headingfont\color{bodytext}\fontsize{30}{32}\selectfont $name$\par}
+  \vspace{2pt}
+  $if(tagline)$
+    {\headingfont\itshape\color{accent}\fontsize{12}{14}\selectfont $tagline$\par}
+    \vspace{4pt}
+  $endif$
+  {\color{secondary}\fontsize{9}{11}\selectfont
+    $email$ \enspace\ensuremath{\cdot}\enspace $phone$ \enspace\ensuremath{\cdot}\enspace \url{$web$}\par}
+  \vspace{8pt}
+  {\color{accent}\rule{\linewidth}{2pt}\par}
+  \vspace{8pt}
+\endgroup
 
 % --- Body ---
 $body$
