@@ -29,8 +29,25 @@
 \usepackage[hidelinks]{hyperref}
 \hypersetup{urlcolor=accent}
 
-% Temporary — replaced by the styled macro in T9.
-\providecommand{\cvitem}[4]{\textbf{#1} (#2, #3)\par #4\par\vspace{4pt}}
+% \cvitem{title}{org}{years}{detail}
+\newcommand{\cvitem}[4]{%
+  \par\vspace{6pt}%
+  \noindent
+  \begin{minipage}[t]{0.82\linewidth}
+    \raggedright
+    {\fontseries{sb}\selectfont\color{bodytext}#1}\par
+    {\itshape\color{secondary}#2}\par
+    \ifx\relax#4\relax\else
+      \vspace{1pt}{\color{tertiary}\small #4}%
+    \fi
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.16\linewidth}
+    \raggedleft
+    {\fontseries{sb}\selectfont\color{accent}#3}%
+  \end{minipage}%
+  \par
+}
 
 \pagestyle{empty}
 
