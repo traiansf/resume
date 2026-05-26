@@ -1,0 +1,27 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[a4paper,top=20mm,bottom=20mm,left=22mm,right=22mm]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\pagestyle{empty}
+
+% pandoc tight-list shim
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\begin{document}
+
+% --- Header (Task 6 will replace this with the styled version) ---
+\noindent\textbf{\Huge $name$}\par
+$if(tagline)$
+\noindent\textit{$tagline$}\par
+$endif$
+\noindent $email$ \quad $phone$ \quad \url{$web$}\par
+\vspace{8pt}\hrule\vspace{8pt}
+
+% --- Body ---
+$body$
+
+\end{document}

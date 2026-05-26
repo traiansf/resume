@@ -6,8 +6,9 @@ help:
 	@echo "  make pdf-short - Generate short resume (resume-short.pdf)"
 	@echo "  make clean     - Remove generated PDFs"
 
-pdf: resume.md filter.lua
+pdf: resume.md filter.lua template.tex
 	pandoc -L filter.lua \
+		--template=template.tex \
 		--metadata short_version=false \
 		-f markdown \
 		-t pdf \
@@ -15,8 +16,9 @@ pdf: resume.md filter.lua
 		resume.md -o resume.pdf
 	@echo "Generated: resume.pdf"
 
-pdf-short: resume.md filter.lua
+pdf-short: resume.md filter.lua template.tex
 	pandoc -L filter.lua \
+		--template=template.tex \
 		--metadata short_version=true \
 		-f markdown \
 		-t pdf \
