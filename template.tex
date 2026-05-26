@@ -1,9 +1,33 @@
 \documentclass[11pt,a4paper]{article}
 
 \usepackage[a4paper,top=20mm,bottom=20mm,left=22mm,right=22mm]{geometry}
+
 \usepackage{fontspec}
+\setmainfont{Source Sans 3}[
+  UprightFont    = * Light,
+  BoldFont       = * Semibold,
+  ItalicFont     = * Light Italic,
+  BoldItalicFont = * Semibold Italic,
+]
+\newfontfamily\headingfont{Playfair Display}
+
 \usepackage{xcolor}
+\definecolor{accent}{HTML}{7A1F1F}
+\definecolor{bodytext}{HTML}{1A1A1A}
+\definecolor{secondary}{HTML}{555555}
+\definecolor{tertiary}{HTML}{444444}
+\definecolor{calloutbg}{HTML}{FAF7F4}
+
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\itshape\headingfont\color{accent}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{16pt}{6pt}
+
+\usepackage{enumitem}
+\setlist{nosep,topsep=2pt,partopsep=0pt,leftmargin=*}
+
 \usepackage[hidelinks]{hyperref}
+\hypersetup{urlcolor=accent}
 
 \pagestyle{empty}
 
