@@ -143,6 +143,22 @@ function Pandoc(doc)
       table.insert(out, pandoc.RawBlock("latex", line))
       i = i + 1
 
+    -- Languages section: render bullet list as inline " · "-joined string.
+    elseif b.t == "BulletList" and section == "languages" then
+      local parts = {}
+      for _, item in ipairs(b.content) do
+        local item_text = pandoc_utils.stringify(item):gsub("%s+", " ")
+                                                      :gsub("^%s+", "")
+                                                      :gsub("%s+$", "")
+        -- Grey out parenthetical level qualifier "(native)" etc.
+        item_text = item_text:gsub("%s*%(([^)]+)%)$",
+          " {\\color{secondary}\\small (%1)}")
+        if item_text ~= "" then table.insert(parts, item_text) end
+      end
+      local line = table.concat(parts, " \\,\\ensuremath{\\cdot}\\, ")
+      table.insert(out, pandoc.RawBlock("latex", line))
+      i = i + 1
+
     -- [LONG] stripping for non-CV sections (legacy behaviour).
     elseif b.t == "Para" then
       local text = pandoc_utils.stringify(b)
