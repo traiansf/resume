@@ -2,9 +2,14 @@
 
 help:
 	@echo "Resume Build Targets:"
-	@echo "  make pdf       - Generate full resume (resume.pdf)"
-	@echo "  make pdf-short - Generate short resume (resume-short.pdf)"
-	@echo "  make clean     - Remove generated PDFs"
+	@echo "  make check-deps - Verify pandoc, xelatex, fonts are installed"
+	@echo "  make pdf        - Generate full resume (resume.pdf)"
+	@echo "  make pdf-short  - Generate short resume (resume-short.pdf)"
+	@echo "  make test       - Run filter regression tests"
+	@echo "  make clean      - Remove generated PDFs"
+	@echo ""
+	@echo "First-time setup: install Playfair Display and Source Sans 3 fonts"
+	@echo "from Google Fonts into ~/.local/share/fonts/ then run 'fc-cache -f'."
 
 pdf: resume.md filter.lua template.tex
 	pandoc -L filter.lua \
