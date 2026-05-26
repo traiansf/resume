@@ -128,6 +128,21 @@ function Pandoc(doc)
       table.insert(out, pandoc.RawBlock("latex", "\\end{callout}"))
       i = i + 1
 
+    -- Skills section: render bullet list as inline \pill{} tags.
+    elseif b.t == "BulletList" and section == "skills" then
+      local parts = {}
+      for _, item in ipairs(b.content) do
+        local item_text = pandoc_utils.stringify(item):gsub("%s+", " ")
+                                                      :gsub("^%s+", "")
+                                                      :gsub("%s+$", "")
+        if item_text ~= "" then
+          table.insert(parts, "\\pill{" .. item_text .. "}")
+        end
+      end
+      local line = table.concat(parts, "\\,\\,")
+      table.insert(out, pandoc.RawBlock("latex", line))
+      i = i + 1
+
     -- [LONG] stripping for non-CV sections (legacy behaviour).
     elseif b.t == "Para" then
       local text = pandoc_utils.stringify(b)
@@ -135,6 +150,19 @@ function Pandoc(doc)
         if short_version then
           local s = text:gsub("%[LONG%].*%[/LONG%]", "")
           if s:gsub("%s",""):len() > 0 then table.insert(out, pandoc.Para(s)) end
+        elseif section == "skills" then
+          -- In skills section: parse dash-separated items from LONG block as pills.
+          local inner = text:gsub("%[LONG%]",""):gsub("%[/LONG%]","")
+          local parts = {}
+          for item in inner:gmatch("[^%-\n]+") do
+            item = item:gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", "")
+            if item ~= "" then
+              table.insert(parts, "\\pill{" .. item .. "}")
+            end
+          end
+          if #parts > 0 then
+            table.insert(out, pandoc.RawBlock("latex", table.concat(parts, "\\,\\,")))
+          end
         else
           local s = text:gsub("%[LONG%]",""):gsub("%[/LONG%]","")
           if s:gsub("%s",""):len() > 0 then table.insert(out, pandoc.Para(s)) end

@@ -33,6 +33,16 @@
   topsep=4pt,
 }
 
+\usepackage{tikz}
+\newcommand{\pill}[1]{%
+  \tikz[baseline=(t.base)]{
+    \node[draw=accent, text=accent, line width=0.4pt,
+          rounded corners=4pt,
+          inner xsep=6pt, inner ysep=1.5pt,
+          font=\small](t){#1};
+  }%
+}
+
 \usepackage[hidelinks]{hyperref}
 \hypersetup{urlcolor=accent}
 
