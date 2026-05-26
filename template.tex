@@ -51,6 +51,19 @@
 
 \pagestyle{empty}
 
+\usepackage[most]{tcolorbox}
+\tcbset{
+  calloutbox/.style={
+    enhanced, breakable,
+    colback=calloutbg, colframe=accent,
+    boxrule=0pt, leftrule=2.5pt,
+    arc=0pt, outer arc=0pt,
+    boxsep=4pt, left=10pt, right=10pt, top=4pt, bottom=4pt,
+    before skip=4pt, after skip=8pt,
+  }
+}
+\newenvironment{callout}{\begin{tcolorbox}[calloutbox]}{\end{tcolorbox}}
+
 % pandoc tight-list shim
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}

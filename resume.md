@@ -117,9 +117,13 @@ Implemented classification algorithms for one of the first AI Agents
 
 # Publications
 
-- 40 articles indexed in Web of Science (43 in Scopus; 55 in Google Scholar)
-- Hirsch index 13 in Web of Science (17 in Scopus; 22 in Google Scholar)
-- 653 citations in Web of Science (1042 in Scopus; 2105 in Google Scholar)
+[CALLOUT]
+
+- **40 articles** indexed in Web of Science (43 Scopus, 55 Google Scholar)
+- **Hirsch index 13** (WoS) / 17 (Scopus) / **22 (Google Scholar)**
+- **653 citations** (WoS) / 1042 (Scopus) / **2105 (Google Scholar)**
+
+[/CALLOUT]
 
 [LONG]
 The following are the 22 most-cited publications — the works that make up the Hirsch (h) index of 22 — listed in decreasing order of citations (Google Scholar, as of May 2026). Complete and continuously updated publication and citation records are available on [Google Scholar](https://scholar.google.com/citations?user=QVLcUrcAAAAJ&hl=en) and [DBLP](https://dblp.org/pid/s/TFSerbanuta.html); the aggregate Web of Science and Scopus figures above are drawn from the corresponding author profiles in those databases.

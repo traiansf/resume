@@ -120,6 +120,14 @@ function Pandoc(doc)
         i = i + 1
       end
 
+    -- [CALLOUT] markers — wrap the following blocks in a callout environment.
+    elseif b.t == "Para" and pandoc_utils.stringify(b):match("^%s*%[CALLOUT%]%s*$") then
+      table.insert(out, pandoc.RawBlock("latex", "\\begin{callout}"))
+      i = i + 1
+    elseif b.t == "Para" and pandoc_utils.stringify(b):match("^%s*%[/CALLOUT%]%s*$") then
+      table.insert(out, pandoc.RawBlock("latex", "\\end{callout}"))
+      i = i + 1
+
     -- [LONG] stripping for non-CV sections (legacy behaviour).
     elseif b.t == "Para" then
       local text = pandoc_utils.stringify(b)
