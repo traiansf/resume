@@ -25,9 +25,19 @@
 
 \usepackage{enumitem}
 \setlist{nosep,topsep=2pt,partopsep=0pt,leftmargin=*}
+\setlist[enumerate,1]{
+  label={\color{accent}\fontseries{sb}\selectfont\arabic*.},
+  labelsep=8pt,
+  leftmargin=24pt,
+  itemsep=4pt,
+  topsep=4pt,
+}
 
 \usepackage[hidelinks]{hyperref}
 \hypersetup{urlcolor=accent}
+
+% \cites{N} — burgundy semibold citation count
+\newcommand{\cites}[1]{\,{\color{accent}\fontseries{sb}\selectfont[#1]}}
 
 % \cvitem{title}{org}{years}{detail}
 \newcommand{\cvitem}[4]{%

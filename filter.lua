@@ -171,6 +171,65 @@ function Pandoc(doc)
     end
   end
 
-  doc.blocks = out
+  -- Second pass: in Publications, rewrap "(cited by N)" as \cites{N}.
+  -- Works directly on inlines to preserve existing emphasis/formatting.
+  local cur_section = nil
+  local function rewrap_cites(el)
+    if cur_section ~= "publications" then return nil end
+    local text = pandoc_utils.stringify(el)
+    local n = text:match("%(cited by (%d+)%)%s*$")
+    if not n then return nil end
+    -- Rebuild the inline list: copy all inlines, trim the trailing
+    -- " (cited by N)" tokens, then append \cites{N}.
+    local src = {}
+    for _, inline in ipairs(el.content) do
+      table.insert(src, inline)
+    end
+    -- Walk backwards to strip: the tail looks like
+    --   ... Str("(cited") Space Str("by") Space Str("N)") [Space]
+    -- Trim trailing Spaces first.
+    while #src > 0 and src[#src].t == "Space" do
+      table.remove(src)
+    end
+    -- Now the last token should be Str ending with ")".
+    -- Strip " (cited by N)" by removing the last 5 tokens:
+    -- Str("(cited") Space Str("by") Space Str("N)")
+    -- but the Str tokens may vary; use stringify on the remainder to verify.
+    -- Safer: remove from the end until the closing ")" Str is gone.
+    -- Remove tokens from the end until "(cited" is gone from stringified text.
+    local found = false
+    for _ = 1, 10 do  -- bounded loop
+      if #src == 0 then break end
+      table.remove(src)
+      local rejoined = pandoc_utils.stringify(pandoc.Para(pandoc.Inlines(src)))
+      if not rejoined:match("%(cited") then
+        found = true
+        break
+      end
+    end
+    if not found then
+      -- Could not strip; return unchanged.
+      return nil
+    end
+    -- Trim trailing space/punct that was before "(cited by N)".
+    while #src > 0 and src[#src].t == "Space" do
+      table.remove(src)
+    end
+    table.insert(src, pandoc.Space())
+    table.insert(src, pandoc.RawInline("latex", "\\cites{"..n.."}"))
+    local inlines = pandoc.Inlines(src)
+    if el.t == "Para" then return pandoc.Para(inlines) end
+    return pandoc.Plain(inlines)
+  end
+
+  local result = pandoc.Pandoc(out):walk{
+    Header = function(h)
+      if h.level == 1 then cur_section = normalize(pandoc_utils.stringify(h)) end
+      return nil
+    end,
+    Para  = rewrap_cites,
+    Plain = rewrap_cites,
+  }
+  doc.blocks = result.blocks
   return doc
 end
