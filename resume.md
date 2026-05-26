@@ -4,6 +4,7 @@ email: traian.serbanuta@unibuc.ro
 phone: "+40 21 314 3508"
 address: "Faculty of Mathematics and Informatics, University of Bucharest, Str. Academiei nr.14, Sector 1, Bucharest, Romania"
 web: "http://cs.unibuc.ro/~tserbanuta"
+github: "github.com/traiansf"
 tagline: "Associate Professor · Researcher in Formal Methods"
 ---
 
@@ -60,14 +61,28 @@ Supervise graduate students and serve on departmental committees.
 **Pi Squared, Inc., 2024–2026**
 
 [LONG]
-Core Rust engineer on FastSet and its Verifiable Settlement Layer — Pi Squared's infrastructure for verifiable computing and universal settlement ("Proof of Proof"). Built much of the validator–proxy layer (REST/OpenAPI RPC, signed settlement claims, USDC fees, multisig CLI, monitoring) and extended the platform into agentic AI-commerce.
+
+Core Rust engineer on Pi Squared's verifiable-computing and universal-settlement infrastructure ("Proof of Proof"). Work spans four phases of the platform's evolution:
+
+- **Pi² research prototype (2024)** — Metamath-based proof checkers compiled to multiple zkVM backends (RISC Zero, SP1, Nexus, Lurk, Delphinus); `mmtool` driver with checkpoint/resume; cross-backend benchmarking infrastructure; WASM build of the checker.
+- **Verifiable Settlement Layer (2025)** — VSL claim model with `SubmittedClaim` quorum semantics and signed `SettledClaim`s on every state-changing endpoint; u128 asset/amount model with RLP wire format; receiver-side subscriptions and explorer endpoints; extracted the `vsl-sdk` standalone package.
+- **FastSet validator + proxy (2025–2026)** — versioned-protocol releases with golden-vector wire-format tests, per-IP rate limiting with clock-race-safe refill, faucet pending-tx cleanup, structured validator-error relay with proper HTTP status codes, race-free shared test-proxy harness.
+- **Fast Shop / agentic AI commerce (2026)** — Universal Commerce Protocol integration with platform profiles and cached refresh; region-aware fan-out and country inference for multi-region delivery; Shopify backend with SSRF guard and idempotent advisory-lock migrations; MCP exposure of the commerce surface.
+
 [/LONG]
 
 ## Consultant and Researcher
 **Runtime Verification, Inc., 2012–2023**
 
 [LONG]
-Principal contributor to the K Framework and its Haskell symbolic-execution prover, and core developer of RV-Predict, a data-race and deadlock detector for Java and C/C++. Applied K to the formal semantics of the EVM (smart-contract verification), WebAssembly, and the IELE VM, and formalized CBC-Casper consensus in Coq.
+
+Long-running principal contributor across four projects:
+
+- **K Framework — Java implementation (2014–2015)** — LTL model-checker plumbing (Promela parser, `LTLMC` API, `ProofResults`); search-graph extraction from the executor/debugger; AC matcher backed by the `assoc` attribute on function rules; builtin/binder mechanics for the Maude and Java backends.
+- **RV-Predict — race & deadlock detector (2014–2017)** — maximal-causal-model predictive race detection for Java; C/C++ side via an LLVM AspectLLVM instrumentation pass with fork/lock/thread-creation event handling; scaling work pushing the variable cap to 1M.
+- **K Haskell Backend — symbolic-execution prover (2018–2024)** — all-path and one-path reachability logic, SMT integration with int/bool existential translation, unification with overloaded variables and an `OverloadSimplifier`, `unboundVariables` attribute, cell-maps ceil rules. Applied to the formal semantics of the EVM, WebAssembly, and the IELE VM.
+- **CBC-Casper / VLSM consensus in Coq (2022–2023)** — VLSM projections, induced validators, fixed-set and message-dependent limited equivocation, reachable-threshold non-triviality results, decidability of the constrained-state property for ELMO.
+
 [/LONG]
 
 ## Postdoctoral Research Fellow
@@ -171,6 +186,20 @@ The following are the 22 most-cited publications — the works that make up the 
 21. Frei, Regina, Giovanna Di Marzo Serugendo, and Traian Florin Șerbănuță. "Ambient intelligence in self-organising assembly systems using the chemical reaction model." *Journal of Ambient Intelligence and Humanized Computing*, Vol. 1, No. 3, pp. 163-184, 2010. (cited by 25)
 
 22. Șerbănuță, Traian Florin. "A Rewriting Approach to Concurrent Programming Language Design and Semantics." PhD thesis, University of Illinois at Urbana-Champaign, 2010. (cited by 24)
+
+[/LONG]
+
+[LONG]
+
+# Open-source Projects
+
+Personal research and tooling outside employer-affiliated work; full list at <https://github.com/traiansf>.
+
+- **Formalization libraries** — [aml-in-coq](https://github.com/traiansf/aml-in-coq) (Applicative Matching Logic), [arl-in-coq](https://github.com/traiansf/arl-in-coq) (Abstract Rewrite Systems), [sets-in-coq](https://github.com/traiansf/sets-in-coq).
+- **Type theory study** — [propositions-as-types](https://github.com/traiansf/propositions-as-types), Coq scribbles along *Type Theory and Formal Proofs* (Nederpelt & Geuvers); actively maintained.
+- **Teaching companions** — [semantics-in-coq](https://github.com/traiansf/semantics-in-coq) and [semantics-in-lean](https://github.com/traiansf/semantics-in-lean), companions to the Foundations of Programming Languages course.
+- **Schools & events** — [bucharest-lean-ac](https://github.com/traiansf/bucharest-lean-ac), Bucharest Autumn School materials in Lean 4.
+- **Other** — [excel-database](https://github.com/traiansf/excel-database), a WordPress plugin (★4) that exposes an Excel spreadsheet table as queryable data.
 
 [/LONG]
 
