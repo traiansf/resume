@@ -88,12 +88,17 @@ Long-running principal contributor across four projects:
 ## Postdoctoral Research Fellow
 **Alexandru Ioan Cuza University, Iași (FMSE Laboratory), 2011–2013**
 
+[LONG]
 Formal methods research in software engineering. Coordonated the team developing the K framework.
+
+[/LONG]
 
 ## Postdoctoral Research Associate
 **University of Illinois, Urbana-Champaign (Information Trust Institute), 2011–2012**
 
+[LONG]
 Formal systems and verification research.
+[/LONG]
 
 ## Research Assistant
 **University of Illinois, Urbana-Champaign (FSL Laboratory), 2004–2010**
@@ -134,9 +139,9 @@ Implemented classification algorithms for one of the first AI Agents
 
 [CALLOUT]
 
-- **40 articles** indexed in Web of Science (43 Scopus, 55 Google Scholar)
-- **Hirsch index 13** (WoS) / 17 (Scopus) / **22 (Google Scholar)**
-- **653 citations** (WoS) / 1042 (Scopus) / **2105 (Google Scholar)**
+- **36 articles** indexed in Web of Science / 41 Scopus / 55 Google Scholar
+- **Hirsch index 13** (WoS) / 16 (Scopus) / 22 (Google Scholar)
+- **622 citations** (WoS) / 1144 (Scopus) / 2106 (Google Scholar)
 
 [/CALLOUT]
 
