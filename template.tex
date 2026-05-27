@@ -57,6 +57,10 @@
 \usepackage[hidelinks]{hyperref}
 \hypersetup{urlcolor=accent}
 
+% No paragraph indent — this CV uses blank-line paragraph separation
+% throughout, so a first-line indent would just look like a typo.
+\setlength{\parindent}{0pt}
+
 % \cites{N} — burgundy semibold citation count
 \newcommand{\cites}[1]{\,{\color{accent}\fontseries{sb}\selectfont[#1]}}
 
@@ -133,7 +137,6 @@
 
 % --- Header ---
 \begingroup
-  \setlength{\parindent}{0pt}
   {\headingfont\color{bodytext}\fontsize{30}{32}\selectfont $name$\par}
   \vspace{2pt}
   $if(tagline)$

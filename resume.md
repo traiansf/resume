@@ -206,7 +206,7 @@ Personal research and tooling outside employer-affiliated work; full list at <ht
 [/CALLOUT]
 
 [LONG]
-The following are my 20 most-cited publications listed in decreasing order of citations (Google Scholar, as of May 2026). Complete and continuously updated publication and citation records are available on [Google Scholar](https://scholar.google.com/citations?user=QVLcUrcAAAAJ&hl=en) and [DBLP](https://dblp.org/pid/s/TFSerbanuta.html).
+Top 20 by citations (Google Scholar, May 2026). Full record: [Google Scholar](https://scholar.google.com/citations?user=QVLcUrcAAAAJ&hl=en) · [DBLP](https://dblp.org/pid/s/TFSerbanuta.html).
 
 1. Roșu, Grigore and Traian Florin Șerbănuță. "An Overview of the K Semantic Framework." *Journal of Logic and Algebraic Programming*, Vol. 79, No. 6, pp. 397-434, 2010. (cited by 639)
 
@@ -247,9 +247,5 @@ The following are my 20 most-cited publications listed in decreasing order of ci
 19. Șerbănuță, Traian Florin, Gheorghe Ștefănescu, and Grigore Roșu. "Defining and Executing P Systems with Structured Data in K." *Membrane Computing (WMC'08)*, LNCS Vol. 5391, pp. 374-393, 2009. (cited by 28)
 
 20. Lucanu, Dorel, Traian Florin Șerbănuță, and Grigore Roșu. "K Framework Distilled." *Rewriting Logic and Its Applications (WRLA'12)*, LNCS Vol. 7571, pp. 31-53, 2012. (cited by 25)
-
-21. Frei, Regina, Giovanna Di Marzo Serugendo, and Traian Florin Șerbănuță. "Ambient intelligence in self-organising assembly systems using the chemical reaction model." *Journal of Ambient Intelligence and Humanized Computing*, Vol. 1, No. 3, pp. 163-184, 2010. (cited by 25)
-
-22. Șerbănuță, Traian Florin. "A Rewriting Approach to Concurrent Programming Language Design and Semantics." PhD thesis, University of Illinois at Urbana-Champaign, 2010. (cited by 24)
 
 [/LONG]
