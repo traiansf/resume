@@ -166,7 +166,6 @@ Personal research and tooling outside employer-affiliated work; full list at <ht
 
 - Formal methods and verification
 - Programming language semantics
-
 [LONG]
 - Rewriting logic
 - K framework
@@ -182,7 +181,6 @@ Personal research and tooling outside employer-affiliated work; full list at <ht
 - Coq / Rocq
 - Java
 - C / C++
-
 [LONG]
 - K / Maude
 - Lean 4
@@ -202,12 +200,12 @@ Personal research and tooling outside employer-affiliated work; full list at <ht
 
 [CALLOUT]
 
-**55** articles · h-index **22** · **2106** citations (according to Google Scholar)
+**55** articles · h-index **22** · **2106** citations (Google Scholar, as of May 2026)
 
 [/CALLOUT]
 
 [LONG]
-The following are the 22 most-cited publications — the works that make up the Hirsch (h) index of 22 — listed in decreasing order of citations (Google Scholar, as of May 2026). Complete and continuously updated publication and citation records are available on [Google Scholar](https://scholar.google.com/citations?user=QVLcUrcAAAAJ&hl=en) and [DBLP](https://dblp.org/pid/s/TFSerbanuta.html).
+The following are my 20 most-cited publications listed in decreasing order of citations (Google Scholar, as of May 2026). Complete and continuously updated publication and citation records are available on [Google Scholar](https://scholar.google.com/citations?user=QVLcUrcAAAAJ&hl=en) and [DBLP](https://dblp.org/pid/s/TFSerbanuta.html).
 
 1. Roșu, Grigore and Traian Florin Șerbănuță. "An Overview of the K Semantic Framework." *Journal of Logic and Algebraic Programming*, Vol. 79, No. 6, pp. 397-434, 2010. (cited by 639)
 
