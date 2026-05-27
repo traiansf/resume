@@ -49,6 +49,11 @@
   }%
 }
 
+% \pillrow{...} renders a row of pills with raggedright line-breaking so the
+% inter-pill separators can break naturally when the next pill won't fit on
+% the current line, instead of overfilling a justified line.
+\newcommand{\pillrow}[1]{{\raggedright #1\par}}
+
 \usepackage[hidelinks]{hyperref}
 \hypersetup{urlcolor=accent}
 

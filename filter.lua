@@ -335,7 +335,7 @@ function Pandoc(doc)
           table.insert(parts, "\\pill{" .. item_text .. "}")
         end
       end
-      local line = table.concat(parts, "\\,\\allowbreak\\,")
+      local line = "\\pillrow{" .. table.concat(parts, "\\,\\allowbreak\\,") .. "}"
       table.insert(out, pandoc.RawBlock("latex", line))
       i = i + 1
 
@@ -373,7 +373,8 @@ function Pandoc(doc)
             end
           end
           if #parts > 0 then
-            table.insert(out, pandoc.RawBlock("latex", table.concat(parts, "\\,\\allowbreak\\,")))
+            table.insert(out, pandoc.RawBlock("latex",
+              "\\pillrow{" .. table.concat(parts, "\\,\\allowbreak\\,") .. "}"))
           end
         else
           local s = text:gsub("%[LONG%]",""):gsub("%[/LONG%]","")
