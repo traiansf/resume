@@ -28,7 +28,7 @@ Committee: Thomas Ball, Darko Marinov, José Meseguer, Madhusudan Parthasarathy
 Dissertation: *Concepte instituționale în logica de ordinul I, teoria specificațiilor parametrizate și programarea logică*
 
 Advisors: Răzvan Diaconescu, Virgil Emil Căzănescu
-</LONG>
+[/LONG]
 
 ## Bachelor in Computer Science
 **University of Bucharest, 2002**

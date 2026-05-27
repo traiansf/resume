@@ -24,68 +24,87 @@ local function split_org_years(block)
   return org, years
 end
 
--- Apply [LONG] stripping to a slice of blocks (the "detail" of a CV entry).
-local function clean_long(blocks)
-  local cleaned = {}
-  local in_long = false
-  for _, b in ipairs(blocks) do
-    if b.t == "Para" then
-      local s = pandoc_utils.stringify(b)
-      if s:find("%[LONG%]") and s:find("%[/LONG%]") then
-        if short_version then
-          local stripped = s:gsub("%[LONG%].*%[/LONG%]", "")
-          if stripped:gsub("%s",""):len() > 0 then
-            table.insert(cleaned, pandoc.Para(stripped))
-          end
-        else
-          local stripped = s:gsub("%[LONG%]",""):gsub("%[/LONG%]","")
-          if stripped:gsub("%s",""):len() > 0 then
-            table.insert(cleaned, pandoc.Para(stripped))
-          end
-        end
-      elseif s:find("%[LONG%]") then
-        in_long = true
-        if not short_version then
-          local stripped = s:gsub("%[LONG%]","")
-          if stripped:gsub("%s",""):len() > 0 then
-            table.insert(cleaned, pandoc.Para(stripped))
-          end
-        end
-      elseif s:find("%[/LONG%]") then
-        in_long = false
-      elseif in_long then
-        if not short_version then table.insert(cleaned, b) end
-      else
-        table.insert(cleaned, b)
-      end
-    else
-      if not in_long or not short_version then
-        table.insert(cleaned, b)
-      end
-    end
-  end
-  return cleaned
-end
-
-local function render_detail(blocks)
-  local cleaned = clean_long(blocks)
-  if #cleaned == 0 then return "" end
-  return pandoc.write(pandoc.Pandoc(cleaned), "latex")
-end
-
 local function is_cv_section()
   return section == "experience" or section == "education"
 end
 
--- Pre-pass: resolve block-level standalone [LONG] / [/LONG] tag paragraphs.
--- A "standalone" tag is a paragraph whose entire content is just [LONG] or
--- [/LONG] (whitespace-trimmed). These wrap one-or-more sibling blocks.
+-- ─── [LONG] handling ────────────────────────────────────────────────────────
+-- We support three source forms for hiding content in the short version:
 --
--- In short mode, drop the wrapped blocks and both tags. In full mode, drop
--- just the tag paragraphs and keep the wrapped blocks.
+--   1. Standalone tag paragraphs (block-level wrap):
+--        [LONG]
 --
--- Inline [LONG]...[/LONG] within a single paragraph is left untouched here so
--- the main loop's section-specific handlers (skills pills, etc.) can see it.
+--        # Some section
+--        content...
+--
+--        [/LONG]
+--
+--   2. Orphan-leading / orphan-trailing tag in a paragraph that's part of a
+--      larger block (the tag is followed/preceded by a SoftBreak):
+--        [LONG]
+--        Dissertation: *Some title*
+--
+--        Advisors: A, B
+--        [/LONG]
+--
+--   3. Both tags inline within a single paragraph (skills/pills idiom):
+--        [LONG]
+--        - Item 1
+--        - Item 2
+--        [/LONG]
+--
+-- The pipeline is two passes: normalize_long_paras splits form (2) into
+-- standalone tag paragraphs, then resolve_block_long collapses standalone
+-- tag pairs. Form (3) — both tags in one paragraph — is left intact for
+-- the main loop's section-specific handlers (skills/programming-languages
+-- render the dashed list as pills).
+
+-- Pre-pass 1: split paragraphs whose leading inline is `[LONG]` (followed by
+-- a soft/line break) or whose trailing inline is `[/LONG]` (preceded by one).
+-- Paragraphs containing both tags or neither are passed through unchanged.
+local function normalize_long_paras(blocks)
+  local out = {}
+  for _, b in ipairs(blocks) do
+    local emitted = false
+    if b.t == "Para" and #b.content > 0 then
+      local inlines = b.content
+      local n = #inlines
+      local text = pandoc_utils.stringify(b)
+      local has_open = text:find("%[LONG%]") ~= nil
+      local has_close = text:find("%[/LONG%]") ~= nil
+      if has_open ~= has_close then
+        local is_break = function(x)
+          return x.t == "SoftBreak" or x.t == "LineBreak"
+        end
+        if has_open
+            and n >= 2
+            and inlines[1].t == "Str" and inlines[1].text == "[LONG]"
+            and is_break(inlines[2]) then
+          table.insert(out, pandoc.Para({pandoc.Str("[LONG]")}))
+          local rest = {}
+          for i = 3, n do table.insert(rest, inlines[i]) end
+          if #rest > 0 then table.insert(out, pandoc.Para(rest)) end
+          emitted = true
+        elseif has_close
+            and n >= 2
+            and inlines[n].t == "Str" and inlines[n].text == "[/LONG]"
+            and is_break(inlines[n-1]) then
+          local rest = {}
+          for i = 1, n - 2 do table.insert(rest, inlines[i]) end
+          if #rest > 0 then table.insert(out, pandoc.Para(rest)) end
+          table.insert(out, pandoc.Para({pandoc.Str("[/LONG]")}))
+          emitted = true
+        end
+      end
+    end
+    if not emitted then table.insert(out, b) end
+  end
+  return out
+end
+
+-- Pre-pass 2: resolve standalone [LONG] / [/LONG] tag paragraphs.
+-- Drops the wrapped blocks in short mode; drops only the tag paragraphs in
+-- full mode. Supports nesting via depth counting.
 local function resolve_block_long(blocks)
   local function is_tag(b, tag)
     if b.t ~= "Para" then return false end
@@ -96,7 +115,6 @@ local function resolve_block_long(blocks)
   while i <= #blocks do
     local b = blocks[i]
     if is_tag(b, "%[LONG%]") then
-      -- Find matching [/LONG], allowing nesting.
       local depth = 1
       local j = i + 1
       while j <= #blocks do
@@ -107,7 +125,9 @@ local function resolve_block_long(blocks)
         end
         j = j + 1
       end
-      -- j now points at the closing [/LONG] (or past end if unmatched).
+      if j > #blocks then
+        io.stderr:write("filter.lua: warning: unmatched [LONG] tag\n")
+      end
       if not short_version then
         for k = i + 1, math.min(j - 1, #blocks) do
           table.insert(out, blocks[k])
@@ -115,7 +135,7 @@ local function resolve_block_long(blocks)
       end
       i = j + 1
     elseif is_tag(b, "%[/LONG%]") then
-      -- Orphan closing tag: drop it.
+      io.stderr:write("filter.lua: warning: orphan [/LONG] tag (dropped)\n")
       i = i + 1
     else
       table.insert(out, b)
@@ -125,12 +145,45 @@ local function resolve_block_long(blocks)
   return out
 end
 
+-- Render a slice of blocks (the "detail" of a CV entry) to LaTeX. The slice
+-- has already been through normalize+resolve, so it contains no standalone
+-- tag paragraphs. Inline [LONG]...[/LONG] paragraphs (both tags in one Para)
+-- are stripped here: tags removed in full mode, whole bracketed span
+-- removed in short mode.
+local function render_detail(blocks)
+  local cleaned = {}
+  for _, b in ipairs(blocks) do
+    if b.t == "Para" then
+      local s = pandoc_utils.stringify(b)
+      if s:find("%[LONG%]") and s:find("%[/LONG%]") then
+        if short_version then
+          local stripped = s:gsub("%[LONG%].-%[/LONG%]", "")
+          if stripped:gsub("%s",""):len() > 0 then
+            table.insert(cleaned, pandoc.Para(stripped))
+          end
+        else
+          local stripped = s:gsub("%[LONG%]",""):gsub("%[/LONG%]","")
+          if stripped:gsub("%s",""):len() > 0 then
+            table.insert(cleaned, pandoc.Para(stripped))
+          end
+        end
+      else
+        table.insert(cleaned, b)
+      end
+    else
+      table.insert(cleaned, b)
+    end
+  end
+  if #cleaned == 0 then return "" end
+  return pandoc.write(pandoc.Pandoc(cleaned), "latex")
+end
+
 function Pandoc(doc)
   if doc.meta and doc.meta.short_version then
     short_version = pandoc_utils.stringify(doc.meta.short_version) == "true"
   end
 
-  local blocks = resolve_block_long(doc.blocks)
+  local blocks = resolve_block_long(normalize_long_paras(doc.blocks))
   local out = {}
   local i = 1
   while i <= #blocks do
@@ -207,15 +260,15 @@ function Pandoc(doc)
       table.insert(out, pandoc.RawBlock("latex", line))
       i = i + 1
 
-    -- [LONG] stripping for non-CV sections (legacy behaviour).
+    -- Inline [LONG]...[/LONG] within a single paragraph. After the
+    -- normalize+resolve pre-passes, only this form remains.
     elseif b.t == "Para" then
       local text = pandoc_utils.stringify(b)
       if text:find("%[LONG%]") and text:find("%[/LONG%]") then
         if short_version then
-          local s = text:gsub("%[LONG%].*%[/LONG%]", "")
+          local s = text:gsub("%[LONG%].-%[/LONG%]", "")
           if s:gsub("%s",""):len() > 0 then table.insert(out, pandoc.Para(s)) end
         elseif section == "skills" or section == "programming languages" then
-          -- In skills/programming-languages section: parse dash-separated items from LONG block as pills.
           local inner = text:gsub("%[LONG%]",""):gsub("%[/LONG%]","")
           local parts = {}
           for item in inner:gmatch("[^%-\n]+") do
@@ -231,31 +284,10 @@ function Pandoc(doc)
           local s = text:gsub("%[LONG%]",""):gsub("%[/LONG%]","")
           if s:gsub("%s",""):len() > 0 then table.insert(out, pandoc.Para(s)) end
         end
-        i = i + 1
-      elseif text:find("%[LONG%]") then
-        if not short_version then
-          local s = text:gsub("%[LONG%]","")
-          if s:gsub("%s",""):len() > 0 then table.insert(out, pandoc.Para(s)) end
-        end
-        -- Consume blocks until [/LONG]
-        local j = i + 1
-        while j <= #blocks do
-          local bj = blocks[j]
-          if bj.t == "Para" then
-            local sj = pandoc_utils.stringify(bj)
-            if sj:find("%[/LONG%]") then
-              j = j + 1
-              break
-            end
-          end
-          if not short_version then table.insert(out, bj) end
-          j = j + 1
-        end
-        i = j
       else
         table.insert(out, b)
-        i = i + 1
       end
+      i = i + 1
 
     else
       table.insert(out, b)
