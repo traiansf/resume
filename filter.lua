@@ -192,8 +192,44 @@ function Pandoc(doc)
     -- Track current H1 section.
     if b.t == "Header" and b.level == 1 then
       section = normalize(pandoc_utils.stringify(b))
-      table.insert(out, b)
-      i = i + 1
+      -- If this section opens with a [CALLOUT] containing a single short
+      -- paragraph, render the section title and callout content side-by-side
+      -- via \sectionwithcallout (the section spans the full width; the
+      -- callout content sits flush-right on the title baseline).
+      local nb = blocks[i + 1]
+      if nb and nb.t == "Para"
+          and pandoc_utils.stringify(nb):match("^%s*%[CALLOUT%]%s*$") then
+        local j = i + 2
+        local content_blocks = {}
+        while j <= #blocks do
+          local bj = blocks[j]
+          if bj.t == "Para"
+              and pandoc_utils.stringify(bj):match("^%s*%[/CALLOUT%]%s*$") then
+            j = j + 1
+            break
+          end
+          table.insert(content_blocks, bj)
+          j = j + 1
+        end
+        if #content_blocks == 1 and content_blocks[1].t == "Para" then
+          -- Render the single paragraph inline (no \par at end).
+          local plain = pandoc.Plain(content_blocks[1].content)
+          local content_tex = pandoc.write(pandoc.Pandoc({plain}), "latex")
+                              :gsub("^%s+", ""):gsub("%s+$", "")
+          local title = pandoc_utils.stringify(b)
+          table.insert(out, pandoc.RawBlock("latex",
+            string.format("\\sectionwithcallout{%s}{%s}", title, content_tex)))
+          i = j
+        else
+          -- Multi-block callout: fall through to default behaviour
+          -- (emit the header, then the callout markers will be handled below).
+          table.insert(out, b)
+          i = i + 1
+        end
+      else
+        table.insert(out, b)
+        i = i + 1
+      end
 
     -- In CV sections, fold "## Title" + "**Org, Years**" + detail into \cvitem.
     elseif b.t == "Header" and b.level == 2 and is_cv_section() then

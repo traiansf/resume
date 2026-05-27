@@ -57,6 +57,15 @@ Supervise graduate students and serve on departmental committees.
 
 [/LONG]
 
+## Co-founder and Vice-President
+**Institute for Logic and Data Science, 2022–Present**
+
+[LONG]
+
+Non-profit research institute ([ilds.ro](https://ilds.ro)) bringing together academic and industry researchers in logic and data science. Organised conferences and topical workshops including the **Working Formal Methods Symposium** (*FROM 2024* in Bucharest, *FROM 2026* in Timișoara), *Workshop on LLMs for Romanian* (2024), *The Age of Algorithms* (2024), *Deep Blockchain Fundamentals* (2024), and the *Nitro NLP* hackathon (3rd edition, 2024). Runs the weekly **Logic**, **Neuro-symbolic AI**, and **Proof Mining** seminar series. Hosts research projects on proof mining in optimization, matching-logic foundations, LLMs for Romanian, matching logic with cryptography and blockchains, AI for chemistry and RPA, and AI-based electronics failure prediction.
+
+[/LONG]
+
 ## Consultant and Researcher
 **Pi Squared, Inc., 2024–2026**
 
@@ -193,14 +202,12 @@ Personal research and tooling outside employer-affiliated work; full list at <ht
 
 [CALLOUT]
 
-- **36 articles** indexed in Web of Science / 41 Scopus / 55 Google Scholar
-- **Hirsch index 13** (WoS) / 16 (Scopus) / 22 (Google Scholar)
-- **622 citations** (WoS) / 1144 (Scopus) / 2106 (Google Scholar)
+**55** articles · h-index **22** · **2106** citations (according to Google Scholar)
 
 [/CALLOUT]
 
 [LONG]
-The following are the 22 most-cited publications — the works that make up the Hirsch (h) index of 22 — listed in decreasing order of citations (Google Scholar, as of May 2026). Complete and continuously updated publication and citation records are available on [Google Scholar](https://scholar.google.com/citations?user=QVLcUrcAAAAJ&hl=en) and [DBLP](https://dblp.org/pid/s/TFSerbanuta.html); the aggregate Web of Science and Scopus figures above are drawn from the corresponding author profiles in those databases.
+The following are the 22 most-cited publications — the works that make up the Hirsch (h) index of 22 — listed in decreasing order of citations (Google Scholar, as of May 2026). Complete and continuously updated publication and citation records are available on [Google Scholar](https://scholar.google.com/citations?user=QVLcUrcAAAAJ&hl=en) and [DBLP](https://dblp.org/pid/s/TFSerbanuta.html).
 
 1. Roșu, Grigore and Traian Florin Șerbănuță. "An Overview of the K Semantic Framework." *Journal of Logic and Algebraic Programming*, Vol. 79, No. 6, pp. 397-434, 2010. (cited by 639)
 

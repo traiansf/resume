@@ -106,6 +106,20 @@
 }
 \newenvironment{callout}{\begin{tcolorbox}[calloutbox]}{\end{tcolorbox}}
 
+% \sectionwithcallout{title}{inline-content} — renders a section heading with
+% short callout content flush-right on the same baseline. Used by filter.lua
+% when a [CALLOUT] follows an H1 with a single-paragraph payload.
+\newcommand{\sectionwithcallout}[2]{%
+  \par\vspace{16pt}%
+  \hypertarget{\detokenize{#1}}{}%
+  \noindent
+  \begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}r@{}}%
+    {\Large\itshape\headingfont\color{accent}#1} &
+    {\normalfont\fontsize{9}{11}\selectfont\color{secondary}#2}%
+  \end{tabular*}%
+  \par\vspace{6pt}%
+}
+
 % pandoc tight-list shim
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
