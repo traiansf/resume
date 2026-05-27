@@ -50,7 +50,8 @@ Courses developed and taught, with all materials openly published:
 - [Declarative Programming](https://github.com/unibuc-cs/progdecl) — functional and declarative programming in Haskell
 - [Concurrency in Programming Languages](https://github.com/unibuc-cs/iclp) — concurrency hands-on across Java, C++, Erlang/Elixir, JavaScript, and Python
 - [Programming Languages Semantics](https://github.com/unibuc-cs/slp/tree/v2017) — operational semantics, interpreters, and type systems
-- [Foundations of Programming Languages](https://github.com/unibuc-cs/flp) — lambda calculus, type systems, and logic programming (Haskell and Prolog)
+- [Foundations of Programming Languages](https://github.com/unibuc-cs/flp) — a theoretical incursion in semantics, lambda calculus, type systems, and logic programming
+- [Program Verification](https://github.com/unibuc-cs/pv) — Hoare logic, weakest preconditions, separation logic, SAT/SMT solvers, symbolic execution, and model checking
 - [Introduction to Machine Learning](https://github.com/unibuc-cs/dh-ml) — hands-on machine learning for non-computer-scientists (Master in Digital Humanities)
 
 Supervise graduate students and serve on departmental committees.
