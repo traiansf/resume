@@ -37,7 +37,7 @@ the `[LONG]` handling has historically been fragile.
 
 These are non-standard idioms the filter recognises:
 
-- **`[LONG] ... [/LONG]`** — hide content in the short version. Three valid
+- **`[LONG] ... [/LONG]`** — hide content in the short version. Four valid
   forms (see `filter.lua` for the full pipeline):
   - **standalone tags**: `[LONG]` on its own line (blank lines around),
     arbitrary blocks between, `[/LONG]` on its own line. Can wrap entire
@@ -48,6 +48,12 @@ These are non-standard idioms the filter recognises:
   - **inline both**: `[LONG]\n- item\n- item\n[/LONG]` all in one paragraph,
     used in Skills and Programming Languages to render extra pills only in
     the full version.
+  - **in-list trim**: place `[LONG]` and `[/LONG]` on their own lines
+    *immediately after* bullet-list items (no blank line), to hide a
+    contiguous slice of items in the short version while keeping a single
+    `BulletList` in the AST. Implemented in `trim_lists_with_inline_long`
+    by detecting the trailing `SoftBreak + Str "[LONG]"` (resp. `[/LONG]`)
+    appended to the preceding item.
 
   **Never** use `</LONG>` — that's an HTML-style close, pandoc parses it as
   raw HTML and the filter does not recognise it. The integration test fails

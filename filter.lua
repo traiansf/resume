@@ -102,6 +102,64 @@ local function normalize_long_paras(blocks)
   return out
 end
 
+-- Pre-pass 1b: trim bullet lists with inline [LONG]/[/LONG] markers. Pandoc
+-- parses
+--
+--   - visible
+--   - last visible
+--   [LONG]
+--   - hidden
+--   - last hidden
+--   [/LONG]
+--   - after
+--
+-- as a single BulletList where the orphan `[LONG]` line attaches as the
+-- trailing inline of the preceding item (after a SoftBreak), and likewise
+-- for `[/LONG]`. This pass detects that pattern, strips the tag from the
+-- item, and in short mode drops the items between the open and close tags.
+local function process_bullet_items_long(items)
+  local out = {}
+  local in_long = false
+  for _, item in ipairs(items) do
+    local last = item[#item]
+    local trailing = nil  -- "open" | "close" | nil
+    local stripped = item
+    if last and (last.t == "Plain" or last.t == "Para") then
+      local inl = last.content
+      local m = #inl
+      if m >= 2
+          and inl[m].t == "Str"
+          and (inl[m].text == "[LONG]" or inl[m].text == "[/LONG]")
+          and (inl[m-1].t == "SoftBreak" or inl[m-1].t == "LineBreak") then
+        trailing = (inl[m].text == "[LONG]") and "open" or "close"
+        local new_inl = {}
+        for k = 1, m - 2 do table.insert(new_inl, inl[k]) end
+        local new_last = (last.t == "Plain")
+          and pandoc.Plain(new_inl) or pandoc.Para(new_inl)
+        stripped = {}
+        for k = 1, #item - 1 do table.insert(stripped, item[k]) end
+        table.insert(stripped, new_last)
+      end
+    end
+    if not (in_long and short_version) then
+      table.insert(out, stripped)
+    end
+    if trailing == "open" then in_long = true
+    elseif trailing == "close" then in_long = false end
+  end
+  return out
+end
+
+local function trim_lists_with_inline_long(blocks)
+  local doc = pandoc.Pandoc(blocks)
+  local result = doc:walk({
+    BulletList = function(b)
+      return pandoc.BulletList(process_bullet_items_long(b.content))
+    end
+  })
+  return result.blocks
+end
+
 -- Pre-pass 2: resolve standalone [LONG] / [/LONG] tag paragraphs.
 -- Drops the wrapped blocks in short mode; drops only the tag paragraphs in
 -- full mode. Supports nesting via depth counting.
@@ -183,7 +241,8 @@ function Pandoc(doc)
     short_version = pandoc_utils.stringify(doc.meta.short_version) == "true"
   end
 
-  local blocks = resolve_block_long(normalize_long_paras(doc.blocks))
+  local blocks = trim_lists_with_inline_long(
+                   resolve_block_long(normalize_long_paras(doc.blocks)))
   local out = {}
   local i = 1
   while i <= #blocks do
