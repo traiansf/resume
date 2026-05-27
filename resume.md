@@ -13,9 +13,9 @@ tagline: "Associate Professor · Researcher in Formal Methods"
 ## PhD in Computer Science
 **University of Illinois, Urbana-Champaign, 2010**
 
+[LONG]
 Dissertation: *A Rewriting Approach to Concurrent Programming Language Design and Semantics*
 
-[LONG]
 Advisor: Grigore Roșu
 
 Committee: Thomas Ball, Darko Marinov, José Meseguer, Madhusudan Parthasarathy
@@ -28,10 +28,12 @@ Committee: Thomas Ball, Darko Marinov, José Meseguer, Madhusudan Parthasarathy
 Dissertation: *Concepte instituționale în logica de ordinul I, teoria specificațiilor parametrizate și programarea logică*
 
 Advisors: Răzvan Diaconescu, Virgil Emil Căzănescu
+</LONG>
 
 ## Bachelor in Computer Science
 **University of Bucharest, 2002**
 
+[LONG]
 Dissertation: *Ascunderea informației în text folosind gramatici de tip LR(k)*
 
 Advisor: Adrian Atanasiu
@@ -85,10 +87,11 @@ Long-running principal contributor across four projects:
 
 [/LONG]
 
+[LONG]
+
 ## Postdoctoral Research Fellow
 **Alexandru Ioan Cuza University, Iași (FMSE Laboratory), 2011–2013**
 
-[LONG]
 Formal methods research in software engineering. Coordonated the team developing the K framework.
 
 [/LONG]
@@ -107,10 +110,11 @@ Formal systems and verification research.
 Assisted in research on formal semantics, rewriting logic, and programming language design. Contributed to the K framework project.
 [/LONG]
 
+[LONG]
+
 ## Teaching Assistant
 **University of Bucharest, Department of Computer Science Fundamentals, 2003–2004**
 
-[LONG]
 Supported undergraduate courses in programming, discrete mathematics, and computer science theory.
 [/LONG]
 
@@ -128,12 +132,63 @@ Co-authored a patent application on web traffic analysis methods (with Bogdan C�
 Contributed an equality theory propagation core for the Zapp (currently Z3) prover
 [/LONG]
 
+[LONG]
+
 ## Programmer
 **Popnet-Agentscape Romania, Natural Language Processing Team, 2000–2001**
 
-[LONG]
 Implemented classification algorithms for one of the first AI Agents
 [/LONG]
+
+[LONG]
+
+# Open-source Projects
+
+Personal research and tooling outside employer-affiliated work; full list at <https://github.com/traiansf>.
+
+- **Formalization libraries** — [aml-in-coq](https://github.com/traiansf/aml-in-coq) (Applicative Matching Logic), [arl-in-coq](https://github.com/traiansf/arl-in-coq) (Abstract Rewrite Systems), [sets-in-coq](https://github.com/traiansf/sets-in-coq).
+- **Type theory study** — [propositions-as-types](https://github.com/traiansf/propositions-as-types), Coq scribbles along *Type Theory and Formal Proofs* (Nederpelt & Geuvers); actively maintained.
+- **Teaching companions** — [semantics-in-coq](https://github.com/traiansf/semantics-in-coq) and [semantics-in-lean](https://github.com/traiansf/semantics-in-lean), companions to the Foundations of Programming Languages course.
+- **Schools & events** — [bucharest-lean-ac](https://github.com/traiansf/bucharest-lean-ac), Bucharest Autumn School materials in Lean 4.
+- **Other** — [excel-database](https://github.com/traiansf/excel-database), a WordPress plugin (★4) that exposes an Excel spreadsheet table as queryable data.
+
+[/LONG]
+
+# Skills
+
+- Formal methods and verification
+- Programming language semantics
+
+[LONG]
+- Rewriting logic
+- K framework
+- Temporal logics
+- Model checking
+- Specification and verification techniques
+[/LONG]
+
+# Programming Languages
+
+- Rust
+- Haskell
+- Coq / Rocq
+- Java
+- C / C++
+
+[LONG]
+- K / Maude
+- Lean 4
+- Python
+- Prolog
+- JavaScript / TypeScript
+- PHP
+[/LONG]
+
+# Languages
+
+- Romanian (native)
+- English (fluent)
+- French (basic)
 
 # Publications
 
@@ -193,36 +248,3 @@ The following are the 22 most-cited publications — the works that make up the 
 22. Șerbănuță, Traian Florin. "A Rewriting Approach to Concurrent Programming Language Design and Semantics." PhD thesis, University of Illinois at Urbana-Champaign, 2010. (cited by 24)
 
 [/LONG]
-
-[LONG]
-
-# Open-source Projects
-
-Personal research and tooling outside employer-affiliated work; full list at <https://github.com/traiansf>.
-
-- **Formalization libraries** — [aml-in-coq](https://github.com/traiansf/aml-in-coq) (Applicative Matching Logic), [arl-in-coq](https://github.com/traiansf/arl-in-coq) (Abstract Rewrite Systems), [sets-in-coq](https://github.com/traiansf/sets-in-coq).
-- **Type theory study** — [propositions-as-types](https://github.com/traiansf/propositions-as-types), Coq scribbles along *Type Theory and Formal Proofs* (Nederpelt & Geuvers); actively maintained.
-- **Teaching companions** — [semantics-in-coq](https://github.com/traiansf/semantics-in-coq) and [semantics-in-lean](https://github.com/traiansf/semantics-in-lean), companions to the Foundations of Programming Languages course.
-- **Schools & events** — [bucharest-lean-ac](https://github.com/traiansf/bucharest-lean-ac), Bucharest Autumn School materials in Lean 4.
-- **Other** — [excel-database](https://github.com/traiansf/excel-database), a WordPress plugin (★4) that exposes an Excel spreadsheet table as queryable data.
-
-[/LONG]
-
-# Skills
-
-- Formal methods and verification
-- Programming language semantics
-
-[LONG]
-- Rewriting logic
-- K framework
-- Temporal logics
-- Model checking
-- Specification and verification techniques
-[/LONG]
-
-# Languages
-
-- Romanian (native)
-- English (fluent)
-- French (basic)

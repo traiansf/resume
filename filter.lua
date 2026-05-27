@@ -77,12 +77,60 @@ local function is_cv_section()
   return section == "experience" or section == "education"
 end
 
+-- Pre-pass: resolve block-level standalone [LONG] / [/LONG] tag paragraphs.
+-- A "standalone" tag is a paragraph whose entire content is just [LONG] or
+-- [/LONG] (whitespace-trimmed). These wrap one-or-more sibling blocks.
+--
+-- In short mode, drop the wrapped blocks and both tags. In full mode, drop
+-- just the tag paragraphs and keep the wrapped blocks.
+--
+-- Inline [LONG]...[/LONG] within a single paragraph is left untouched here so
+-- the main loop's section-specific handlers (skills pills, etc.) can see it.
+local function resolve_block_long(blocks)
+  local function is_tag(b, tag)
+    if b.t ~= "Para" then return false end
+    return pandoc_utils.stringify(b):match("^%s*" .. tag .. "%s*$") ~= nil
+  end
+  local out = {}
+  local i = 1
+  while i <= #blocks do
+    local b = blocks[i]
+    if is_tag(b, "%[LONG%]") then
+      -- Find matching [/LONG], allowing nesting.
+      local depth = 1
+      local j = i + 1
+      while j <= #blocks do
+        if is_tag(blocks[j], "%[LONG%]") then depth = depth + 1
+        elseif is_tag(blocks[j], "%[/LONG%]") then
+          depth = depth - 1
+          if depth == 0 then break end
+        end
+        j = j + 1
+      end
+      -- j now points at the closing [/LONG] (or past end if unmatched).
+      if not short_version then
+        for k = i + 1, math.min(j - 1, #blocks) do
+          table.insert(out, blocks[k])
+        end
+      end
+      i = j + 1
+    elseif is_tag(b, "%[/LONG%]") then
+      -- Orphan closing tag: drop it.
+      i = i + 1
+    else
+      table.insert(out, b)
+      i = i + 1
+    end
+  end
+  return out
+end
+
 function Pandoc(doc)
   if doc.meta and doc.meta.short_version then
     short_version = pandoc_utils.stringify(doc.meta.short_version) == "true"
   end
 
-  local blocks = doc.blocks
+  local blocks = resolve_block_long(doc.blocks)
   local out = {}
   local i = 1
   while i <= #blocks do
@@ -129,7 +177,7 @@ function Pandoc(doc)
       i = i + 1
 
     -- Skills section: render bullet list as inline \pill{} tags.
-    elseif b.t == "BulletList" and section == "skills" then
+    elseif b.t == "BulletList" and (section == "skills" or section == "programming languages") then
       local parts = {}
       for _, item in ipairs(b.content) do
         local item_text = pandoc_utils.stringify(item):gsub("%s+", " ")
@@ -166,8 +214,8 @@ function Pandoc(doc)
         if short_version then
           local s = text:gsub("%[LONG%].*%[/LONG%]", "")
           if s:gsub("%s",""):len() > 0 then table.insert(out, pandoc.Para(s)) end
-        elseif section == "skills" then
-          -- In skills section: parse dash-separated items from LONG block as pills.
+        elseif section == "skills" or section == "programming languages" then
+          -- In skills/programming-languages section: parse dash-separated items from LONG block as pills.
           local inner = text:gsub("%[LONG%]",""):gsub("%[/LONG%]","")
           local parts = {}
           for item in inner:gmatch("[^%-\n]+") do
