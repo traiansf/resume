@@ -91,7 +91,7 @@ Long-running principal contributor across four projects:
 - **K Framework — Java implementation (2012–2015)** — LTL model-checker plumbing; search-graph extraction from the executor/debugger; AC matcher; builtin/binder mechanics for the Maude and Java backends.
 - **RV-Predict — race & deadlock detector (2012–2017)** — maximal-causal-model predictive race detection for Java; C/C++ side via an LLVM AspectLLVM instrumentation pass with fork/lock/thread-creation event handling; scaling work pushing the variable cap to 1M.
 - **K Haskell Backend — symbolic-execution prover (2017–2022)** — all-path and one-path reachability logic, SMT integration with int/bool existential translation, unification with overloaded variables. Applied to the formal semantics of the EVM, WebAssembly, and the IELE VM.
-- **CBC-Casper / VLSM consensus in Coq (2022–2023)** — modeling and proving properties like VLSM     projections, induced validators, fixed-set and message-dependent limited equivocation, reachable-threshold non-triviality results.
+- **CBC-Casper / VLSM consensus in Coq (2022–2023)** —  Modelling, specifying, and verifying (using the Coq proof assistant) various concepts related to Blockchain protocols, including one of the first formalizations for the safety of the Casper CBC protocol.
 
 [/LONG]
 
