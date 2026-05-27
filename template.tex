@@ -10,6 +10,12 @@
   BoldItalicFont = * Semibold Italic,
 ]
 \newfontfamily\headingfont{Playfair Display}
+\newfontfamily\symbolfont{DejaVu Sans}
+
+% Source Sans 3 lacks some symbol glyphs (e.g. ★ U+2605). Route them through
+% DejaVu Sans so they render instead of triggering missing-glyph warnings.
+\usepackage{newunicodechar}
+\newunicodechar{★}{{\symbolfont ★}}
 
 \usepackage{xcolor}
 \definecolor{accent}{HTML}{7A1F1F}
