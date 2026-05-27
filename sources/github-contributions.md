@@ -57,8 +57,24 @@ universal settlement protocol. Representative work:
 - RLP encoding for the protocol datastructures; CORS middleware; timeseries
   size reduction.
 - Extracted `vsl-sdk` into a standalone package (and later merged it back).
-- `zk` (15 PRs) — zk infrastructure adjacent to VSL.
 - `move-language-semantics` (6 PRs) and `pi2-research` (2 PRs).
+
+**`zk` (15 PRs, Jan–Apr 2025) — Blocks → Circom ZK pipeline.** Rust
+toolchain that compiles specifications from the **Blocks** DSL into Circom
+subcircuits and generates end-to-end ZK certificates for block
+instantiations. Representative work:
+
+- `blocks-parser` + consistency checker (#20, #40, #64) and a binary
+  format for transcript serialization/deserialization (#44).
+- Automated translation of block rules to Circom subcircuits (#23).
+- `ark-witness`: permuting and segmenting R1CS/witness (#38); witness
+  generation in Rust (#57); circuit witness checking (#61).
+- Public/private witness split (#87); verifier checks the public
+  transcript (#89); `zk-blocks-checker` end-to-end transcript checking
+  (#71).
+- High-level architecture documentation (#63); minimal layout based on
+  averaged block distribution (#95, open).
+- Benchmarks: zkUNSAT/resolution transcript generator (#86).
 
 ### Phase 3 — FastSet / Fast validator + proxy (`Fast`, 2025–2026)
 

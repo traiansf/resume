@@ -23,7 +23,7 @@ Committee: Thomas Ball, Darko Marinov, José Meseguer, Madhusudan Parthasarathy
 **University of Bucharest, 2004**
 
 [LONG]
-Dissertation: *Concepte instituționale în logica de ordinul I, teoria specificațiilor parametrizate și programarea logică*
+Dissertation: *Institutional Concepts in First-Order Logic, Parameterized Specification Theory, and Logic Programming*
 
 Advisors: Răzvan Diaconescu, Virgil Emil Căzănescu
 [/LONG]
@@ -32,7 +32,7 @@ Advisors: Răzvan Diaconescu, Virgil Emil Căzănescu
 **University of Bucharest, 2002**
 
 [LONG]
-Dissertation: *Ascunderea informației în text folosind gramatici de tip LR(k)*
+Dissertation: *Information Hiding in Text Using LR(k) Grammars*
 
 Advisor: Adrian Atanasiu
 [/LONG]
@@ -62,9 +62,10 @@ Supervise graduate students and serve on departmental committees.
 
 [LONG]
 
-Core Rust engineer on Pi Squared's verifiable-computing and universal-settlement infrastructure ("Proof of Proof"). Work spans four phases of the platform's evolution:
+Core Rust engineer on Pi Squared's verifiable-computing and universal-settlement infrastructure ("Proof of Proof"). Work spans five phases of the platform's evolution:
 
 - **Pi² research prototype (2024)** — Metamath-based proof checkers compiled to multiple zkVM backends (RISC Zero, SP1, Nexus, Lurk, Delphinus); `mmtool` driver with checkpoint/resume; cross-backend benchmarking infrastructure; WASM build of the checker.
+- **Blocks → Circom ZK pipeline (2025)** — Rust toolchain compiling specifications from the Blocks DSL into Circom subcircuits and generating end-to-end ZK certificates for block instantiations: parser/consistency checker, rule-to-subcircuit translator, R1CS/witness segmentation, Rust witness generation, and public-transcript verifier.
 - **Verifiable Settlement Layer (2025)** — VSL claim model with `SubmittedClaim` quorum semantics and signed `SettledClaim`s on every state-changing endpoint; u128 asset/amount model with RLP wire format; receiver-side subscriptions and explorer endpoints; extracted the `vsl-sdk` standalone package.
 - **FastSet validator + proxy (2025–2026)** — versioned-protocol releases with golden-vector wire-format tests, per-IP rate limiting with clock-race-safe refill, faucet pending-tx cleanup, structured validator-error relay with proper HTTP status codes, race-free shared test-proxy harness.
 - **Fast Shop / agentic AI commerce (2026)** — Universal Commerce Protocol integration with platform profiles and cached refresh; region-aware fan-out and country inference for multi-region delivery; Shopify backend with SSRF guard and idempotent advisory-lock migrations; MCP exposure of the commerce surface.
@@ -78,9 +79,9 @@ Core Rust engineer on Pi Squared's verifiable-computing and universal-settlement
 
 Long-running principal contributor across four projects:
 
-- **K Framework — Java implementation (2014–2015)** — LTL model-checker plumbing (Promela parser, `LTLMC` API, `ProofResults`); search-graph extraction from the executor/debugger; AC matcher backed by the `assoc` attribute on function rules; builtin/binder mechanics for the Maude and Java backends.
-- **RV-Predict — race & deadlock detector (2014–2017)** — maximal-causal-model predictive race detection for Java; C/C++ side via an LLVM AspectLLVM instrumentation pass with fork/lock/thread-creation event handling; scaling work pushing the variable cap to 1M.
-- **K Haskell Backend — symbolic-execution prover (2018–2024)** — all-path and one-path reachability logic, SMT integration with int/bool existential translation, unification with overloaded variables and an `OverloadSimplifier`, `unboundVariables` attribute, cell-maps ceil rules. Applied to the formal semantics of the EVM, WebAssembly, and the IELE VM.
+- **K Framework — Java implementation (2012–2015)** — LTL model-checker plumbing (Promela parser, `LTLMC` API, `ProofResults`); search-graph extraction from the executor/debugger; AC matcher backed by the `assoc` attribute on function rules; builtin/binder mechanics for the Maude and Java backends.
+- **RV-Predict — race & deadlock detector (2012–2017)** — maximal-causal-model predictive race detection for Java; C/C++ side via an LLVM AspectLLVM instrumentation pass with fork/lock/thread-creation event handling; scaling work pushing the variable cap to 1M.
+- **K Haskell Backend — symbolic-execution prover (2017–2022)** — all-path and one-path reachability logic, SMT integration with int/bool existential translation, unification with overloaded variables and an `OverloadSimplifier`, `unboundVariables` attribute, cell-maps ceil rules. Applied to the formal semantics of the EVM, WebAssembly, and the IELE VM.
 - **CBC-Casper / VLSM consensus in Coq (2022–2023)** — VLSM projections, induced validators, fixed-set and message-dependent limited equivocation, reachable-threshold non-triviality results, decidability of the constrained-state property for ELMO.
 
 [/LONG]
@@ -105,7 +106,7 @@ Formal systems and verification research.
 **University of Illinois, Urbana-Champaign (FSL Laboratory), 2004–2010**
 
 [LONG]
-Assisted in research on formal semantics, rewriting logic, and programming language design. Contributed to the K framework project.
+Assisted in research on formal semantics, rewriting logic, and programming language design. Designed and prototyped (in Maude) the K semantic framework.
 [/LONG]
 
 [LONG]
