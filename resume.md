@@ -1,11 +1,9 @@
 ---
 name: Traian Florin Șerbănuță
 email: traian.serbanuta@unibuc.ro
-phone: "+40 21 314 3508"
-address: "Faculty of Mathematics and Informatics, University of Bucharest, Str. Academiei nr.14, Sector 1, Bucharest, Romania"
 web: "http://cs.unibuc.ro/~tserbanuta"
 github: "github.com/traiansf"
-tagline: "Associate Professor · Researcher in Formal Methods"
+tagline: "Associate Professor · Researcher in Formal Methods · Software Engineer"
 ---
 
 # Education
