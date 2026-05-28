@@ -14,7 +14,7 @@ tagline: "Formal Modelling & Verification · Functional Programming · Type Syst
 Core Rust engineer on verifiable-computing and settlement infrastructure.
 
 - **Blocks → Circom pipeline** — Rust toolchain compiling a DSL into ZK subcircuits with end-to-end certificates.
-- **FastSet validator + proxy** — validator and client-facing proxy for the FastSet protocol.
+- **FastSet validator + proxy** — validator and client-facing proxy for the FastSet protocol and verifiable settlement layer.
 - **Metamath proof checkers** across several zkVM backends.
 - **Fast Shop (agentic AI commerce)** — Universal Commerce Protocol integration with an MCP-exposed commerce surface; built largely with **Claude Code**.
 
@@ -28,7 +28,7 @@ Core Rust engineer on verifiable-computing and settlement infrastructure.
 ## Associate Professor of Computer Science
 **University of Bucharest, 2013–Present**
 
-Teach **[Haskell-based declarative programming](https://github.com/unibuc-cs/progdecl)**, **[programming-language semantics](https://github.com/unibuc-cs/slp/tree/v2017)**, and **[program verification](https://github.com/unibuc-cs/pv)**; launched a graduate **AI-assisted Systems Design** course. Co-founder/VP, [Institute for Logic and Data Science](https://ilds.ro).
+Teach **[Haskell-based declarative programming](https://github.com/unibuc-cs/progdecl)**, **[programming-language semantics](https://github.com/unibuc-cs/slp/tree/v2017)**, and **[program verification](https://github.com/unibuc-cs/pv)**; designing a graduate **AI-assisted Systems Design** course for Fall 2026. Co-founder/VP, [Institute for Logic and Data Science](https://ilds.ro).
 
 # Skills
 
@@ -44,9 +44,10 @@ Teach **[Haskell-based declarative programming](https://github.com/unibuc-cs/pro
 - Haskell
 - Rust
 - Coq / Rocq
-- Lean 4
 - Java
 - C / C++
+- Lean 4
+- TypeScript
 
 # Education
 
