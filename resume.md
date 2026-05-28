@@ -63,7 +63,7 @@ Supervise graduate students and serve on departmental committees.
 
 [LONG]
 
-Non-profit research institute ([ilds.ro](https://ilds.ro)) bringing together academic and industry researchers in logic and data science. Organised conferences and topical workshops including the **Working Formal Methods Symposium** (*FROM 2024* in Bucharest, *FROM 2026* in Timișoara), *Workshop on LLMs for Romanian* (2024), *The Age of Algorithms* (2024), *Deep Blockchain Fundamentals* (2024), and the *Nitro NLP* hackathon (3rd edition, 2024). Runs the weekly **Logic**, **Neuro-symbolic AI**, and **Proof Mining** seminar series. Hosts research projects on proof mining in optimization, matching-logic foundations, LLMs for Romanian, matching logic with cryptography and blockchains, AI for chemistry and RPA, and AI-based electronics failure prediction.
+Non-profit research institute ([ilds.ro](https://ilds.ro)) bringing together academic and industry researchers in logic and data science, with an active program of conferences, workshops, weekly seminars, and hosted research projects. Most involved in the **Working Formal Methods Symposium** (*FROM 2024, 2026*), the *Deep Blockchain Fundamentals* workshop, the weekly **Logic** seminar, and matching-logic research.
 
 [/LONG]
 
@@ -74,11 +74,11 @@ Non-profit research institute ([ilds.ro](https://ilds.ro)) bringing together aca
 
 Core Rust engineer on Pi Squared's verifiable-computing and universal-settlement infrastructure ("Proof of Proof"). Work spans five phases of the platform's evolution:
 
-- **Pi² research prototype (2024)** — Metamath-based proof checkers compiled to multiple zkVM backends (RISC Zero, SP1, Nexus, Lurk, Delphinus); `mmtool` driver with checkpoint/resume; cross-backend benchmarking infrastructure; WASM build of the checker.
-- **Blocks → Circom ZK pipeline (2025)** — Rust toolchain compiling specifications from the Blocks DSL into Circom subcircuits and generating end-to-end ZK certificates for block instantiations: parser/consistency checker, rule-to-subcircuit translator, R1CS/witness segmentation, Rust witness generation, and public-transcript verifier.
-- **Verifiable Settlement Layer (2025)** — VSL claim model with `SubmittedClaim` quorum semantics and signed `SettledClaim`s on every state-changing endpoint; u128 asset/amount model with RLP wire format; receiver-side subscriptions and explorer endpoints; extracted the `vsl-sdk` standalone package.
-- **FastSet validator + proxy (2025–2026)** — versioned-protocol releases with golden-vector wire-format tests, per-IP rate limiting with clock-race-safe refill, faucet pending-tx cleanup, structured validator-error relay with proper HTTP status codes, race-free shared test-proxy harness.
-- **Fast Shop / agentic AI commerce (2026)** — Universal Commerce Protocol integration with platform profiles and cached refresh; region-aware fan-out and country inference for multi-region delivery; Shopify backend with SSRF guard and idempotent advisory-lock migrations; MCP exposure of the commerce surface.
+- **Pi² research prototype (2024)** — Metamath proof checkers compiled to five zkVM backends (RISC Zero, SP1, Nexus, Lurk, Delphinus), with driver tooling and cross-backend benchmarking.
+- **Blocks → Circom ZK pipeline (2025)** — Rust toolchain compiling the Blocks DSL into Circom subcircuits and generating end-to-end ZK certificates for block instantiations.
+- **Verifiable Settlement Layer (2025)** — a claim-based settlement layer where submitted claims reach quorum and are recorded as signed settlements.
+- **FastSet validator + proxy (2025–2026)** — validator and client-facing proxy for the FastSet protocol.
+- **Fast Shop / agentic AI commerce (2026)** — Universal Commerce Protocol integration with region-aware multi-region delivery, a Shopify backend, and an MCP-exposed commerce surface.
 
 [/LONG]
 
@@ -89,10 +89,10 @@ Core Rust engineer on Pi Squared's verifiable-computing and universal-settlement
 
 Long-running principal contributor across four projects:
 
-- **K Framework — Java implementation (2012–2015)** — LTL model-checker plumbing; search-graph extraction from the executor/debugger; AC matcher; builtin/binder mechanics for the Maude and Java backends.
-- **RV-Predict — race & deadlock detector (2012–2017)** — maximal-causal-model predictive race detection for Java; C/C++ side via an LLVM AspectLLVM instrumentation pass with fork/lock/thread-creation event handling; scaling work pushing the variable cap to 1M.
-- **K Haskell Backend — symbolic-execution prover (2017–2022)** — all-path and one-path reachability logic, SMT integration with int/bool existential translation, unification with overloaded variables. Applied to the formal semantics of the EVM, WebAssembly, and the IELE VM.
-- **CBC-Casper / VLSM consensus in Coq (2022–2023)** —  Modelling, specifying, and verifying (using the Coq proof assistant) various concepts related to Blockchain protocols, including one of the first formalizations for the safety of the Casper CBC protocol.
+- **K Framework — Java implementation (2012–2015)** — executor/debugger internals for the Maude and Java backends: LTL model-checking, search-graph extraction, and AC matching.
+- **RV-Predict — race & deadlock detector (2012–2017)** — maximal-causal-model predictive race detection for Java and C/C++ (via an LLVM instrumentation pass), scaled to a 1M-variable cap.
+- **K Haskell Backend — symbolic-execution prover (2017–2022)** — all-path/one-path reachability-logic prover with SMT integration, applied to the formal semantics of the EVM, WebAssembly, and IELE.
+- **CBC-Casper / VLSM consensus in Coq (2022–2023)** — Coq modelling and verification of blockchain protocols, including one of the first safety formalizations of CBC Casper.
 
 [/LONG]
 
@@ -156,7 +156,7 @@ Implemented classification algorithms for one of the first AI Agents
 Personal research and tooling outside employer-affiliated work; full list at <https://github.com/traiansf>.
 
 - **Formalization libraries** — [aml-in-coq](https://github.com/traiansf/aml-in-coq) (Applicative Matching Logic), [arl-in-coq](https://github.com/traiansf/arl-in-coq) (Abstract Rewrite Systems), [sets-in-coq](https://github.com/traiansf/sets-in-coq).
-- **Type theory study** — [propositions-as-types](https://github.com/traiansf/propositions-as-types), Coq scribbles along *Type Theory and Formal Proofs* (Nederpelt & Geuvers); actively maintained.
+- **Type theory study** — [propositions-as-types](https://github.com/traiansf/propositions-as-types), Coq scribbles along *Type Theory and Formal Proofs* (Nederpelt & Geuvers).
 - **Teaching companions** — [semantics-in-coq](https://github.com/traiansf/semantics-in-coq) and [semantics-in-lean](https://github.com/traiansf/semantics-in-lean), companions to the Foundations of Programming Languages course.
 - **Schools & events** — [bucharest-lean-ac](https://github.com/traiansf/bucharest-lean-ac), Bucharest Autumn School materials in Lean 4.
 - **Other** — [excel-database](https://github.com/traiansf/excel-database), a WordPress plugin (★4) that exposes an Excel spreadsheet table as queryable data.
@@ -184,8 +184,8 @@ Personal research and tooling outside employer-affiliated work; full list at <ht
 - C / C++
 [LONG]
 - K / Maude
-- Lean 4
 - Python
+- Lean 4
 - Prolog
 - JavaScript / TypeScript
 - PHP
