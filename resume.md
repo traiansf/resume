@@ -50,7 +50,7 @@ Courses developed and taught, with all materials openly published:
 - [Declarative Programming](https://github.com/unibuc-cs/progdecl) — functional and declarative programming in Haskell
 - [Concurrency in Programming Languages](https://github.com/unibuc-cs/iclp) — concurrency hands-on across Java, C++, Erlang/Elixir, JavaScript, and Python
 - [Programming Languages Semantics](https://github.com/unibuc-cs/slp/tree/v2017) — operational semantics, interpreters, and type systems
-- [Foundations of Programming Languages](https://github.com/unibuc-cs/flp) — a theoretical incursion in semantics, lambda calculus, type systems, and logic programming
+- [Foundations of Programming Languages](https://github.com/unibuc-cs/flp) — theoretical incursion into semantics, lambda calculus, type systems, and logic programming
 - [Program Verification](https://github.com/unibuc-cs/pv) — Hoare logic, weakest preconditions, separation logic, SAT/SMT solvers, symbolic execution, and model checking
 - [Introduction to Machine Learning](https://github.com/unibuc-cs/dh-ml) — hands-on machine learning for non-computer-scientists (Master in Digital Humanities)
 
@@ -76,7 +76,7 @@ Core Rust engineer on Pi Squared's verifiable-computing and universal-settlement
 
 - **Pi² research prototype (2024)** — Metamath proof checkers compiled to five zkVM backends (RISC Zero, SP1, Nexus, Lurk, Delphinus), with driver tooling and cross-backend benchmarking.
 - **Blocks → Circom ZK pipeline (2025)** — Rust toolchain compiling the Blocks DSL into Circom subcircuits and generating end-to-end ZK certificates for block instantiations.
-- **Verifiable Settlement Layer (2025)** — a claim-based settlement layer where submitted claims reach quorum and are recorded as signed settlements.
+- **Verifiable Settlement Layer (2025)** — claim-based settlement layer where submitted claims reach quorum and are recorded as signed settlements.
 - **FastSet validator + proxy (2025–2026)** — validator and client-facing proxy for the FastSet protocol.
 - **Fast Shop / agentic AI commerce (2026)** — Universal Commerce Protocol integration with region-aware multi-region delivery, a Shopify backend, and an MCP-exposed commerce surface.
 
@@ -101,7 +101,7 @@ Long-running principal contributor across four projects:
 ## Postdoctoral Research Fellow
 **Alexandru Ioan Cuza University, Iași (FMSE Laboratory), 2011–2013**
 
-Formal methods research in software engineering. Coordonated the team developing the K framework.
+Formal methods research in software engineering. Coordinated the team developing the K Framework.
 
 [/LONG]
 
@@ -138,7 +138,7 @@ Co-authored a patent application on web traffic analysis methods (with Bogdan C�
 **Microsoft Research, Redmond (Testing, Verification, and Measurement Group), 2005**
 
 [LONG]
-Contributed an equality theory propagation core for the Zapp (currently Z3) prover
+Contributed an equality theory propagation core for the Zap automated theorem prover.
 [/LONG]
 
 [LONG]
@@ -146,7 +146,7 @@ Contributed an equality theory propagation core for the Zapp (currently Z3) prov
 ## Programmer
 **Popnet-Agentscape Romania, Natural Language Processing Team, 2000–2001**
 
-Implemented classification algorithms for one of the first AI Agents
+Implemented classification algorithms for one of the first AI agents.
 [/LONG]
 
 [LONG]
@@ -169,7 +169,7 @@ Personal research and tooling outside employer-affiliated work; full list at <ht
 - Programming language semantics
 [LONG]
 - Rewriting logic
-- K framework
+- K Framework
 - Temporal logics
 - Model checking
 - Specification and verification techniques
