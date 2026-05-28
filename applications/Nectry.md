@@ -8,7 +8,7 @@ Functional programming and type systems have become central to how I build — a
 
 That question is Nectry's business: NectryCore makes correctness and policy structurally guaranteed for AI-generated code in regulated settings, rather than bolted on — built alongside Adam Chlipala, a name I've known for years through Fiat Cryptography, Ur/Web, and his PHOAS work on mechanizing language semantics in Coq. I'd love to talk.
 
-Résumé attached. GitHub: github.com/traiansf.
+One-page résumé attached, with my full CV for additional detail. GitHub: github.com/traiansf.
 
 Best,
 Traian Florin Șerbănuță
