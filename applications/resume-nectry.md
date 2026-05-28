@@ -13,8 +13,8 @@ tagline: "Formal Modelling & Verification · Functional Programming · Type Syst
 
 Core Rust engineer on verifiable-computing and settlement infrastructure.
 
-- **Blocks → Circom pipeline** — Rust toolchain compiling a DSL into ZK subcircuits with end-to-end certificates.
-- **FastSet validator + proxy** — validator and client-facing proxy for the FastSet protocol and verifiable settlement layer.
+- **Blocks to Circom pipeline** — Rust toolchain compiling a DSL into ZK subcircuits with end-to-end certificates.
+- **FastSet validator and proxy** — validator and client-facing proxy for the FastSet protocol and verifiable settlement layer.
 - **Metamath proof checkers** across several zkVM backends.
 - **Fast Shop (agentic AI commerce)** — Universal Commerce Protocol integration with an MCP-exposed commerce surface; built largely with **Claude Code**.
 
