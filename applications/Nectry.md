@@ -10,9 +10,9 @@ Almost everything I've built, in academia and industry, comes back to one idea: 
 
 My early training was in algorithms and competitive programming, and even my PhD was about first-order, largely untyped rewriting. Functional programming and type systems are things I grew into, and modelling and proving with a proof assistant is still some of the most satisfying work I've done. It's the same correct-by-construction conviction that drew me to K and matching/reachability logic.
 
-This past year I've leaned heavily on Claude Code in my Rust and TypeScript work. I'm genuinely impressed by it, but uneasy that our best answer for trusting AI-written code is still tests and reviews, increasingly run by other AI agents, to "ensure" correctness.
+This past year I've leaned heavily on Claude Code in my Rust and TypeScript work. I'm genuinely impressed by it, but uneasy that our best answer for trusting AI-written code is still tests, mostly run by AI agents, and reviews, increasingly run by other AI agents, to "ensure" correctness.
 
-That's exactly why Nectry's mission — making correctness and policy structurally guaranteed for AI-generated code in regulated settings — resonates with me, as does the chance to work alongside Adam Chlipala, whose work I've followed since PHOAS and Bedrock. I would be glad to discuss this opportunity further.
+That's exactly why Nectry's mission resonates with me, as does the chance to work alongside Adam Chlipala, whose research and practical applications I had to compare to, and learned to admire, in my academic career. I would be glad to discuss this opportunity further.
 
 Attached you can find my one-page résumé and my academic CV for more detail. GitHub: github.com/traiansf.
 
