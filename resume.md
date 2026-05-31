@@ -4,6 +4,7 @@ email: traian.serbanuta@unibuc.ro
 web: "http://cs.unibuc.ro/~tserbanuta"
 github: "github.com/traiansf"
 tagline: "Associate Professor · Researcher in Formal Methods · Software Engineer"
+tagline-industry: "Formal Methods for Software Correctness · Verification Engineer · Associate Professor"
 ---
 
 # Education
@@ -12,29 +13,35 @@ tagline: "Associate Professor · Researcher in Formal Methods · Software Engine
 **University of Illinois, Urbana-Champaign, 2010**
 
 [LONG]
+[ACADEMIC]
 Dissertation: *A Rewriting Approach to Concurrent Programming Language Design and Semantics*
 
 Advisor: Grigore Roșu
 
 Committee: Thomas Ball, Darko Marinov, José Meseguer, Madhusudan Parthasarathy
+[/ACADEMIC]
 [/LONG]
 
 ## Master in Computer Science
 **University of Bucharest, 2004**
 
 [LONG]
+[ACADEMIC]
 Dissertation: *Institutional Concepts in First-Order Logic, Parameterized Specification Theory, and Logic Programming*
 
 Advisors: Răzvan Diaconescu, Virgil Emil Căzănescu
+[/ACADEMIC]
 [/LONG]
 
 ## Bachelor in Computer Science
 **University of Bucharest, 2002**
 
 [LONG]
+[ACADEMIC]
 Dissertation: *Information Hiding in Text Using LR(k) Grammars*
 
 Advisor: Adrian Atanasiu
+[/ACADEMIC]
 [/LONG]
 
 # Experience
@@ -42,7 +49,15 @@ Advisor: Adrian Atanasiu
 ## Associate Professor of Computer Science
 **University of Bucharest, Faculty of Mathematics and Informatics, 2013–Present**
 
+[INDUSTRY]
+
+Designed and taught courses across software modelling, declarative & concurrent programming, programming-language semantics, program verification, and machine learning — all course materials openly published.
+
+[/INDUSTRY]
+
 [LONG]
+
+[ACADEMIC]
 
 Courses developed and taught, with all materials openly published:
 
@@ -53,6 +68,8 @@ Courses developed and taught, with all materials openly published:
 - [Foundations of Programming Languages](https://github.com/unibuc-cs/flp) — theoretical incursion into semantics, lambda calculus, type systems, and logic programming
 - [Program Verification](https://github.com/unibuc-cs/pv) — Hoare logic, weakest preconditions, separation logic, SAT/SMT solvers, symbolic execution, and model checking
 - [Introduction to Machine Learning](https://github.com/unibuc-cs/dh-ml) — hands-on machine learning for non-computer-scientists (Master in Digital Humanities)
+
+[/ACADEMIC]
 
 Supervise graduate students and serve on departmental committees.
 
@@ -101,7 +118,9 @@ Long-running principal contributor across four projects:
 ## Postdoctoral Research Fellow
 **Alexandru Ioan Cuza University, Iași (FMSE Laboratory), 2011–2013**
 
+[ACADEMIC]
 Formal methods research in software engineering. Coordinated the team developing the K Framework.
+[/ACADEMIC]
 
 [/LONG]
 
@@ -109,14 +128,18 @@ Formal methods research in software engineering. Coordinated the team developing
 **University of Illinois, Urbana-Champaign (Information Trust Institute), 2011–2012**
 
 [LONG]
+[ACADEMIC]
 Formal systems and verification research.
+[/ACADEMIC]
 [/LONG]
 
 ## Research Assistant
 **University of Illinois, Urbana-Champaign (FSL Laboratory), 2004–2010**
 
 [LONG]
+[ACADEMIC]
 Assisted in research on formal semantics, rewriting logic, and programming language design. Designed and prototyped (in Maude) the K semantic framework.
+[/ACADEMIC]
 [/LONG]
 
 [LONG]
@@ -124,21 +147,27 @@ Assisted in research on formal semantics, rewriting logic, and programming langu
 ## Teaching Assistant
 **University of Bucharest, Department of Computer Science Fundamentals, 2003–2004**
 
+[ACADEMIC]
 Supported undergraduate courses in programming, discrete mathematics, and computer science theory.
+[/ACADEMIC]
 [/LONG]
 
 ## Summer Intern
 **Google, New York, 2007**
 
 [LONG]
+[ACADEMIC]
 Co-authored a patent application on web traffic analysis methods (with Bogdan Căpriță).
+[/ACADEMIC]
 [/LONG]
 
 ## Summer Intern
 **Microsoft Research, Redmond (Testing, Verification, and Measurement Group), 2005**
 
 [LONG]
+[ACADEMIC]
 Contributed an equality theory propagation core for the Zap automated theorem prover.
+[/ACADEMIC]
 [/LONG]
 
 [LONG]
@@ -146,7 +175,9 @@ Contributed an equality theory propagation core for the Zap automated theorem pr
 ## Programmer
 **Popnet-Agentscape Romania, Natural Language Processing Team, 2000–2001**
 
+[ACADEMIC]
 Implemented classification algorithms for one of the first AI agents.
+[/ACADEMIC]
 [/LONG]
 
 [LONG]
@@ -206,6 +237,7 @@ Personal research and tooling outside employer-affiliated work; full list at <ht
 [/CALLOUT]
 
 [LONG]
+[ACADEMIC]
 Top 20 by citations (Google Scholar, May 2026). Full record: [Google Scholar](https://scholar.google.com/citations?user=QVLcUrcAAAAJ&hl=en) · [DBLP](https://dblp.org/pid/s/TFSerbanuta.html).
 
 1. Roșu, Grigore and Traian Florin Șerbănuță. "An Overview of the K Semantic Framework." *Journal of Logic and Algebraic Programming*, Vol. 79, No. 6, pp. 397-434, 2010. (cited by 639)
@@ -248,4 +280,5 @@ Top 20 by citations (Google Scholar, May 2026). Full record: [Google Scholar](ht
 
 20. Lucanu, Dorel, Traian Florin Șerbănuță, and Grigore Roșu. "K Framework Distilled." *Rewriting Logic and Its Applications (WRLA'12)*, LNCS Vol. 7571, pp. 31-53, 2012. (cited by 25)
 
+[/ACADEMIC]
 [/LONG]
