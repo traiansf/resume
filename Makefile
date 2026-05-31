@@ -1,10 +1,11 @@
-.PHONY: pdf pdf-short clean help all check-deps test
+.PHONY: pdf pdf-short pdf-industry clean help all check-deps test
 
 help:
 	@echo "Resume Build Targets:"
 	@echo "  make check-deps - Verify pandoc, xelatex, fonts are installed"
 	@echo "  make pdf        - Generate full resume (runs test first)"
 	@echo "  make pdf-short  - Generate short resume (runs test first)"
+	@echo "  make pdf-industry - Generate industry-oriented resume (runs test first)"
 	@echo "  make test       - Run filter fixture and regression tests"
 	@echo "  make clean      - Remove generated PDFs"
 	@echo ""
@@ -32,10 +33,21 @@ pdf-short: test resume.md filter.lua template.tex
 		resume.md -o resume-short.pdf
 	@echo "Generated: resume-short.pdf"
 
-clean:
-	rm -f resume.pdf resume-short.pdf
+pdf-industry: test resume.md filter.lua template.tex
+	pandoc -L filter.lua \
+		--template=template.tex \
+		--metadata industry_version=true \
+		--metadata short_version=false \
+		-f markdown \
+		-t pdf \
+		--pdf-engine=xelatex \
+		resume.md -o resume-industry.pdf
+	@echo "Generated: resume-industry.pdf"
 
-all: pdf pdf-short
+clean:
+	rm -f resume.pdf resume-short.pdf resume-industry.pdf
+
+all: pdf pdf-short pdf-industry
 
 check-deps:
 	@command -v pandoc >/dev/null || { echo "ERROR: pandoc not installed"; exit 1; }
