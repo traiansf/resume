@@ -1,5 +1,6 @@
 -- filter.lua — see docs/superpowers/specs/2026-05-26-editorial-cv-template-design.md
 local short_version = false
+local industry_version = false
 local section = nil   -- normalized name of the current H1 section
 local pandoc_utils = pandoc.utils
 
@@ -247,9 +248,14 @@ function Pandoc(doc)
   if doc.meta and doc.meta.short_version then
     short_version = pandoc_utils.stringify(doc.meta.short_version) == "true"
   end
+  if doc.meta and doc.meta.industry_version then
+    industry_version = pandoc_utils.stringify(doc.meta.industry_version) == "true"
+  end
 
   local blocks = normalize_tag_paras(doc.blocks, "LONG")
+  blocks = normalize_tag_paras(blocks, "ACADEMIC")
   blocks = resolve_block_tag(blocks, "LONG", short_version)
+  blocks = resolve_block_tag(blocks, "ACADEMIC", industry_version)
   blocks = trim_lists_with_inline_long(blocks)
   local out = {}
   local i = 1
