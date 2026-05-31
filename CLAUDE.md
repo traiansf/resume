@@ -1,24 +1,25 @@
 # Resume — project notes
 
-A two-target academic resume: `resume.pdf` (full) and `resume-short.pdf`
-(condensed, intended to fit one page). One markdown source, one pandoc Lua
-filter, one xelatex template; both PDFs are produced from the same `resume.md`
-by toggling a metadata flag.
+Three build variants from a single `resume.md`: `resume.pdf` (full academic),
+`resume-short.pdf` (condensed, intended to fit one page), and
+`resume-industry.pdf` (industry-oriented, full-length). One pandoc Lua filter,
+one xelatex template; all three PDFs are produced by toggling metadata flags.
 
 ## Build
 
 ```
-make pdf        # full version
-make pdf-short  # short version
-make all        # both
-make test       # filter tests (run automatically before pdf/pdf-short)
-make clean      # remove generated PDFs
-make check-deps # verify pandoc, xelatex, fonts
+make pdf          # full version
+make pdf-short    # short version (condensed, one page)
+make pdf-industry # industry-oriented full-length version
+make all          # all three
+make test         # filter tests (run automatically before pdf targets)
+make clean        # remove generated PDFs
+make check-deps   # verify pandoc, xelatex, fonts
 ```
 
-Both `pdf` targets depend on `test`, so a filter regression aborts the build
-before generating PDFs. Do not bypass this — the test suite exists because
-the `[LONG]` handling has historically been fragile.
+All three `pdf` targets depend on `test`, so a filter regression aborts the
+build before generating PDFs. Do not bypass this — the test suite exists
+because the `[LONG]` handling has historically been fragile.
 
 ## Source layout
 
@@ -59,6 +60,31 @@ These are non-standard idioms the filter recognises:
   raw HTML and the filter does not recognise it. The integration test fails
   on the resulting "unmatched [LONG] tag" warning.
 
+- **`[ACADEMIC] ... [/ACADEMIC]`** — hide content in the industry version
+  (shown in full and short). Used for the publications Top-20 list, detailed
+  course listings, dissertation/advisor/committee detail, and early-career
+  role descriptions. Nest inside `[LONG]` to produce full-only content:
+  `[LONG][ACADEMIC]...[/ACADEMIC][/LONG]`.
+
+- **`[INDUSTRY] ... [/INDUSTRY]`** — show content only in the industry
+  version (hidden in full and short). Used for the industry teaching-subjects
+  summary and other industry-targeted additions.
+
+- **`tagline-industry` frontmatter field** — when `industry_version=true` the
+  filter replaces the `tagline` metadata value with the value of
+  `tagline-industry` before template rendering. Declare both fields in the
+  YAML frontmatter of `resume.md`.
+
+- **Blank-line rule for `[ACADEMIC]`/`[INDUSTRY]` (important gotcha):** always
+  put each tag on its own line with blank lines separating it from the wrapped
+  content (standalone-paragraph form). A single-line construct like
+  `[ACADEMIC]\ncontent\n[/ACADEMIC]` with no surrounding blank lines causes
+  pandoc to parse all three lines as one paragraph; the block resolver does not
+  handle that form, so the content leaks unhidden and the tags render as literal
+  text. The `[LONG]` orphan-leading/trailing normalizer handles multi-paragraph
+  cases, but `[ACADEMIC]`/`[INDUSTRY]` have no such normalizer — the safe rule
+  for all three tags is: blank lines around both the open and close tag.
+
 - **`[CALLOUT] ... [/CALLOUT]`** — wrap content in a soft-background callout
   box. Used for the Publications stats.
 
@@ -82,21 +108,31 @@ These are non-standard idioms the filter recognises:
 When changing the filter, preserve this order — later passes assume earlier
 ones have run:
 
-1. `normalize_long_paras` — splits paragraphs with orphan leading/trailing
-   `[LONG]`/`[/LONG]` into standalone tag paragraphs.
-2. `resolve_block_long` — depth-counted resolution of standalone tag pairs.
-   Drops wrapped content in short mode, drops only the tags in full mode.
-   Emits a stderr warning on any unmatched tag (the integration test fails
-   on these).
-3. Main loop — section tracking; CV-fold for `## H2` entries inside CV
+1. `normalize_tag_paras(blocks, tag)` — generalized pre-pass, run once per
+   tag in order: LONG, ACADEMIC, INDUSTRY. Splits paragraphs with orphan
+   leading/trailing tag into standalone tag paragraphs.
+2. `resolve_block_tag(blocks, tag, hide)` — generalized depth-counted
+   resolution of standalone tag pairs, run once per tag:
+   - LONG: `hide = short_version` (hidden in short, shown in full + industry).
+   - ACADEMIC: `hide = industry_version` (hidden in industry, shown in full + short).
+   - INDUSTRY: `hide = not industry_version` (shown only in industry).
+   Drops wrapped content when `hide` is true; drops only the tag paragraphs
+   otherwise. Emits a stderr warning on any unmatched tag (the integration
+   test fails on these). Tags compose by nesting, e.g.
+   `[LONG][ACADEMIC]...[/ACADEMIC][/LONG]` = full-only content.
+3. `trim_lists_with_inline_long` — handles the in-list trim idiom (`[LONG]`/
+   `[/LONG]` attached inline to bullet items). This idiom is LONG-specific
+   and is not generalized to `[ACADEMIC]`/`[INDUSTRY]`.
+4. Main loop — section tracking; CV-fold for `## H2` entries inside CV
    sections; CALLOUT markers; pills for Skills/Programming Languages;
-   inline `·` for Languages; inline `[LONG]...[/LONG]` for the pills idiom.
-4. Citation rewrite — `(cited by N)` → `\cites{N}` walk in the
+   inline `·` for Languages; inline `[LONG]...[/LONG]` for the pills idiom
+   (also LONG-specific, not generalized).
+5. Citation rewrite — `(cited by N)` → `\cites{N}` walk in the
    Publications section.
 
-The main loop should never see a standalone `[LONG]` or `[/LONG]` paragraph
-— if you find yourself adding handling for that there, the pre-pass is
-broken and that's where to fix it.
+The main loop should never see a standalone `[LONG]`, `[ACADEMIC]`, or
+`[INDUSTRY]` paragraph — if you find yourself adding handling for that there,
+the pre-pass is broken and that's where to fix it.
 
 ## Tests
 
@@ -105,23 +141,36 @@ Each subdirectory under `tests/filter/` is a fixture:
 - `input.md` — markdown input (required).
 - `expected.tex` — expected LaTeX for the **full** version (optional).
 - `expected-short.tex` — expected LaTeX for the **short** version (optional).
+- `expected-industry.tex` — expected LaTeX for the **industry** version
+  (optional; rendered with `industry_version=true short_version=false`).
 
-At least one expected file must exist. If both are present, both modes run.
+At least one expected file must exist. All present variants are exercised.
 
 Plus an **integration check**: the runner renders the real `resume.md` in
-both modes and fails if the output contains a literal `[LONG]`/`[/LONG]`
-token or the filter emits any stderr warning. This is what catches typos
-and tag-balance regressions.
+**three modes** (full, short, industry) and fails if the output contains a
+literal `[LONG]`, `[ACADEMIC]`, or `[INDUSTRY]` token or the filter emits
+any stderr warning. Before scanning, the runner strips `{}` from the output
+with `tr -d '{}'` so that LaTeX-escaped brackets (`{[}TAG{]}`) are caught by
+the same regex as bare brackets. This is what catches typos and tag-balance
+regressions.
+
+A dedicated **`tagline-swap`** check verifies that the `tagline-industry`
+frontmatter swap works: it renders the minimal fixture at
+`tests/filter/tagline/` in full and industry modes against a minimal template
+and confirms the correct tagline appears (and the wrong one does not) in each.
 
 When adding a new markdown idiom or special-casing a section in
-`filter.lua`, add a fixture covering both modes. Regenerate expected files
-by running pandoc directly:
+`filter.lua`, add a fixture covering all relevant modes. Regenerate expected
+files by running pandoc directly:
 
 ```
 pandoc -L filter.lua --metadata short_version=false -f markdown -t latex \
   tests/filter/<name>/input.md > tests/filter/<name>/expected.tex
 pandoc -L filter.lua --metadata short_version=true -f markdown -t latex \
   tests/filter/<name>/input.md > tests/filter/<name>/expected-short.tex
+pandoc -L filter.lua --metadata short_version=false --metadata industry_version=true \
+  -f markdown -t latex \
+  tests/filter/<name>/input.md > tests/filter/<name>/expected-industry.tex
 ```
 
 ## Dependencies
