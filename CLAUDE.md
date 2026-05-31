@@ -79,11 +79,13 @@ These are non-standard idioms the filter recognises:
   put each tag on its own line with blank lines separating it from the wrapped
   content (standalone-paragraph form). A single-line construct like
   `[ACADEMIC]\ncontent\n[/ACADEMIC]` with no surrounding blank lines causes
-  pandoc to parse all three lines as one paragraph; the block resolver does not
-  handle that form, so the content leaks unhidden and the tags render as literal
-  text. The `[LONG]` orphan-leading/trailing normalizer handles multi-paragraph
-  cases, but `[ACADEMIC]`/`[INDUSTRY]` have no such normalizer — the safe rule
-  for all three tags is: blank lines around both the open and close tag.
+  pandoc to parse all three lines as one paragraph holding *both* tags. The
+  generalized `normalize_tag_paras` runs for all three tags and splits the
+  orphan-leading/trailing forms (one tag per paragraph), but the *both-tags-in-
+  one-paragraph* form is only special-cased for `[LONG]` (the pills idiom) — for
+  `[ACADEMIC]`/`[INDUSTRY]` it falls through unresolved, so the content leaks
+  unhidden and the tags render as literal text. The safe rule for all three
+  tags: blank lines around both the open and close tag.
 
 - **`[CALLOUT] ... [/CALLOUT]`** — wrap content in a soft-background callout
   box. Used for the Publications stats.
