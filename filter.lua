@@ -254,8 +254,10 @@ function Pandoc(doc)
 
   local blocks = normalize_tag_paras(doc.blocks, "LONG")
   blocks = normalize_tag_paras(blocks, "ACADEMIC")
+  blocks = normalize_tag_paras(blocks, "INDUSTRY")
   blocks = resolve_block_tag(blocks, "LONG", short_version)
   blocks = resolve_block_tag(blocks, "ACADEMIC", industry_version)
+  blocks = resolve_block_tag(blocks, "INDUSTRY", not industry_version)
   blocks = trim_lists_with_inline_long(blocks)
   local out = {}
   local i = 1
