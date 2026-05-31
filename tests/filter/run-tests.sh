@@ -86,6 +86,39 @@ if [[ -f resume.md ]]; then
   done
 fi
 
+# Tagline swap check: industry mode substitutes `tagline-industry` for the
+# template's $tagline$ variable; full mode keeps the academic tagline.
+if [[ -f tests/filter/tagline/input.md ]]; then
+  tl_in="tests/filter/tagline/input.md"
+  tl_tmpl="tests/filter/tagline/template.tex"
+  full_tl=$(pandoc -L filter.lua --metadata short_version=false \
+              --template="$tl_tmpl" -t latex "$tl_in" 2>/dev/null)
+  ind_tl=$(pandoc -L filter.lua --metadata industry_version=true \
+              --template="$tl_tmpl" -t latex "$tl_in" 2>/dev/null)
+  tl_problems=""
+  if printf '%s' "$full_tl" | grep -q "ACAD-TAGLINE"; then
+    :
+  else
+    tl_problems="${tl_problems}full mode lost academic tagline; "
+  fi
+  if printf '%s' "$ind_tl" | grep -q "IND-TAGLINE"; then
+    :
+  else
+    tl_problems="${tl_problems}industry mode did not swap tagline; "
+  fi
+  if printf '%s' "$ind_tl" | grep -q "ACAD-TAGLINE"; then
+    tl_problems="${tl_problems}industry mode still shows academic tagline; "
+  fi
+  if [[ -n "$tl_problems" ]]; then
+    echo "FAIL  tagline-swap ($tl_problems)"
+    fail=$((fail+1))
+    failed_names+=("tagline-swap")
+  else
+    echo "PASS  tagline-swap"
+    pass=$((pass+1))
+  fi
+fi
+
 echo
 echo "Results: $pass passed, $fail failed"
 [[ $fail -eq 0 ]]

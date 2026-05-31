@@ -251,6 +251,9 @@ function Pandoc(doc)
   if doc.meta and doc.meta.industry_version then
     industry_version = pandoc_utils.stringify(doc.meta.industry_version) == "true"
   end
+  if industry_version and doc.meta and doc.meta["tagline-industry"] then
+    doc.meta.tagline = doc.meta["tagline-industry"]
+  end
 
   local blocks = normalize_tag_paras(doc.blocks, "LONG")
   blocks = normalize_tag_paras(blocks, "ACADEMIC")
