@@ -119,7 +119,9 @@ Long-running principal contributor across four projects:
 **Alexandru Ioan Cuza University, Iași (FMSE Laboratory), 2011–2013**
 
 [ACADEMIC]
+
 Formal methods research in software engineering. Coordinated the team developing the K Framework.
+
 [/ACADEMIC]
 
 [/LONG]
@@ -129,7 +131,9 @@ Formal methods research in software engineering. Coordinated the team developing
 
 [LONG]
 [ACADEMIC]
+
 Formal systems and verification research.
+
 [/ACADEMIC]
 [/LONG]
 
@@ -138,7 +142,9 @@ Formal systems and verification research.
 
 [LONG]
 [ACADEMIC]
+
 Assisted in research on formal semantics, rewriting logic, and programming language design. Designed and prototyped (in Maude) the K semantic framework.
+
 [/ACADEMIC]
 [/LONG]
 
@@ -148,7 +154,9 @@ Assisted in research on formal semantics, rewriting logic, and programming langu
 **University of Bucharest, Department of Computer Science Fundamentals, 2003–2004**
 
 [ACADEMIC]
+
 Supported undergraduate courses in programming, discrete mathematics, and computer science theory.
+
 [/ACADEMIC]
 [/LONG]
 
@@ -157,7 +165,9 @@ Supported undergraduate courses in programming, discrete mathematics, and comput
 
 [LONG]
 [ACADEMIC]
+
 Co-authored a patent application on web traffic analysis methods (with Bogdan Căpriță).
+
 [/ACADEMIC]
 [/LONG]
 
@@ -166,7 +176,9 @@ Co-authored a patent application on web traffic analysis methods (with Bogdan C�
 
 [LONG]
 [ACADEMIC]
+
 Contributed an equality theory propagation core for the Zap automated theorem prover.
+
 [/ACADEMIC]
 [/LONG]
 
@@ -176,7 +188,9 @@ Contributed an equality theory propagation core for the Zap automated theorem pr
 **Popnet-Agentscape Romania, Natural Language Processing Team, 2000–2001**
 
 [ACADEMIC]
+
 Implemented classification algorithms for one of the first AI agents.
+
 [/ACADEMIC]
 [/LONG]
 
