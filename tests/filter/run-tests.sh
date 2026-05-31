@@ -18,10 +18,9 @@ fail=0
 failed_names=()
 
 run_variant() {
-  local name="$1" input="$2" expected="$3" short_meta="$4"
+  local name="$1" input="$2" expected="$3"; shift 3
   local actual
-  actual=$(pandoc -L filter.lua --metadata "short_version=$short_meta" \
-             -f markdown -t latex "$input" 2>/dev/null)
+  actual=$(pandoc -L filter.lua "$@" -f markdown -t latex "$input" 2>/dev/null)
   if diff -u "$expected" <(printf '%s\n' "$actual") > /tmp/diff.$$ 2>&1; then
     echo "PASS  $name"
     pass=$((pass+1))
@@ -38,10 +37,16 @@ for d in tests/filter/*/; do
   name=$(basename "$d")
   [[ -f "$d/input.md" ]] || continue
   if [[ -f "$d/expected.tex" ]]; then
-    run_variant "$name" "$d/input.md" "$d/expected.tex" "false"
+    run_variant "$name" "$d/input.md" "$d/expected.tex" \
+      --metadata short_version=false
   fi
   if [[ -f "$d/expected-short.tex" ]]; then
-    run_variant "$name:short" "$d/input.md" "$d/expected-short.tex" "true"
+    run_variant "$name:short" "$d/input.md" "$d/expected-short.tex" \
+      --metadata short_version=true
+  fi
+  if [[ -f "$d/expected-industry.tex" ]]; then
+    run_variant "$name:industry" "$d/input.md" "$d/expected-industry.tex" \
+      --metadata short_version=false --metadata industry_version=true
   fi
 done
 
@@ -50,15 +55,20 @@ done
 #   2. the filter emits no warnings to stderr (catches unbalanced tags,
 #      typos like </LONG>, etc. — classes of regression that have bitten us)
 if [[ -f resume.md ]]; then
-  for mode in false true; do
-    label=$([ "$mode" = "true" ] && echo "resume:short" || echo "resume:full")
+  declare -a int_modes=(
+    "resume:full|--metadata short_version=false"
+    "resume:short|--metadata short_version=true"
+    "resume:industry|--metadata short_version=false --metadata industry_version=true"
+  )
+  tag_re='\[/?(LONG|ACADEMIC|INDUSTRY)\]'
+  for entry in "${int_modes[@]}"; do
+    label="${entry%%|*}"; metaflags="${entry#*|}"
     err_file=$(mktemp)
-    out=$(pandoc -L filter.lua --metadata "short_version=$mode" \
-            -f markdown -t latex resume.md 2>"$err_file")
+    out=$(pandoc -L filter.lua $metaflags -f markdown -t latex resume.md 2>"$err_file")
     err=$(cat "$err_file"); rm -f "$err_file"
     problems=""
-    if printf '%s' "$out" | grep -qE '\[/?LONG\]'; then
-      problems="${problems}literal [LONG]/[/LONG] in output; "
+    if printf '%s' "$out" | grep -qE "$tag_re"; then
+      problems="${problems}literal [LONG]/[ACADEMIC]/[INDUSTRY] tag in output; "
     fi
     if printf '%s' "$err" | grep -qi "filter.lua: warning"; then
       problems="${problems}filter warning on stderr; "
@@ -66,7 +76,7 @@ if [[ -f resume.md ]]; then
     if [[ -n "$problems" ]]; then
       echo "FAIL  $label ($problems)"
       [[ -n "$err" ]] && printf '%s\n' "$err" | head -5
-      printf '%s' "$out" | grep -nE '\[/?LONG\]' | head -5
+      printf '%s' "$out" | grep -nE "$tag_re" | head -5
       fail=$((fail+1))
       failed_names+=("$label")
     else
