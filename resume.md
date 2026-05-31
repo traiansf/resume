@@ -75,9 +75,9 @@ Non-profit research institute ([ilds.ro](https://ilds.ro)) bringing together aca
 Core Rust engineer on Pi Squared's verifiable-computing and universal-settlement infrastructure ("Proof of Proof"). Work spans five phases of the platform's evolution:
 
 - **Pi² research prototype (2024)** — Metamath proof checkers compiled to five zkVM backends (RISC Zero, SP1, Nexus, Lurk, Delphinus), with driver tooling and cross-backend benchmarking.
-- **Blocks → Circom ZK pipeline (2025)** — Rust toolchain compiling the Blocks DSL into Circom subcircuits and generating end-to-end ZK certificates for block instantiations.
+- **Blocks to Circom ZK pipeline (2025)** — Rust toolchain compiling the Blocks DSL into Circom subcircuits and generating end-to-end ZK certificates for block instantiations.
 - **Verifiable Settlement Layer (2025)** — claim-based settlement layer where submitted claims reach quorum and are recorded as signed settlements.
-- **FastSet validator + proxy (2025–2026)** — validator and client-facing proxy for the FastSet protocol.
+- **FastSet validator and proxy (2025–2026)** — validator and client-facing proxy for the FastSet protocol.
 - **Fast Shop / agentic AI commerce (2026)** — Universal Commerce Protocol integration with region-aware multi-region delivery, a Shopify backend, and an MCP-exposed commerce surface.
 
 [/LONG]
