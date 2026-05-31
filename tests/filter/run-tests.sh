@@ -67,7 +67,10 @@ if [[ -f resume.md ]]; then
     out=$(pandoc -L filter.lua $metaflags -f markdown -t latex resume.md 2>"$err_file")
     err=$(cat "$err_file"); rm -f "$err_file"
     problems=""
-    if printf '%s' "$out" | grep -qE "$tag_re"; then
+    # Strip LaTeX brace-escaping ({[} / {]}) before scanning: pandoc escapes
+    # [ and ] to {[} and {]} in LaTeX output, so a leaked [TAG] appears as
+    # {[}TAG{]}. Removing braces lets the same regex catch both forms.
+    if printf '%s' "$out" | tr -d '{}' | grep -qE "$tag_re"; then
       problems="${problems}literal [LONG]/[ACADEMIC]/[INDUSTRY] tag in output; "
     fi
     if printf '%s' "$err" | grep -qi "filter.lua: warning"; then
@@ -76,7 +79,7 @@ if [[ -f resume.md ]]; then
     if [[ -n "$problems" ]]; then
       echo "FAIL  $label ($problems)"
       [[ -n "$err" ]] && printf '%s\n' "$err" | head -5
-      printf '%s' "$out" | grep -nE "$tag_re" | head -5
+      printf '%s' "$out" | tr -d '{}' | grep -nE "$tag_re" | head -5
       fail=$((fail+1))
       failed_names+=("$label")
     else
