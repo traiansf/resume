@@ -53,16 +53,20 @@ end
 --        - Item 2
 --        [/LONG]
 --
--- The pipeline is two passes: normalize_long_paras splits form (2) into
--- standalone tag paragraphs, then resolve_block_long collapses standalone
+-- The pipeline is two passes: normalize_tag_paras splits form (2) into
+-- standalone tag paragraphs, then resolve_block_tag collapses standalone
 -- tag pairs. Form (3) — both tags in one paragraph — is left intact for
 -- the main loop's section-specific handlers (skills/programming-languages
 -- render the dashed list as pills).
 
--- Pre-pass 1: split paragraphs whose leading inline is `[LONG]` (followed by
--- a soft/line break) or whose trailing inline is `[/LONG]` (preceded by one).
+-- Pre-pass 1: split paragraphs whose leading inline is `[TAG]` (followed by
+-- a soft/line break) or whose trailing inline is `[/TAG]` (preceded by one).
 -- Paragraphs containing both tags or neither are passed through unchanged.
-local function normalize_long_paras(blocks)
+local function normalize_tag_paras(blocks, tag)
+  local open_lit  = "[" .. tag .. "]"
+  local close_lit = "[/" .. tag .. "]"
+  local open_pat  = "%[" .. tag .. "%]"
+  local close_pat = "%[/" .. tag .. "%]"
   local out = {}
   for _, b in ipairs(blocks) do
     local emitted = false
@@ -70,29 +74,29 @@ local function normalize_long_paras(blocks)
       local inlines = b.content
       local n = #inlines
       local text = pandoc_utils.stringify(b)
-      local has_open = text:find("%[LONG%]") ~= nil
-      local has_close = text:find("%[/LONG%]") ~= nil
+      local has_open = text:find(open_pat) ~= nil
+      local has_close = text:find(close_pat) ~= nil
       if has_open ~= has_close then
         local is_break = function(x)
           return x.t == "SoftBreak" or x.t == "LineBreak"
         end
         if has_open
             and n >= 2
-            and inlines[1].t == "Str" and inlines[1].text == "[LONG]"
+            and inlines[1].t == "Str" and inlines[1].text == open_lit
             and is_break(inlines[2]) then
-          table.insert(out, pandoc.Para({pandoc.Str("[LONG]")}))
+          table.insert(out, pandoc.Para({pandoc.Str(open_lit)}))
           local rest = {}
           for i = 3, n do table.insert(rest, inlines[i]) end
           if #rest > 0 then table.insert(out, pandoc.Para(rest)) end
           emitted = true
         elseif has_close
             and n >= 2
-            and inlines[n].t == "Str" and inlines[n].text == "[/LONG]"
+            and inlines[n].t == "Str" and inlines[n].text == close_lit
             and is_break(inlines[n-1]) then
           local rest = {}
           for i = 1, n - 2 do table.insert(rest, inlines[i]) end
           if #rest > 0 then table.insert(out, pandoc.Para(rest)) end
-          table.insert(out, pandoc.Para({pandoc.Str("[/LONG]")}))
+          table.insert(out, pandoc.Para({pandoc.Str(close_lit)}))
           emitted = true
         end
       end
@@ -160,40 +164,43 @@ local function trim_lists_with_inline_long(blocks)
   return result.blocks
 end
 
--- Pre-pass 2: resolve standalone [LONG] / [/LONG] tag paragraphs.
--- Drops the wrapped blocks in short mode; drops only the tag paragraphs in
--- full mode. Supports nesting via depth counting.
-local function resolve_block_long(blocks)
-  local function is_tag(b, tag)
+-- Pre-pass 2: resolve standalone [TAG] / [/TAG] tag paragraphs.
+-- Drops the wrapped blocks when `hide` is true; drops only the tag paragraphs
+-- otherwise. Supports nesting via depth counting. Emits a stderr warning on
+-- any unmatched tag (the integration test fails on these).
+local function resolve_block_tag(blocks, tag, hide)
+  local open_pat  = "%[" .. tag .. "%]"
+  local close_pat = "%[/" .. tag .. "%]"
+  local function is_tag(b, pat)
     if b.t ~= "Para" then return false end
-    return pandoc_utils.stringify(b):match("^%s*" .. tag .. "%s*$") ~= nil
+    return pandoc_utils.stringify(b):match("^%s*" .. pat .. "%s*$") ~= nil
   end
   local out = {}
   local i = 1
   while i <= #blocks do
     local b = blocks[i]
-    if is_tag(b, "%[LONG%]") then
+    if is_tag(b, open_pat) then
       local depth = 1
       local j = i + 1
       while j <= #blocks do
-        if is_tag(blocks[j], "%[LONG%]") then depth = depth + 1
-        elseif is_tag(blocks[j], "%[/LONG%]") then
+        if is_tag(blocks[j], open_pat) then depth = depth + 1
+        elseif is_tag(blocks[j], close_pat) then
           depth = depth - 1
           if depth == 0 then break end
         end
         j = j + 1
       end
       if j > #blocks then
-        io.stderr:write("filter.lua: warning: unmatched [LONG] tag\n")
+        io.stderr:write("filter.lua: warning: unmatched [" .. tag .. "] tag\n")
       end
-      if not short_version then
+      if not hide then
         for k = i + 1, math.min(j - 1, #blocks) do
           table.insert(out, blocks[k])
         end
       end
       i = j + 1
-    elseif is_tag(b, "%[/LONG%]") then
-      io.stderr:write("filter.lua: warning: orphan [/LONG] tag (dropped)\n")
+    elseif is_tag(b, close_pat) then
+      io.stderr:write("filter.lua: warning: orphan [/" .. tag .. "] tag (dropped)\n")
       i = i + 1
     else
       table.insert(out, b)
@@ -241,8 +248,9 @@ function Pandoc(doc)
     short_version = pandoc_utils.stringify(doc.meta.short_version) == "true"
   end
 
-  local blocks = trim_lists_with_inline_long(
-                   resolve_block_long(normalize_long_paras(doc.blocks)))
+  local blocks = normalize_tag_paras(doc.blocks, "LONG")
+  blocks = resolve_block_tag(blocks, "LONG", short_version)
+  blocks = trim_lists_with_inline_long(blocks)
   local out = {}
   local i = 1
   while i <= #blocks do
