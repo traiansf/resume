@@ -75,6 +75,7 @@ Supervise graduate students and serve on departmental committees.
 
 [/LONG]
 
+[ACADEMIC]
 ## Co-founder and Vice-President
 **Institute for Logic and Data Science, 2022–Present**
 
@@ -83,6 +84,7 @@ Supervise graduate students and serve on departmental committees.
 Non-profit research institute ([ilds.ro](https://ilds.ro)) bringing together academic and industry researchers in logic and data science, with an active program of conferences, workshops, weekly seminars, and hosted research projects. Most involved in the **Working Formal Methods Symposium** (*FROM 2024, 2026*), the *Deep Blockchain Fundamentals* workshop, the weekly **Logic** seminar, and matching-logic research.
 
 [/LONG]
+[/ACADEMIC]
 
 ## Consultant and Researcher
 **Pi Squared, Inc., 2024–2026**
