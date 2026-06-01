@@ -1,6 +1,6 @@
 ---
 name: Traian Florin Șerbănuță
-email: traian.serbanuta@unibuc.ro
+email: traian.serbanuta@gmail.com
 web: "http://cs.unibuc.ro/~tserbanuta"
 github: "github.com/traiansf"
 tagline: "Associate Professor · Researcher in Formal Methods · Software Engineer"
