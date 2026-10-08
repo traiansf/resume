@@ -1,7 +1,8 @@
-# Generated PDFs (built from resume.md)
-resume.pdf
-resume-short.pdf
-resume-industry.pdf
+# Generated PDFs (built from resume.md); copies under docs/ are published
+/resume.pdf
+/resume-short.pdf
+/resume-industry.pdf
+/publications.pdf
 
 # Brainstorming visual companion artifacts
 .superpowers/

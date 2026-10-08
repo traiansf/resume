@@ -5,6 +5,10 @@
 #   input.md            — required, the markdown input
 #   expected.tex        — optional, expected LaTeX for the FULL version
 #   expected-short.tex  — optional, expected LaTeX for the SHORT version
+#   expected-industry.tex — optional, expected LaTeX for the INDUSTRY version
+#   expected.html / expected-short.html — optional, expected HTML (web build)
+#
+# Diffs ignore CR line endings (Windows checkouts).
 #
 # A directory must provide at least one expected.* file. If both are present,
 # both modes are exercised. The test name reported is "<dir>" for the full
@@ -19,9 +23,10 @@ failed_names=()
 
 run_variant() {
   local name="$1" input="$2" expected="$3"; shift 3
-  local actual
-  actual=$(pandoc -L filter.lua "$@" -f markdown -t latex "$input" 2>/dev/null)
-  if diff -u "$expected" <(printf '%s\n' "$actual") > /tmp/diff.$$ 2>&1; then
+  local actual to=latex
+  [[ "$expected" == *.html ]] && to=html5
+  actual=$(pandoc -L filter.lua "$@" -f markdown -t "$to" "$input" 2>/dev/null)
+  if diff -u --strip-trailing-cr "$expected" <(printf '%s\n' "$actual") > /tmp/diff.$$ 2>&1; then
     echo "PASS  $name"
     pass=$((pass+1))
   else
@@ -47,6 +52,15 @@ for d in tests/filter/*/; do
   if [[ -f "$d/expected-industry.tex" ]]; then
     run_variant "$name:industry" "$d/input.md" "$d/expected-industry.tex" \
       --metadata short_version=false --metadata industry_version=true
+  fi
+  # HTML (web build) variants.
+  if [[ -f "$d/expected.html" ]]; then
+    run_variant "$name:html" "$d/input.md" "$d/expected.html" \
+      --metadata short_version=false
+  fi
+  if [[ -f "$d/expected-short.html" ]]; then
+    run_variant "$name:html-short" "$d/input.md" "$d/expected-short.html" \
+      --metadata short_version=true
   fi
 done
 

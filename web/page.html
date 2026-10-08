@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#7a1f1f" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171313" media="(prefers-color-scheme: dark)">
+<title>$name$ — Curriculum Vitae</title>
+<meta name="description" content="Curriculum vitae of $name$: academic, industry and one-page versions, and the full list of publications.">
+<meta name="author" content="$name$">
+<link rel="canonical" href="https://traiansf.github.io/resume/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="tabs.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+<div class="wrap">
+<p class="home"><a href="/">traiansf.github.io</a></p>
+<h1 class="name">$name$</h1>
+<nav class="tabs" aria-label="CV versions">
+<ul data-tabs>
+<li><a id="tab-academic" href="#academic">Academic</a></li>
+<li><a id="tab-industry" href="#industry">Industry</a></li>
+<li><a id="tab-short" href="#short">One page</a></li>
+<li><a id="tab-publications" href="#publications">Publications</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main id="main" class="wrap" tabindex="-1">
+$for(include-before)$
+$include-before$
+$endfor$
+</main>
+<footer class="site-footer">
+<div class="wrap">
+<p>Last updated $updated$ · <a href="/">Homepage</a></p>
+</div>
+</footer>
+</body>
+</html>
