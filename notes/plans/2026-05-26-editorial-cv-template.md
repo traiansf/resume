@@ -8,7 +8,7 @@
 
 **Tech Stack:** pandoc (Lua filters + custom LaTeX templates), XeLaTeX, `fontspec`, `xcolor`, `titlesec`, `enumitem`, `tcolorbox`, `tikz`. Fonts: Playfair Display + Source Sans 3 (installed from Google Fonts to `~/.local/share/fonts/`).
 
-**Spec reference:** `docs/superpowers/specs/2026-05-26-editorial-cv-template-design.md`
+**Spec reference:** `notes/specs/2026-05-26-editorial-cv-template-design.md`
 
 ---
 
@@ -513,7 +513,7 @@ Expected: `FAIL  cvitem` with a diff showing the current pandoc-default `\subsec
 Replace the contents of `filter.lua` with the version below. This rewrites the filter to use Pandoc's `Pandoc` walker for two purposes: section-aware `\cvitem` emission and the existing `[LONG]/[/LONG]` stripping.
 
 ```lua
--- filter.lua — see docs/superpowers/specs/2026-05-26-editorial-cv-template-design.md
+-- filter.lua — see notes/specs/2026-05-26-editorial-cv-template-design.md
 local short_version = false
 local section = nil   -- normalized name of the current H1 section
 local pandoc_utils = pandoc.utils

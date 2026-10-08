@@ -1,6 +1,7 @@
 ---
 name: Traian Florin Șerbănuță
 email: traian.serbanuta@gmail.com
+email-academic: traian.serbanuta@unibuc.ro
 web: "http://cs.unibuc.ro/~tserbanuta"
 github: "github.com/traiansf"
 tagline: "Associate Professor · Researcher in Formal Methods · Software Engineer"
@@ -61,13 +62,13 @@ Designed and taught courses across software modelling, declarative & concurrent 
 
 Courses developed and taught, with all materials openly published:
 
-- [Software Systems Modelling](https://traiansf.github.io/class/amss2025) — requirements analysis and modelling (UML, design patterns)
+- [Software Systems Modelling](https://traiansf.github.io/class/amss2026/) — requirements analysis and modelling (UML, design patterns)
 - [Declarative Programming](https://github.com/unibuc-cs/progdecl) — functional and declarative programming in Haskell
 - [Concurrency in Programming Languages](https://github.com/unibuc-cs/iclp) — concurrency hands-on across Java, C++, Erlang/Elixir, JavaScript, and Python
 - [Programming Languages Semantics](https://github.com/unibuc-cs/slp/tree/v2017) — operational semantics, interpreters, and type systems
-- [Foundations of Programming Languages](https://github.com/unibuc-cs/flp) — theoretical incursion into semantics, lambda calculus, type systems, and logic programming
+- [Foundations of Programming Languages](https://github.com/unibuc-cs/flp) — hands-on semantics, lambda calculus, and type systems in Haskell and Prolog, with an introduction to logic programming
 - [Program Verification](https://github.com/unibuc-cs/pv) — Hoare logic, weakest preconditions, separation logic, SAT/SMT solvers, symbolic execution, and model checking
-- [Introduction to Machine Learning](https://github.com/unibuc-cs/dh-ml) — hands-on machine learning for non-computer-scientists (Master in Digital Humanities)
+- [Introduction to Machine Learning](https://github.com/unibuc-cs/dh-ml) — hands-on machine learning for non-computer-scientists (Master in Digital Humanities; [Kaggle notebook](https://www.kaggle.com/code/traiansf/introduction-to-machine-learning))
 
 [/ACADEMIC]
 
@@ -76,6 +77,7 @@ Supervise graduate students and serve on departmental committees.
 [/LONG]
 
 [ACADEMIC]
+
 ## Co-founder and Vice-President
 **Institute for Logic and Data Science, 2022–Present**
 
@@ -85,6 +87,15 @@ Non-profit research institute ([ilds.ro](https://ilds.ro)) bringing together aca
 
 [/LONG]
 [/ACADEMIC]
+
+## Consultant and Researcher
+**Asymptotic, 2026–Present**
+
+[LONG]
+
+Prototyping AI-assisted, Lean-based provers for programming languages. Lead author of *Rust-Prover*, a Lean 4–backed verifier for Rust: specifications and Rust code are translated into Lean theorems that LLM agents prove, with Lean's kernel as the final check. It proved all 1325 theorems of the 1007-problem VeriContest benchmark.
+
+[/LONG]
 
 ## Consultant and Researcher
 **Pi Squared, Inc., 2024–2026**
@@ -205,6 +216,7 @@ Personal research and tooling outside employer-affiliated work; full list at <ht
 - **Formalization libraries** — [aml-in-coq](https://github.com/traiansf/aml-in-coq) (Applicative Matching Logic), [arl-in-coq](https://github.com/traiansf/arl-in-coq) (Abstract Rewrite Systems), [sets-in-coq](https://github.com/traiansf/sets-in-coq).
 - **Type theory study** — [propositions-as-types](https://github.com/traiansf/propositions-as-types), Coq scribbles along *Type Theory and Formal Proofs* (Nederpelt & Geuvers).
 - **Teaching companions** — [semantics-in-coq](https://github.com/traiansf/semantics-in-coq) and [semantics-in-lean](https://github.com/traiansf/semantics-in-lean), companions to the Foundations of Programming Languages course.
+- **Teaching tools** — [multiple_choice_exam](https://github.com/traiansf/multiple_choice_exam), built with AI coding agents: a Python generator for randomized, print-ready exam variants from a Markdown question bank, and a Dart mobile app that grades answer sheets by QR code and optical mark recognition.
 - **Schools & events** — [bucharest-lean-ac](https://github.com/traiansf/bucharest-lean-ac), Bucharest Autumn School materials in Lean 4.
 - **Other** — [excel-database](https://github.com/traiansf/excel-database), a WordPress plugin (★4) that exposes an Excel spreadsheet table as queryable data.
 
@@ -214,7 +226,9 @@ Personal research and tooling outside employer-affiliated work; full list at <ht
 
 - Formal methods and verification
 - Programming language semantics
+- AI-assisted software development
 [LONG]
+- LLM agents for theorem proving
 - Rewriting logic
 - K Framework
 - Temporal logics
@@ -248,53 +262,53 @@ Personal research and tooling outside employer-affiliated work; full list at <ht
 
 [CALLOUT]
 
-**55** articles · h-index **22** · **2106** citations (Google Scholar, as of May 2026)
+**55** articles · h-index **22** · **2178** citations (Google Scholar, as of October 2026)
 
 [/CALLOUT]
 
 [LONG]
 [ACADEMIC]
-Top 20 by citations (Google Scholar, May 2026). Full record: [Google Scholar](https://scholar.google.com/citations?user=QVLcUrcAAAAJ&hl=en) · [DBLP](https://dblp.org/pid/s/TFSerbanuta.html).
+Top 20 by citations (Google Scholar, October 2026). Full record: [Google Scholar](https://scholar.google.com/citations?user=QVLcUrcAAAAJ&hl=en) · [DBLP](https://dblp.org/pid/s/TFSerbanuta.html).
 
-1. Roșu, Grigore and Traian Florin Șerbănuță. "An Overview of the K Semantic Framework." *Journal of Logic and Algebraic Programming*, Vol. 79, No. 6, pp. 397-434, 2010. (cited by 639)
+1. Roșu, Grigore and Traian Florin Șerbănuță. "An Overview of the K Semantic Framework." *Journal of Logic and Algebraic Programming*, Vol. 79, No. 6, pp. 397-434, 2010. (cited by 673)
 
-2. Chen, Feng, Traian Florin Șerbănuță, and Grigore Roșu. "jPredictor: a predictive runtime analysis tool for Java." *ICSE '08: Proceedings of the 30th International Conference on Software Engineering*, pp. 221-230, 2008. (cited by 154)
+2. Chen, Feng, Traian Florin Șerbănuță, and Grigore Roșu. "jPredictor: a predictive runtime analysis tool for Java." *ICSE '08: Proceedings of the 30th International Conference on Software Engineering*, pp. 221-230, 2008. (cited by 155)
 
-3. Șerbănuță, Traian Florin, Grigore Roșu, and José Meseguer. "A Rewriting Logic Approach to Operational Semantics." *Information and Computation*, Vol. 207, No. 2, pp. 305-340, 2009. (cited by 126)
+3. Șerbănuță, Traian Florin, Grigore Roșu, and José Meseguer. "A Rewriting Logic Approach to Operational Semantics." *Information and Computation*, Vol. 207, No. 2, pp. 305-340, 2009. (cited by 129)
 
-4. Ștefănescu, Andrei, Ștefan Ciobâcă, Radu Mereuta, Brandon M Moore, Traian Florin Șerbănuță, and Grigore Roșu. "All-Path Reachability Logic." *Logical Methods in Computer Science*, Vol. 15, Issue 2, 2019. (cited by 114)
+4. Ștefănescu, Andrei, Ștefan Ciobâcă, Radu Mereuta, Brandon M Moore, Traian Florin Șerbănuță, and Grigore Roșu. "All-Path Reachability Logic." *Logical Methods in Computer Science*, Vol. 15, Issue 2, 2019. (cited by 117)
 
-5. Șerbănuță, Traian Florin, Feng Chen, and Grigore Roșu. "Maximal Causal Models for Sequentially Consistent Systems." *Runtime Verification (RV'12)*, LNCS Vol. 7687, pp. 136-150, 2013. (cited by 104)
+5. Luo, Qingzhou, Yi Zhang, Choonghwan Lee, Dongyun Jin, Patrick O'Neil Meredith, Traian Florin Șerbănuță, and Grigore Roșu. "RV-Monitor: Efficient Parametric Runtime Verification with Simultaneous Properties." *Runtime Verification (RV'14)*, LNCS Vol. 8734, pp. 285-300, 2014. (cited by 108)
 
-6. Luo, Qingzhou, Yi Zhang, Choonghwan Lee, Dongyun Jin, Patrick O'Neil Meredith, Traian Florin Șerbănuță, and Grigore Roșu. "RV-Monitor: Efficient Parametric Runtime Verification with Simultaneous Properties." *Runtime Verification (RV'14)*, LNCS Vol. 8734, pp. 285-300, 2014. (cited by 103)
+6. Șerbănuță, Traian Florin, Feng Chen, and Grigore Roșu. "Maximal Causal Models for Sequentially Consistent Systems." *Runtime Verification (RV'12)*, LNCS Vol. 7687, pp. 136-150, 2013. (cited by 105)
 
-7. Șerbănuță, Traian Florin and Grigore Roșu. "K-Maude: A Rewriting Based Tool for Semantics of Programming Languages." *Rewriting Logic and Its Applications (WRLA'10)*, LNCS Vol. 6381, pp. 104-122, 2010. (cited by 71)
+7. Șerbănuță, Traian Florin and Grigore Roșu. "K-Maude: A Rewriting Based Tool for Semantics of Programming Languages." *Rewriting Logic and Its Applications (WRLA'10)*, LNCS Vol. 6381, pp. 104-122, 2010. (cited by 74)
 
-8. Șerbănuță, Traian Florin. "Extending Parikh matrices." *Theoretical Computer Science*, Vol. 310, No. 1-3, pp. 233-246, 2004. (cited by 70)
+8. Șerbănuță, Traian Florin. "Extending Parikh matrices." *Theoretical Computer Science*, Vol. 310, No. 1-3, pp. 233-246, 2004. (cited by 66)
 
-9. Șerbănuță, Virgil Nicolae and Traian Florin Șerbănuță. "Injectivity of the Parikh matrix mappings revisited." *Fundamenta Informaticae*, Vol. 73, No. 1-2, pp. 265-283, 2006. (cited by 65)
+9. Roșu, Grigore and Traian Florin Șerbănuță. "K Overview and SIMPLE Case Study." *Proceedings of K'11*, ENTCS Vol. 304, pp. 3-56, 2014. (cited by 64)
 
-10. Roșu, Grigore and Traian Florin Șerbănuță. "K Overview and SIMPLE Case Study." *Proceedings of K'11*, ENTCS Vol. 304, pp. 3-56, 2014. (cited by 64)
+10. Roșu, Grigore, Wolfram Schulte, and Traian Florin Șerbănuță. "Runtime Verification of C Memory Safety." *Runtime Verification (RV'09)*, LNCS Vol. 5779, pp. 132-151, 2009. (cited by 64)
 
-11. Roșu, Grigore, Wolfram Schulte, and Traian Florin Șerbănuță. "Runtime Verification of C Memory Safety." *Runtime Verification (RV'09)*, LNCS Vol. 5779, pp. 132-151, 2009. (cited by 59)
+11. Șerbănuță, Virgil Nicolae and Traian Florin Șerbănuță. "Injectivity of the Parikh matrix mappings revisited." *Fundamenta Informaticae*, Vol. 73, No. 1-2, pp. 265-283, 2006. (cited by 63)
 
-12. Șerbănuță, Traian Florin, Andrei Arusoaie, David Lazar, Chucky Ellison, Dorel Lucanu, and Grigore Roșu. "The K Primer (version 3.3)." *Proceedings of K'11*, ENTCS Vol. 304, pp. 57-80, 2014. (cited by 53)
+12. Șerbănuță, Traian Florin, Andrei Arusoaie, David Lazar, Chucky Ellison, Dorel Lucanu, and Grigore Roșu. "The K Primer (version 3.3)." *Proceedings of K'11*, ENTCS Vol. 304, pp. 57-80, 2014. (cited by 54)
 
-13. Kasampalis, Theodoros, Dwight Guth, Brandon Moore, Traian Florin Șerbănuță, Yi Zhang, Daniele Filaretti, Virgil Șerbănuță, Ralph Johnson, and Grigore Roșu. "IELE: A Rigorously Designed Language and Tool Ecosystem for the Blockchain." *Formal Methods (FM'19)*, pp. 593-610, 2019. (cited by 45)
+13. Kasampalis, Theodoros, Dwight Guth, Brandon Moore, Traian Florin Șerbănuță, Yi Zhang, Daniele Filaretti, Virgil Șerbănuță, Ralph Johnson, and Grigore Roșu. "IELE: A Rigorously Designed Language and Tool Ecosystem for the Blockchain." *Formal Methods (FM'19)*, pp. 593-610, 2019. (cited by 46)
 
-14. Șerbănuță, Traian Florin and Grigore Roșu. "Computationally Equivalent Elimination of Conditions." *Rewriting Techniques and Applications (RTA'06)*, LNCS Vol. 4098, pp. 19-34, 2006. (cited by 38)
+14. Șerbănuță, Traian Florin and Grigore Roșu. "Computationally Equivalent Elimination of Conditions." *Rewriting Techniques and Applications (RTA'06)*, LNCS Vol. 4098, pp. 19-34, 2006. (cited by 41)
 
-15. Rusu, Vlad, Dorel Lucanu, Traian-Florin Șerbănuță, Andrei Arusoaie, Andrei Ștefănescu, and Grigore Roșu. "Language Definitions as Rewrite Theories." *Journal of Logical and Algebraic Methods in Programming*, Vol. 85, No. 1, pp. 98-120, 2016. (cited by 32)
+15. Rusu, Vlad, Dorel Lucanu, Traian-Florin Șerbănuță, Andrei Arusoaie, Andrei Ștefănescu, and Grigore Roșu. "Language Definitions as Rewrite Theories." *Journal of Logical and Algebraic Methods in Programming*, Vol. 85, No. 1, pp. 98-120, 2016. (cited by 34)
 
-16. Daian, Philip, Ylies Falcone, Patrick Meredith, Traian Florin Șerbănuță, Akihito Iwai, Shin'ichi Shiriashi, and Grigore Roșu. "RV-Android: Efficient Parametric Android Runtime Verification, a Brief Tutorial." *Runtime Verification (RV'15)*, LNCS Vol. 9333, pp. 342-357, 2015. (cited by 29)
+16. Daian, Philip, Ylies Falcone, Patrick Meredith, Traian Florin Șerbănuță, Akihito Iwai, Shin'ichi Shiriashi, and Grigore Roșu. "RV-Android: Efficient Parametric Android Runtime Verification, a Brief Tutorial." *Runtime Verification (RV'15)*, LNCS Vol. 9333, pp. 342-357, 2015. (cited by 31)
 
-17. Hills, Mark, Traian Florin Șerbănuță, and Grigore Roșu. "A Rewrite Framework for Language Definitions and for Generation of Efficient Interpreters." *Rewriting Logic and Its Applications (WRLA'06)*, ENTCS Vol. 176, No. 4, pp. 215-231, 2007. (cited by 29)
+17. Hills, Mark, Traian Florin Șerbănuță, and Grigore Roșu. "A Rewrite Framework for Language Definitions and for Generation of Efficient Interpreters." *Rewriting Logic and Its Applications (WRLA'06)*, ENTCS Vol. 176, No. 4, pp. 215-231, 2007. (cited by 31)
 
-18. Ellison, Chucky, Traian Florin Șerbănuță, and Grigore Roșu. "A Rewriting Logic Approach to Type Inference." *Recent Trends in Algebraic Development Techniques (WADT'08)*, LNCS Vol. 5486, pp. 135-151, 2009. (cited by 28)
+18. Lucanu, Dorel, Traian Florin Șerbănuță, and Grigore Roșu. "K Framework Distilled." *Rewriting Logic and Its Applications (WRLA'12)*, LNCS Vol. 7571, pp. 31-53, 2012. (cited by 29)
 
-19. Șerbănuță, Traian Florin, Gheorghe Ștefănescu, and Grigore Roșu. "Defining and Executing P Systems with Structured Data in K." *Membrane Computing (WMC'08)*, LNCS Vol. 5391, pp. 374-393, 2009. (cited by 28)
+19. Ellison, Chucky, Traian Florin Șerbănuță, and Grigore Roșu. "A Rewriting Logic Approach to Type Inference." *Recent Trends in Algebraic Development Techniques (WADT'08)*, LNCS Vol. 5486, pp. 135-151, 2009. (cited by 28)
 
-20. Lucanu, Dorel, Traian Florin Șerbănuță, and Grigore Roșu. "K Framework Distilled." *Rewriting Logic and Its Applications (WRLA'12)*, LNCS Vol. 7571, pp. 31-53, 2012. (cited by 25)
+20. Șerbănuță, Traian Florin, Gheorghe Ștefănescu, and Grigore Roșu. "Defining and Executing P Systems with Structured Data in K." *Membrane Computing (WMC'08)*, LNCS Vol. 5391, pp. 374-393, 2009. (cited by 28)
 
 [/ACADEMIC]
 [/LONG]

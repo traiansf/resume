@@ -11,11 +11,32 @@ one xelatex template; all three PDFs are produced by toggling metadata flags.
 make pdf          # full version
 make pdf-short    # short version (condensed, one page)
 make pdf-industry # industry-oriented full-length version
-make all          # all three
+make pdf-publications # full list of publications (publications.md)
+make all          # all four PDFs
+make web          # tabbed web page + PDFs into docs/ (published)
 make test         # filter tests (run automatically before pdf targets)
-make clean        # remove generated PDFs
+make clean        # remove generated PDFs (docs/ is tracked; kept)
 make check-deps   # verify pandoc, xelatex, fonts
 ```
+
+## Web build
+
+`make web` renders the same sources through the same filter in **HTML mode**
+(`FORMAT` is html: the filter builds pandoc Divs/Spans instead of raw LaTeX)
+and assembles `docs/index.html`, one page with four tab panels: Academic
+(full), Industry, One page (short), and Publications. Each panel is rendered
+by `web/panel.html` with its own `--id-prefix` (`academic-`, `industry-`,
+`short-`, `pubs-`) so heading ids stay unique; `web/page.html` stitches them
+in with `-B`. `web/style.css` is the theme (light/dark via
+`prefers-color-scheme`, WCAG AA contrast, responsive, print styles) and
+`web/tabs.js` progressively enhances the nav into a WAI-ARIA tablist driven by
+the URL hash (`#academic`, `#industry`, `#short`, `#publications`). Without
+JavaScript all four versions show in sequence.
+
+`docs/` is committed and GitHub Pages serves it from `main:/docs` at
+<https://traiansf.github.io/resume/> (`docs/.nojekyll` disables Jekyll). To
+publish changes: `make web`, then commit `docs/` and push. Keep anything that
+should not be public out of `docs/` (design notes live in `notes/`).
 
 All three `pdf` targets depend on `test`, so a filter regression aborts the
 build before generating PDFs. Do not bypass this — the test suite exists
@@ -31,6 +52,10 @@ because the `[LONG]` handling has historically been fragile.
 - `template.tex` — xelatex template (fonts, section spacing, colors, the
   `\cvitem`, `\pill`, `\cites`, callout macros).
 - `tests/filter/` — fixture-based tests; see "Tests" below.
+- `publications.md` — the full publication list (`make pdf-publications`).
+- `web/` — web build templates, theme and tabs script; output goes to the
+  committed `docs/` (see "Web build").
+- `notes/` — design specs and plans.
 - `sources/` — older/auxiliary CVs and GitHub-contribution notes used as
   input material when updating `resume.md`. Not consumed by the build.
 
@@ -74,6 +99,12 @@ These are non-standard idioms the filter recognises:
   filter replaces the `tagline` metadata value with the value of
   `tagline-industry` before template rendering. Declare both fields in the
   YAML frontmatter of `resume.md`.
+
+- **`email-academic` frontmatter field** — in the full version (neither
+  `short_version` nor `industry_version`) the filter replaces `email` with
+  `email-academic` (the institutional address). Short and industry keep
+  `email`. `publications.md` sets its `email` to the institutional address
+  directly.
 
 - **Blank-line rule for `[ACADEMIC]`/`[INDUSTRY]` (important gotcha):** always
   put each tag on its own line with blank lines separating it from the wrapped
@@ -130,7 +161,11 @@ ones have run:
    inline `·` for Languages; inline `[LONG]...[/LONG]` for the pills idiom
    (also LONG-specific, not generalized).
 5. Citation rewrite — `(cited by N)` → `\cites{N}` walk in the
-   Publications section.
+   Publications section (also entered via a `\sectionwithcallout` block).
+6. HTML only — demote all headers by one level (the page `<h1>` is the name).
+
+Every LaTeX construct has an HTML counterpart guarded by `html_output`; when
+adding one, add the other and an `expected.html` fixture.
 
 The main loop should never see a standalone `[LONG]`, `[ACADEMIC]`, or
 `[INDUSTRY]` paragraph — if you find yourself adding handling for that there,
@@ -145,6 +180,8 @@ Each subdirectory under `tests/filter/` is a fixture:
 - `expected-short.tex` — expected LaTeX for the **short** version (optional).
 - `expected-industry.tex` — expected LaTeX for the **industry** version
   (optional; rendered with `industry_version=true short_version=false`).
+- `expected.html` / `expected-short.html` — expected HTML (web build) output
+  (optional; rendered with `-t html5`).
 
 At least one expected file must exist. All present variants are exercised.
 

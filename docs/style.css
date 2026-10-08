@@ -1,0 +1,360 @@
+/* Web theme for the CV — mirrors the PDF's editorial look (Playfair Display
+   headings, Source Sans 3 body, burgundy accent). Contrast ratios noted are
+   against --bg and meet WCAG 2.2 AA (most meet AAA). */
+
+:root {
+  --bg: #ffffff;
+  --surface: #faf7f4;
+  --text: #1a1a1a;         /* 17.4:1 */
+  --muted: #555555;        /*  7.5:1 */
+  --line: #e4dcd6;
+  --accent: #7a1f1f;       /* 11.0:1 */
+  --accent-soft: #f3e9e7;
+  --focus: #7a1f1f;
+  --measure: 52rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171313;
+    --surface: #211b1a;
+    --text: #ece6e4;       /* 14.9:1 */
+    --muted: #b8aeab;      /*  8.3:1 */
+    --line: #3a302e;
+    --accent: #eaa7a2;     /*  9.4:1 */
+    --accent-soft: #33221f;
+    --focus: #f5c26b;
+    color-scheme: dark;
+  }
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Source Sans 3", "Source Sans Pro", system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+.wrap {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+main:focus { outline: none; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.5rem; top: -100px;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+  border-radius: 0 0 4px 4px;
+}
+.skip-link:focus { top: 0; }
+
+/* ── Header and tabs ──────────────────────────────────────────────────── */
+
+.site-header {
+  border-bottom: 2px solid var(--accent);
+  background: var(--bg);
+}
+
+.home {
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+}
+
+.name {
+  margin: 0.25rem 0 0.75rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 2.9rem);
+  line-height: 1.15;
+}
+
+.tabs ul {
+  display: flex;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex-wrap: wrap;                  /* all versions stay visible on phones */
+}
+
+.tabs a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;                 /* comfortable touch target */
+  padding: 0.25rem 0.9rem;
+  white-space: nowrap;
+  color: var(--muted);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+}
+.tabs a:hover { color: var(--accent); }
+@media (max-width: 26rem) {
+  .tabs a { padding-inline: 0.55rem; }
+}
+.tabs a[aria-selected="true"] {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ── Panels ───────────────────────────────────────────────────────────── */
+
+.panel {
+  padding-block: 1.5rem 2.5rem;
+}
+
+/* Without JS all versions are shown; separate them clearly. */
+html:not(.has-tabs) .panel + .panel {
+  border-top: 2px solid var(--accent);
+  margin-top: 1rem;
+}
+
+.panel-head {
+  margin-bottom: 1rem;
+}
+
+.tagline {
+  margin: 0 0 0.35rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--accent);
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+}
+
+.download { margin: 0.75rem 0 0; }
+.download a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.35rem 1rem;
+  border: 1.5px solid var(--accent);
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.download a:hover { background: var(--accent-soft); }
+
+/* ── Sections ─────────────────────────────────────────────────────────── */
+
+.panel h2 {
+  margin: 2rem 0 0.75rem;
+  padding-bottom: 0.2rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  color: var(--accent);
+  border-bottom: 1px solid var(--line);
+}
+
+.panel h3 {
+  margin: 1.5rem 0 0.5rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+}
+
+.section-stats p {
+  margin: -0.25rem 0 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.callout {
+  margin: 1rem 0;
+  padding: 0.6rem 1rem;
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+}
+.callout > :first-child { margin-top: 0; }
+.callout > :last-child { margin-bottom: 0; }
+
+/* CV entries: title + organisation on the left, years on the right. */
+.cv-item {
+  margin: 1.1rem 0;
+}
+.cv-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 1rem;
+}
+.cv-head h3 {
+  grid-column: 1;
+  margin: 0;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+.cv-org {
+  grid-column: 1;
+  font-style: italic;
+  color: var(--muted);
+}
+.cv-years {
+  grid-column: 2;
+  grid-row: 1;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.cv-detail {
+  margin-top: 0.25rem;
+  font-size: 0.97rem;
+}
+.cv-detail p { margin: 0.35rem 0; }
+.cv-detail ul { margin: 0.35rem 0; padding-left: 1.25rem; }
+.cv-detail li { margin: 0.2rem 0; }
+
+@media (max-width: 30rem) {
+  .cv-head { grid-template-columns: 1fr; }
+  .cv-years { grid-column: 1; grid-row: auto; }
+}
+
+/* Pills (Skills, Programming Languages). */
+.pills ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.4rem 0;
+  padding: 0;
+  list-style: none;
+}
+.pills li {
+  padding: 0.1rem 0.7rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* Inline dot-separated list (Languages). */
+.inline-list ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+  margin: 0.4rem 0;
+  padding: 0;
+  list-style: none;
+}
+.inline-list li + li::before {
+  content: "·";
+  margin-right: 0.5rem;
+  color: var(--muted);
+}
+.qual { color: var(--muted); font-size: 0.9em; }
+
+/* Publication lists. */
+.panel ol {
+  padding-left: 2.2rem;
+}
+.panel ol > li {
+  margin: 0.55rem 0;
+}
+.panel ol > li::marker {
+  color: var(--accent);
+  font-weight: 600;
+}
+.panel ol > li > p { margin: 0; }
+
+.cites {
+  display: inline-block;
+  margin-left: 0.3rem;
+  padding: 0 0.45rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────── */
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.site-footer p { margin: 1rem 0 1.5rem; }
+
+/* ── Preferences and print ────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+@media (forced-colors: active) {
+  .pills li, .cites, .download a { border: 1px solid CanvasText; }
+  .tabs a[aria-selected="true"] { border-bottom-color: Highlight; }
+}
+
+@media print {
+  :root {
+    --bg: #fff; --surface: #fff; --text: #000; --muted: #333;
+    --accent: #7a1f1f; --accent-soft: #fff;
+  }
+  .skip-link, .tabs, .home, .download, .site-footer { display: none; }
+  .site-header { border: 0; }
+  .panel[hidden] { display: none; }
+  a { color: inherit; text-decoration: none; }
+  .cv-item, .panel ol > li { break-inside: avoid; }
+}

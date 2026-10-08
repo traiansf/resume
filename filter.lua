@@ -1,6 +1,10 @@
--- filter.lua — see docs/superpowers/specs/2026-05-26-editorial-cv-template-design.md
+-- filter.lua — see notes/specs/2026-05-26-editorial-cv-template-design.md
 local short_version = false
 local industry_version = false
+-- True when rendering to HTML (the web build). Every LaTeX-specific
+-- construct below has an HTML counterpart built from pandoc AST nodes, so
+-- the HTML writer handles escaping and heading ids (incl. --id-prefix).
+local html_output = false
 local section = nil   -- normalized name of the current H1 section
 local pandoc_utils = pandoc.utils
 
@@ -240,11 +244,28 @@ local function render_detail(blocks)
       table.insert(cleaned, b)
     end
   end
+  if html_output then return cleaned end
   if #cleaned == 0 then return "" end
   return pandoc.write(pandoc.Pandoc(cleaned), "latex")
 end
 
+-- HTML helpers -------------------------------------------------------------
+
+local function div(blocks, class)
+  return pandoc.Div(blocks, pandoc.Attr("", {class}))
+end
+
+-- A list of strings rendered as a <ul> of pills.
+local function html_pills(items)
+  local list = {}
+  for _, t in ipairs(items) do
+    table.insert(list, {pandoc.Plain({pandoc.Str(t)})})
+  end
+  return div({pandoc.BulletList(list)}, "pills")
+end
+
 function Pandoc(doc)
+  html_output = FORMAT:match("html") ~= nil
   if doc.meta and doc.meta.short_version then
     short_version = pandoc_utils.stringify(doc.meta.short_version) == "true"
   end
@@ -253,6 +274,11 @@ function Pandoc(doc)
   end
   if industry_version and doc.meta and doc.meta["tagline-industry"] then
     doc.meta.tagline = doc.meta["tagline-industry"]
+  end
+  -- The full (academic) version uses the institutional email address.
+  if not short_version and not industry_version
+      and doc.meta and doc.meta["email-academic"] then
+    doc.meta.email = doc.meta["email-academic"]
   end
 
   local blocks = normalize_tag_paras(doc.blocks, "LONG")
@@ -289,7 +315,14 @@ function Pandoc(doc)
           table.insert(content_blocks, bj)
           j = j + 1
         end
-        if #content_blocks == 1 and content_blocks[1].t == "Para" then
+        if html_output and #content_blocks == 1
+            and content_blocks[1].t == "Para" then
+          -- HTML: keep the real header; the stats line follows it.
+          table.insert(out, b)
+          table.insert(out, div({pandoc.Para(content_blocks[1].content)},
+                                "section-stats"))
+          i = j
+        elseif #content_blocks == 1 and content_blocks[1].t == "Para" then
           -- Render the single paragraph inline (no \par at end).
           local plain = pandoc.Plain(content_blocks[1].content)
           local content_tex = pandoc.write(pandoc.Pandoc({plain}), "latex")
@@ -325,6 +358,22 @@ function Pandoc(doc)
           table.insert(detail, bj)
           j = j + 1
         end
+        if html_output then
+          local head = {
+            pandoc.Header(2, b.content, b.attr),
+            div({pandoc.Plain({pandoc.Str(org)})}, "cv-org"),
+            div({pandoc.Plain({pandoc.Str((years:gsub("%-%-", "–")))})},
+                "cv-years"),
+          }
+          local item = {div(head, "cv-head")}
+          local detail_blocks = render_detail(detail)
+          if #detail_blocks > 0 then
+            table.insert(item, div(detail_blocks, "cv-detail"))
+          end
+          table.insert(out, div(item, "cv-item"))
+          i = j
+          goto continue
+        end
         local detail_tex = render_detail(detail):gsub("%s+$", "")
         local tex = string.format("\\cvitem{%s}{%s}{%s}{%s}",
           title, org, years, detail_tex)
@@ -337,22 +386,32 @@ function Pandoc(doc)
 
     -- [CALLOUT] markers — wrap the following blocks in a callout environment.
     elseif b.t == "Para" and pandoc_utils.stringify(b):match("^%s*%[CALLOUT%]%s*$") then
-      table.insert(out, pandoc.RawBlock("latex", "\\begin{callout}"))
+      table.insert(out, html_output
+        and pandoc.RawBlock("html", '<div class="callout">')
+        or pandoc.RawBlock("latex", "\\begin{callout}"))
       i = i + 1
     elseif b.t == "Para" and pandoc_utils.stringify(b):match("^%s*%[/CALLOUT%]%s*$") then
-      table.insert(out, pandoc.RawBlock("latex", "\\end{callout}"))
+      table.insert(out, html_output
+        and pandoc.RawBlock("html", "</div>")
+        or pandoc.RawBlock("latex", "\\end{callout}"))
       i = i + 1
 
     -- Skills section: render bullet list as inline \pill{} tags.
     elseif b.t == "BulletList" and (section == "skills" or section == "programming languages") then
-      local parts = {}
+      local parts, texts = {}, {}
       for _, item in ipairs(b.content) do
         local item_text = pandoc_utils.stringify(item):gsub("%s+", " ")
                                                       :gsub("^%s+", "")
                                                       :gsub("%s+$", "")
         if item_text ~= "" then
+          table.insert(texts, item_text)
           table.insert(parts, "\\pill{" .. item_text .. "}")
         end
+      end
+      if html_output then
+        table.insert(out, html_pills(texts))
+        i = i + 1
+        goto continue
       end
       local line = "\\pillrow{" .. table.concat(parts, "\\,\\allowbreak\\,") .. "}"
       table.insert(out, pandoc.RawBlock("latex", line))
@@ -360,6 +419,23 @@ function Pandoc(doc)
 
     -- Languages section: render bullet list as inline " · "-joined string.
     elseif b.t == "BulletList" and section == "languages" then
+      if html_output then
+        local list = {}
+        for _, item in ipairs(b.content) do
+          local t = pandoc_utils.stringify(item):gsub("%s+", " ")
+                                               :gsub("^%s+", ""):gsub("%s+$", "")
+          local name, qual = t:match("^(.-)%s*%(([^)]+)%)$")
+          local inl = name
+            and {pandoc.Str(name), pandoc.Space(),
+                 pandoc.Span({pandoc.Str("(" .. qual .. ")")},
+                             pandoc.Attr("", {"qual"}))}
+            or {pandoc.Str(t)}
+          table.insert(list, {pandoc.Plain(inl)})
+        end
+        table.insert(out, div({pandoc.BulletList(list)}, "inline-list"))
+        i = i + 1
+        goto continue
+      end
       local parts = {}
       for _, item in ipairs(b.content) do
         local item_text = pandoc_utils.stringify(item):gsub("%s+", " ")
@@ -384,14 +460,17 @@ function Pandoc(doc)
           if s:gsub("%s",""):len() > 0 then table.insert(out, pandoc.Para(s)) end
         elseif section == "skills" or section == "programming languages" then
           local inner = text:gsub("%[LONG%]",""):gsub("%[/LONG%]","")
-          local parts = {}
+          local parts, texts = {}, {}
           for item in inner:gmatch("[^%-\n]+") do
             item = item:gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", "")
             if item ~= "" then
+              table.insert(texts, item)
               table.insert(parts, "\\pill{" .. item .. "}")
             end
           end
-          if #parts > 0 then
+          if html_output then
+            if #texts > 0 then table.insert(out, html_pills(texts)) end
+          elseif #parts > 0 then
             table.insert(out, pandoc.RawBlock("latex",
               "\\pillrow{" .. table.concat(parts, "\\,\\allowbreak\\,") .. "}"))
           end
@@ -408,6 +487,7 @@ function Pandoc(doc)
       table.insert(out, b)
       i = i + 1
     end
+    ::continue::
   end
 
   -- Second pass: in Publications, rewrap "(cited by N)" as \cites{N}.
@@ -455,7 +535,13 @@ function Pandoc(doc)
       table.remove(src)
     end
     table.insert(src, pandoc.Space())
-    table.insert(src, pandoc.RawInline("latex", "\\cites{"..n.."}"))
+    if html_output then
+      table.insert(src, pandoc.RawInline("html",
+        '<span class="cites"><span class="visually-hidden">cited by </span>'
+        .. n .. '</span>'))
+    else
+      table.insert(src, pandoc.RawInline("latex", "\\cites{"..n.."}"))
+    end
     local inlines = pandoc.Inlines(src)
     if el.t == "Para" then return pandoc.Para(inlines) end
     return pandoc.Plain(inlines)
@@ -466,9 +552,23 @@ function Pandoc(doc)
       if h.level == 1 then cur_section = normalize(pandoc_utils.stringify(h)) end
       return nil
     end,
+    -- An H1 followed by a short [CALLOUT] was folded into a
+    -- \sectionwithcallout RawBlock by the main loop; track it as a section too.
+    RawBlock = function(rb)
+      local title = rb.text:match("^\\sectionwithcallout{(.-)}{")
+      if title then cur_section = normalize(title) end
+      return nil
+    end,
     Para  = rewrap_cites,
     Plain = rewrap_cites,
   }
+  if html_output then
+    -- The page title (the person's name) is the <h1>; demote sections to
+    -- <h2> and entries to <h3>.
+    result = result:walk{
+      Header = function(h) h.level = h.level + 1; return h end,
+    }
+  end
   doc.blocks = result.blocks
   return doc
 end
