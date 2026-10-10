@@ -218,3 +218,110 @@ pandoc -L filter.lua --metadata short_version=false --metadata industry_version=
 - Fonts: **Playfair Display** (headings) and **Source Sans 3** (body).
   Install into `~/.local/share/fonts/` from Google Fonts, then `fc-cache -f`.
 - `make check-deps` verifies all of the above.
+
+## Administrative documents (ARACIS lists, Europass)
+
+Not part of the build; notes for recurring paperwork.
+
+### Bibliographic databases via e-nformation (Web of Science, Scopus)
+
+- Access goes through the University of Bucharest's ANELIS Plus subscription at
+  e-nformation.ro. The credentials are in `env.toml` (gitignored, never commit
+  or echo it). **The user logs in themselves in Chrome**; Claude does not type
+  passwords into sign-in forms. Logging in from a script also kicks out the
+  user's browser session (single-session account).
+- Once logged in, open these in Chrome (claude-in-chrome). The proxy rewrites
+  the hostname per session (e.g. `0510qtc5t-y-https-www-webofscience-com.z.e-nformation.ro`),
+  so always enter through the link:
+  - WoS: `https://z.e-nformation.ro/PlatformaUnivBucsiBCUBuc?action=source&sourceID=ClarivateWoS_AnelisPlus`
+  - Scopus: same URL with `sourceID=Scopus_AnelisPlus`. If the landing page
+    errors, go to `/search/form.uri?display=authorLookup` on the proxied host.
+- Scripted WoS API calls (`/api/wosnx/...`) fail with
+  `Server.passiveVerificationRequired`; use the browser UI.
+- WoS advanced search (`/wos/woscc/advanced-search`): the query box can be
+  pre-filled from history and typing interleaves with it; set the value with
+  `form_input` instead. Decline the cookie banner first, because it swallows clicks.
+- Author query that catches every record (one FROM 2019 paper is indexed
+  without a matching author form):
+  `AU=(Serbanuta T*) OR AU=(Serbanuta, Traian*) OR TI=("From Hybrid Modal Logic to Matching Logic")`.
+  Add `AND PY=(YYYY-YYYY)` for a period. "Citation Report" on the results page
+  gives total publications, h-index and citations.
+- The results list is virtualized. Collect `a[data-ta="summary-record-title-link"]`
+  while scrolling; the href ends in the `WOS:` accession number.
+- Scopus author profile: ID **6507372636** (`/authid/detail.uri?authorId=6507372636`);
+  a stray 1-document duplicate profile also exists.
+- Snapshot (2026-10-10): WoS CC 37 pubs, h 14, 793 citations; Scopus 43 docs,
+  h 16, 1162 citations; Google Scholar 55, h 22, 2178.
+- DBLP (and its XML API) sits behind an Anubis bot check, even in Chrome. Don't
+  try to get around it; rely on `publications.md` / `sources/vitae.bib`.
+
+### ARACIS publication list (`Lista_lucrari_format_ARACIS_*.doc`)
+
+- Blank template: `Lista_lucrari_format_ARACIS_Nume_Prenume.doc`; filled:
+  `Lista_lucrari_format_ARACIS_Serbanuta_Traian_Florin.{doc,docx}`.
+- Conventions agreed with the user: "ultimii 10 ani" = the current year minus
+  10 (2016 items kept for 2026); "BDI" = any international database, so
+  everything refereed goes in C (journals and conferences as separate sublists)
+  and D (unindexed) is "—". Mark each C entry `[ISI – WOS:…]` or `[BDI]`.
+  Exclude arXiv preprints.
+- Workflow: `soffice --headless --convert-to docx` the template, unzip, replace
+  the dotted placeholders / `1.` stub paragraphs in `word/document.xml`, zip,
+  validate, convert back with `--convert-to doc:"MS Word 97"`.
+- Tool quirks on this machine: Python 3.10 (no `tomllib`, no `requests`; use
+  urllib); local `pdftoppm` has no `-jpeg` (use `-png`); `soffice` hangs if it
+  isn't given an input file (kill it with `Stop-Process`); pass absolute
+  Windows paths plus `--outdir`.
+
+### Europass CV (`CV-Europass-YYYY-MM-DD-Șerbănuță-RO.pdf`)
+
+- Latest: `CV-Europass-2026-10-10-Șerbănuță-RO.pdf` (Romanian, first/
+  single-column template, Medium text, page numbers on). The user rejected the
+  left-labels ("tabular") template: its PDF hyphenates long headings like
+  "EXPERIENȚA PROFESIO-NALĂ" even at Small size (the on-screen preview doesn't
+  show this; check the downloaded PDF). It is also saved in the Europass
+  library under the same name, so future updates should start from that CV
+  (My Library → edit) rather than from scratch. Older versions are in
+  `sources/`. Europass PDFs embed their data as `attachment.xml`
+  (`pdfdetach -list`).
+- The user logs in to Europass in Chrome; then drive it with claude-in-chrome.
+  URLs: profile `https://europa.eu/europass/eportfolio/screen/profile?lang=en`,
+  library `.../screen/my-library?lang=en`.
+- **Use the CV editor, not the profile, for dates.** The profile editor
+  (`profile`) stores full DD-MM-YYYY dates, shows them shifted by a day
+  (timezone), and turns month-precision entries into day-precision ones as
+  soon as you edit them. The CV editor ("Create a CV based on this profile"
+  → *standard* builder → Edit step) has separate DD/MM/YYYY selects; leave
+  DD empty for "10/2013"-style dates, or leave DD and MM empty for a year
+  only. The profile itself is now partly stale (day-level dates; the newer
+  entries and the skills/projects sections exist only in the CV).
+- CV editor mechanics (Angular + Quill):
+  - Rich-text fields are Quill: `Quill.find(container).clipboard.dangerouslyPasteHTML(0, html, 'user')`
+    after `setContents([], 'user')`. Typing with the keyboard doesn't reach them.
+  - Plain inputs (employer, city): native value setter plus `input`/`change`
+    events. The job-title field is an ESCO autocomplete. Type it with the
+    keyboard, click elsewhere, press Escape, then Save, otherwise the value
+    reverts or a suggestion replaces it.
+  - Country is a custom dropdown: click it, type the name, click the option.
+  - Work experience is ordered by **end date** (newest first; ongoing roles
+    first, in their existing order). Same rule in `resume.md`. Reorder with
+    the per-entry "Move the record up" buttons.
+  - Deleting a whole line in Quill: delete from the line start through its
+    own trailing `
+`. Deleting the *preceding* `
+` merges it into the line
+    above and takes over that line's formatting (e.g. a bullet is lost); fix
+    with `q.formatLine(i, 1, 'list', 'bullet', 'user')`.
+  - Each entry's "Edit" opens a menu ("Edit work experience"). The department
+    field sits under the collapsed "Address details" section and is rendered
+    as "Unitatea sau departamentul", so don't also put it in the employer name.
+  - Custom-section descriptions are capped at **4000 characters** (the top-20
+    publications list uses compact APA style with initials to fit).
+  - Skills section: add each skill with the search box + Add, then create
+    categories and assign skills via "Add skills to this category" (checkbox
+    ids are `select-<skill name>`).
+  - Avoid `setTimeout`-based scripts: the tab gets throttled and
+    `javascript_tool` times out (45 s), although the script keeps running.
+    Prefer synchronous snippets, or start the async work, then poll a
+    `window.__last` result between screenshots.
+  - Matching DOM text: use XPath `normalize-space(text())`; scanning
+    `innerText` over all elements freezes the page.

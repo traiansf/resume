@@ -72,8 +72,6 @@ Courses developed and taught, with all materials openly published:
 
 [/ACADEMIC]
 
-Supervise graduate students and serve on departmental committees.
-
 [/LONG]
 
 [ACADEMIC]
@@ -161,18 +159,6 @@ Assisted in research on formal semantics, rewriting logic, and programming langu
 [/ACADEMIC]
 [/LONG]
 
-[LONG]
-
-## Teaching Assistant
-**University of Bucharest, Department of Computer Science Fundamentals, 2003–2004**
-
-[ACADEMIC]
-
-Supported undergraduate courses in programming, discrete mathematics, and computer science theory.
-
-[/ACADEMIC]
-[/LONG]
-
 ## Summer Intern
 **Google, New York, 2007**
 
@@ -191,6 +177,18 @@ Co-authored a patent application on web traffic analysis methods (with Bogdan C�
 [ACADEMIC]
 
 Contributed an equality theory propagation core for the Zap automated theorem prover.
+
+[/ACADEMIC]
+[/LONG]
+
+[LONG]
+
+## Teaching Assistant
+**University of Bucharest, Department of Computer Science Fundamentals, 2003–2004**
+
+[ACADEMIC]
+
+Supported undergraduate courses in programming, discrete mathematics, and computer science theory.
 
 [/ACADEMIC]
 [/LONG]
@@ -217,7 +215,6 @@ Personal research and tooling outside employer-affiliated work; full list at <ht
 - **Type theory study** — [propositions-as-types](https://github.com/traiansf/propositions-as-types), Coq scribbles along *Type Theory and Formal Proofs* (Nederpelt & Geuvers).
 - **Teaching companions** — [semantics-in-coq](https://github.com/traiansf/semantics-in-coq) and [semantics-in-lean](https://github.com/traiansf/semantics-in-lean), companions to the Foundations of Programming Languages course.
 - **Teaching tools** — [multiple_choice_exam](https://github.com/traiansf/multiple_choice_exam), built with AI coding agents: a Python generator for randomized, print-ready exam variants from a Markdown question bank, and a Dart mobile app that grades answer sheets by QR code and optical mark recognition.
-- **Schools & events** — [bucharest-lean-ac](https://github.com/traiansf/bucharest-lean-ac), Bucharest Autumn School materials in Lean 4.
 - **Other** — [excel-database](https://github.com/traiansf/excel-database), a WordPress plugin (★4) that exposes an Excel spreadsheet table as queryable data.
 
 [/LONG]
