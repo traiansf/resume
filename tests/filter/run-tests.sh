@@ -8,7 +8,9 @@
 #   expected-industry.tex — optional, expected LaTeX for the INDUSTRY version
 #   expected.html / expected-short.html — optional, expected HTML (web build)
 #
-# Diffs ignore CR line endings (Windows checkouts).
+# Diffs ignore CR line endings (Windows checkouts) and the
+# \hypertarget{id}{% ... } wrapper that older pandoc versions put around
+# section headings (newer ones emit the bare \section{...}\label{...}).
 #
 # A directory must provide at least one expected.* file. If both are present,
 # both modes are exercised. The test name reported is "<dir>" for the full
@@ -21,12 +23,17 @@ pass=0
 fail=0
 failed_names=()
 
+normalize() {
+  tr -d '\r' | sed '/^\\hypertarget{[^}]*}{%$/{N;s/^\\hypertarget{[^}]*}{%\n\(.*\)}$/\1/;}'
+}
+
 run_variant() {
   local name="$1" input="$2" expected="$3"; shift 3
   local actual to=latex
   [[ "$expected" == *.html ]] && to=html5
   actual=$(pandoc -L filter.lua "$@" -f markdown -t "$to" "$input" 2>/dev/null)
-  if diff -u --strip-trailing-cr "$expected" <(printf '%s\n' "$actual") > /tmp/diff.$$ 2>&1; then
+  if diff -u <(normalize < "$expected") <(printf '%s\n' "$actual" | normalize) \
+       > /tmp/diff.$$ 2>&1; then
     echo "PASS  $name"
     pass=$((pass+1))
   else
