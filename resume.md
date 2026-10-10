@@ -255,6 +255,20 @@ Personal research and tooling outside employer-affiliated work; full list at <ht
 - English (fluent)
 - French (basic)
 
+[LONG]
+
+[ACADEMIC]
+
+# Bibliometric Data (October 2026)
+
+- **Web of Science Core Collection:** 37 publications, h-index 14, 793 citations
+- **Scopus:** 43 publications, h-index 16, 1162 citations
+- **Google Scholar:** 55 publications, h-index 22, 2178 citations
+
+[/ACADEMIC]
+
+[/LONG]
+
 # Publications
 
 [CALLOUT]
