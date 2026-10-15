@@ -7,3 +7,5 @@
 # Brainstorming visual companion artifacts
 .superpowers/
 env.toml
+# Job applications (private; not published)
+/applications/
